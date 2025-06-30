@@ -1,0 +1,10 @@
+Removing orphan container "biuai-api-1"
+Removing orphan container "biuai-etl_service-1"
+Removing orphan container "biuai-cache-1"
+Removing orphan container "biuai-ml_service-1"
+Removing network biuai_default
+Deleted Volumes:
+439e0a031ba8026c75c41d28f032338f0c7d821c075b60b69d89edc567ab718b
+46dfc139e458efe15cc575ef13e4ecedbb739e6e795ecb7fb83c73a8a6e1405b
+
+Total reclaimed space: 0B

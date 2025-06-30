@@ -1,0 +1,124 @@
+// Variáveis Vuetify personalizadas para BIUAI
+@use 'vuetify/settings' with (
+  $color-pack: false
+);
+
+// Cores do tema BIUAI
+$primary: #1976D2;
+$primary-lighten-1: #42A5F5;
+$primary-lighten-2: #64B5F6;
+$primary-darken-1: #1565C0;
+$primary-darken-2: #0D47A1;
+
+$secondary: #43A047;
+$secondary-lighten-1: #66BB6A;
+$secondary-lighten-2: #81C784;
+$secondary-darken-1: #388E3C;
+$secondary-darken-2: #2E7D32;
+
+$accent: #FF6F00;
+$error: #E53935;
+$warning: #FB8C00;
+$info: #1E88E5;
+$success: #43A047;
+
+// Tons de cinza
+$grey-lighten-5: #FAFAFA;
+$grey-lighten-4: #F5F5F5;
+$grey-lighten-3: #EEEEEE;
+$grey-lighten-2: #E0E0E0;
+$grey-lighten-1: #BDBDBD;
+$grey: #9E9E9E;
+$grey-darken-1: #757575;
+$grey-darken-2: #616161;
+$grey-darken-3: #424242;
+$grey-darken-4: #212121;
+
+// Superfícies
+$surface: #FFFFFF;
+$surface-variant: #F8F9FA;
+$background: #FAFAFA;
+
+// Tipografia
+$body-font-family: 'Inter', 'Roboto', sans-serif;
+$heading-font-family: 'Inter', 'Roboto', sans-serif;
+
+$font-size-root: 16px;
+$line-height-root: 1.5;
+
+$font-weights: (
+  'thin': 100,
+  'light': 300,
+  'regular': 400,
+  'medium': 500,
+  'bold': 600,
+  'black': 900
+);
+
+// Border radius
+$border-radius-root: 8px;
+$border-radius-sm: 4px;
+$border-radius-lg: 12px;
+$border-radius-xl: 16px;
+
+// Elevações (sombras)
+$elevation-umbra: (
+  0: rgba(0, 0, 0, 0.00),
+  1: rgba(0, 0, 0, 0.04),
+  2: rgba(0, 0, 0, 0.08),
+  3: rgba(0, 0, 0, 0.12),
+  4: rgba(0, 0, 0, 0.14),
+  6: rgba(0, 0, 0, 0.16),
+  8: rgba(0, 0, 0, 0.18),
+  12: rgba(0, 0, 0, 0.20),
+  16: rgba(0, 0, 0, 0.22),
+  24: rgba(0, 0, 0, 0.24)
+);
+
+// Espaçamento (grid de 8px)
+$spacer: 8px;
+$spacers: (
+  0: 0,
+  1: $spacer * 0.5,    // 4px
+  2: $spacer * 1,      // 8px
+  3: $spacer * 1.5,    // 12px
+  4: $spacer * 2,      // 16px
+  5: $spacer * 2.5,    // 20px
+  6: $spacer * 3,      // 24px
+  8: $spacer * 4,      // 32px
+  10: $spacer * 5,     // 40px
+  12: $spacer * 6,     // 48px
+  16: $spacer * 8      // 64px
+);
+
+// Breakpoints
+$breakpoints: (
+  'xs': 0,
+  'sm': 600px,
+  'md': 960px,
+  'lg': 1280px,
+  'xl': 1920px,
+  'xxl': 2560px
+);
+
+// Componentes específicos
+$btn-border-radius: $border-radius-root;
+$btn-font-weight: 600;
+$btn-letter-spacing: 0.02em;
+
+$card-border-radius: $border-radius-lg;
+$card-elevation: 2;
+
+$app-bar-height: 64px;
+$navigation-drawer-width: 280px;
+
+// Transições
+$transition-primary: 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+$transition-secondary: 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+// Densidade de componentes
+$density: (
+  'default': 0,
+  'comfortable': -1,
+  'compact': -2
+); 

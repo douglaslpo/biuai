@@ -1,0 +1,493 @@
+db uses an image, skipping
+cache uses an image, skipping
+Building api
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 232B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/python:3.9-slim
+#2 DONE 0.6s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [internal] load build context
+#4 transferring context: 563B done
+#4 DONE 0.0s
+
+#5 [1/5] FROM docker.io/library/python:3.9-slim@sha256:a40cf9eba2c3ed9226afa9ace504f07ad30fe831343bb1c69f7a6707aadb7c21
+#5 resolve docker.io/library/python:3.9-slim@sha256:a40cf9eba2c3ed9226afa9ace504f07ad30fe831343bb1c69f7a6707aadb7c21 0.0s done
+#5 DONE 0.0s
+
+#6 [2/5] WORKDIR /app
+#6 CACHED
+
+#7 [3/5] COPY requirements.txt .
+#7 DONE 0.0s
+
+#8 [4/5] RUN pip install --no-cache-dir -r requirements.txt
+#8 1.632 Collecting fastapi==0.95.0
+#8 1.884   Downloading fastapi-0.95.0-py3-none-any.whl (57 kB)
+#8 1.921      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 57.1/57.1 kB 1.3 MB/s eta 0:00:00
+#8 1.984 Collecting uvicorn==0.21.1
+#8 2.019   Downloading uvicorn-0.21.1-py3-none-any.whl (57 kB)
+#8 2.028      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 57.8/57.8 kB 7.0 MB/s eta 0:00:00
+#8 2.479 Collecting sqlalchemy==2.0.7
+#8 2.515   Downloading SQLAlchemy-2.0.7-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.8 MB)
+#8 3.762      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.8/2.8 MB 2.2 MB/s eta 0:00:00
+#8 3.897 Collecting psycopg2-binary==2.9.5
+#8 3.934   Downloading psycopg2_binary-2.9.5-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (3.0 MB)
+#8 3.983      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.0/3.0 MB 63.8 MB/s eta 0:00:00
+#8 4.176 Collecting pydantic==1.10.7
+#8 4.212   Downloading pydantic-1.10.7-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (3.2 MB)
+#8 4.245      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.2/3.2 MB 101.6 MB/s eta 0:00:00
+#8 4.305 Collecting python-jose==3.3.0
+#8 4.342   Downloading python_jose-3.3.0-py2.py3-none-any.whl (33 kB)
+#8 4.393 Collecting passlib==1.7.4
+#8 4.431   Downloading passlib-1.7.4-py2.py3-none-any.whl (525 kB)
+#8 4.443      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 525.6/525.6 kB 70.0 MB/s eta 0:00:00
+#8 4.504 Collecting python-multipart==0.0.6
+#8 4.543   Downloading python_multipart-0.0.6-py3-none-any.whl (45 kB)
+#8 4.549      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 45.7/45.7 kB 70.7 MB/s eta 0:00:00
+#8 4.629 Collecting redis==4.5.4
+#8 4.663   Downloading redis-4.5.4-py3-none-any.whl (238 kB)
+#8 4.670      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 238.9/238.9 kB 98.7 MB/s eta 0:00:00
+#8 4.850 Collecting pandas==1.5.3
+#8 4.889   Downloading pandas-1.5.3-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (12.2 MB)
+#8 5.034      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 12.2/12.2 MB 92.6 MB/s eta 0:00:00
+#8 5.307 Collecting numpy==1.24.2
+#8 5.344   Downloading numpy-1.24.2-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (17.3 MB)
+#8 5.540      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 17.3/17.3 MB 95.9 MB/s eta 0:00:00
+#8 5.696 Collecting scikit-learn==1.2.2
+#8 5.733   Downloading scikit_learn-1.2.2-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (9.6 MB)
+#8 5.841      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 9.6/9.6 MB 90.8 MB/s eta 0:00:00
+#8 6.075 Collecting prophet==1.1.2
+#8 6.112   Downloading prophet-1.1.2-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (8.9 MB)
+#8 6.202      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 8.9/8.9 MB 100.0 MB/s eta 0:00:00
+#8 6.324 Collecting starlette<0.27.0,>=0.26.1
+#8 6.360   Downloading starlette-0.26.1-py3-none-any.whl (66 kB)
+#8 6.365      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 66.9/66.9 kB 141.7 MB/s eta 0:00:00
+#8 6.435 Collecting click>=7.0
+#8 6.469   Downloading click-8.1.8-py3-none-any.whl (98 kB)
+#8 6.475      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 98.2/98.2 kB 137.3 MB/s eta 0:00:00
+#8 6.533 Collecting h11>=0.8
+#8 6.567   Downloading h11-0.16.0-py3-none-any.whl (37 kB)
+#8 6.787 Collecting greenlet!=0.4.17
+#8 6.821   Downloading greenlet-3.2.3-cp39-cp39-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (580 kB)
+#8 6.826      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 580.8/580.8 kB 148.1 MB/s eta 0:00:00
+#8 6.884 Collecting typing-extensions>=4.2.0
+#8 6.921   Downloading typing_extensions-4.14.0-py3-none-any.whl (43 kB)
+#8 6.926      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 43.8/43.8 kB 102.0 MB/s eta 0:00:00
+#8 7.001 Collecting ecdsa!=0.15
+#8 7.038   Downloading ecdsa-0.19.1-py2.py3-none-any.whl (150 kB)
+#8 7.044      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 150.6/150.6 kB 190.4 MB/s eta 0:00:00
+#8 7.104 Collecting rsa
+#8 7.138   Downloading rsa-4.9.1-py3-none-any.whl (34 kB)
+#8 7.204 Collecting pyasn1
+#8 7.239   Downloading pyasn1-0.6.1-py3-none-any.whl (83 kB)
+#8 7.243      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 83.1/83.1 kB 156.2 MB/s eta 0:00:00
+#8 7.308 Collecting async-timeout>=4.0.2
+#8 7.343   Downloading async_timeout-5.0.1-py3-none-any.whl (6.2 kB)
+#8 7.433 Collecting pytz>=2020.1
+#8 7.471   Downloading pytz-2025.2-py2.py3-none-any.whl (509 kB)
+#8 7.479      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 509.2/509.2 kB 95.1 MB/s eta 0:00:00
+#8 7.539 Collecting python-dateutil>=2.8.1
+#8 7.574   Downloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl (229 kB)
+#8 7.580      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 229.9/229.9 kB 167.7 MB/s eta 0:00:00
+#8 7.666 Collecting joblib>=1.1.1
+#8 7.702   Downloading joblib-1.5.1-py3-none-any.whl (307 kB)
+#8 7.714      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 307.7/307.7 kB 49.2 MB/s eta 0:00:00
+#8 7.931 Collecting scipy>=1.3.2
+#8 7.968   Downloading scipy-1.13.1-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (38.6 MB)
+#8 8.385      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 38.6/38.6 MB 88.4 MB/s eta 0:00:00
+#8 8.466 Collecting threadpoolctl>=2.0.0
+#8 8.503   Downloading threadpoolctl-3.6.0-py3-none-any.whl (18 kB)
+#8 8.712 Collecting cmdstanpy>=1.0.4
+#8 8.749   Downloading cmdstanpy-1.2.5-py3-none-any.whl (94 kB)
+#8 8.754      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 94.5/94.5 kB 85.1 MB/s eta 0:00:00
+#8 8.814 Collecting convertdate>=2.1.2
+#8 8.850   Downloading convertdate-2.4.0-py3-none-any.whl (47 kB)
+#8 8.855      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 47.9/47.9 kB 127.4 MB/s eta 0:00:00
+#8 8.944 Collecting tqdm>=4.36.1
+#8 8.981   Downloading tqdm-4.67.1-py3-none-any.whl (78 kB)
+#8 8.986      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 78.5/78.5 kB 155.6 MB/s eta 0:00:00
+#8 9.037 Collecting LunarCalendar>=0.0.9
+#8 9.073   Downloading LunarCalendar-0.0.9-py2.py3-none-any.whl (18 kB)
+#8 9.167 Collecting holidays>=0.14.2
+#8 9.210   Downloading holidays-0.75-py3-none-any.whl (1.0 MB)
+#8 9.238      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.0/1.0 MB 49.1 MB/s eta 0:00:00
+#8 9.457 Collecting matplotlib>=2.0.0
+#8 9.494   Downloading matplotlib-3.9.4-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (8.3 MB)
+#8 9.582      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 8.3/8.3 MB 97.2 MB/s eta 0:00:00
+#8 9.771 Collecting stanio<2.0.0,>=0.4.0
+#8 9.808   Downloading stanio-0.5.1-py3-none-any.whl (8.1 kB)
+#8 9.877 Collecting pymeeus<=1,>=0.3.13
+#8 9.914   Downloading PyMeeus-0.5.12.tar.gz (5.8 MB)
+#8 9.982      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.8/5.8 MB 87.6 MB/s eta 0:00:00
+#8 10.12   Preparing metadata (setup.py): started
+#8 10.33   Preparing metadata (setup.py): finished with status 'done'
+#8 10.39 Collecting six>=1.9.0
+#8 10.42   Downloading six-1.17.0-py2.py3-none-any.whl (11 kB)
+#8 10.55 Collecting ephem>=3.7.5.3
+#8 10.59   Downloading ephem-4.2-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (1.8 MB)
+#8 10.61      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.8/1.8 MB 78.0 MB/s eta 0:00:00
+#8 10.67 Collecting cycler>=0.10
+#8 10.71   Downloading cycler-0.12.1-py3-none-any.whl (8.3 kB)
+#8 10.89 Collecting contourpy>=1.0.1
+#8 10.93   Downloading contourpy-1.3.0-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (321 kB)
+#8 10.94      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 321.9/321.9 kB 145.8 MB/s eta 0:00:00
+#8 11.15 Collecting fonttools>=4.22.0
+#8 11.18   Downloading fonttools-4.58.4-cp39-cp39-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (4.7 MB)
+#8 11.24      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.7/4.7 MB 94.1 MB/s eta 0:00:00
+#8 11.31 Collecting packaging>=20.0
+#8 11.35   Downloading packaging-25.0-py3-none-any.whl (66 kB)
+#8 11.35      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 66.5/66.5 kB 168.2 MB/s eta 0:00:00
+#8 11.42 Collecting importlib-resources>=3.2.0
+#8 11.45   Downloading importlib_resources-6.5.2-py3-none-any.whl (37 kB)
+#8 11.68 Collecting pillow>=8
+#8 11.72   Downloading pillow-11.2.1-cp39-cp39-manylinux_2_28_x86_64.whl (4.6 MB)
+#8 11.77      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.6/4.6 MB 99.1 MB/s eta 0:00:00
+#8 11.85 Collecting pyparsing>=2.3.1
+#8 11.89   Downloading pyparsing-3.2.3-py3-none-any.whl (111 kB)
+#8 11.89      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 111.1/111.1 kB 135.9 MB/s eta 0:00:00
+#8 12.02 Collecting kiwisolver>=1.3.1
+#8 12.06   Downloading kiwisolver-1.4.7-cp39-cp39-manylinux_2_12_x86_64.manylinux2010_x86_64.whl (1.6 MB)
+#8 12.07      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.6/1.6 MB 106.2 MB/s eta 0:00:00
+#8 12.16 Collecting anyio<5,>=3.4.0
+#8 12.20   Downloading anyio-4.9.0-py3-none-any.whl (100 kB)
+#8 12.20      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100.9/100.9 kB 171.9 MB/s eta 0:00:00
+#8 12.29 Collecting exceptiongroup>=1.0.2
+#8 12.33   Downloading exceptiongroup-1.3.0-py3-none-any.whl (16 kB)
+#8 12.38 Collecting sniffio>=1.1
+#8 12.42   Downloading sniffio-1.3.1-py3-none-any.whl (10 kB)
+#8 12.47 Collecting idna>=2.8
+#8 12.51   Downloading idna-3.10-py3-none-any.whl (70 kB)
+#8 12.51      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 70.4/70.4 kB 142.6 MB/s eta 0:00:00
+#8 12.63 Collecting zipp>=3.1.0
+#8 12.67   Downloading zipp-3.23.0-py3-none-any.whl (10 kB)
+#8 12.80 Building wheels for collected packages: pymeeus
+#8 12.80   Building wheel for pymeeus (setup.py): started
+#8 13.06   Building wheel for pymeeus (setup.py): finished with status 'done'
+#8 13.06   Created wheel for pymeeus: filename=PyMeeus-0.5.12-py3-none-any.whl size=732018 sha256=5ddbe7465d4f24033f4bbc48ad0c33baf966f1929ea41572e106b496d60aced1
+#8 13.06   Stored in directory: /tmp/pip-ephem-wheel-cache-fuyibyxt/wheels/04/1f/e5/8dd0c661cd8d252817655dc14a84f7ae045d6616594145aa81
+#8 13.06 Successfully built pymeeus
+#8 13.30 Installing collected packages: pytz, pymeeus, passlib, ephem, zipp, typing-extensions, tqdm, threadpoolctl, sniffio, six, python-multipart, pyparsing, pyasn1, psycopg2-binary, pillow, packaging, numpy, kiwisolver, joblib, idna, h11, greenlet, fonttools, cycler, convertdate, click, async-timeout, uvicorn, stanio, sqlalchemy, scipy, rsa, redis, python-dateutil, pydantic, importlib-resources, exceptiongroup, ecdsa, contourpy, scikit-learn, python-jose, pandas, matplotlib, LunarCalendar, holidays, anyio, starlette, cmdstanpy, prophet, fastapi
+#8 23.02 Successfully installed LunarCalendar-0.0.9 anyio-4.9.0 async-timeout-5.0.1 click-8.1.8 cmdstanpy-1.2.5 contourpy-1.3.0 convertdate-2.4.0 cycler-0.12.1 ecdsa-0.19.1 ephem-4.2 exceptiongroup-1.3.0 fastapi-0.95.0 fonttools-4.58.4 greenlet-3.2.3 h11-0.16.0 holidays-0.75 idna-3.10 importlib-resources-6.5.2 joblib-1.5.1 kiwisolver-1.4.7 matplotlib-3.9.4 numpy-1.24.2 packaging-25.0 pandas-1.5.3 passlib-1.7.4 pillow-11.2.1 prophet-1.1.2 psycopg2-binary-2.9.5 pyasn1-0.6.1 pydantic-1.10.7 pymeeus-0.5.12 pyparsing-3.2.3 python-dateutil-2.9.0.post0 python-jose-3.3.0 python-multipart-0.0.6 pytz-2025.2 redis-4.5.4 rsa-4.9.1 scikit-learn-1.2.2 scipy-1.13.1 six-1.17.0 sniffio-1.3.1 sqlalchemy-2.0.7 stanio-0.5.1 starlette-0.26.1 threadpoolctl-3.6.0 tqdm-4.67.1 typing-extensions-4.14.0 uvicorn-0.21.1 zipp-3.23.0
+#8 23.02 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+#8 23.29 
+#8 23.29 [notice] A new release of pip is available: 23.0.1 -> 25.1.1
+#8 23.29 [notice] To update, run: pip install --upgrade pip
+#8 DONE 23.8s
+
+#9 [5/5] COPY . .
+#9 DONE 0.1s
+
+#10 exporting to image
+#10 exporting layers
+#10 exporting layers 12.3s done
+#10 exporting manifest sha256:f0790308896633cc5685904ab2b014d4f720b1351e5eb5c25c1d98267b90a934 0.0s done
+#10 exporting config sha256:3d4fa5758367afd9ac694edd4b6efb68d56294c3f1b7cc61c9dc53e87d5b9da9 done
+#10 exporting attestation manifest sha256:fd8a2a2a36330e75a0da3ea5288ecd1d9b00b07b6ff5db5bb11eea49caea172d 0.0s done
+#10 exporting manifest list sha256:63ee4a5c787462b7732633dec14a0732288e90bc96941889cfaec5b9847c5d25 0.0s done
+#10 naming to docker.io/library/biuai_api:latest done
+#10 unpacking to docker.io/library/biuai_api:latest
+#10 unpacking to docker.io/library/biuai_api:latest 1.9s done
+#10 DONE 14.3s
+Building frontend
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 368B done
+#1 WARN: FromAsCasing: 'as' and 'FROM' keywords' casing do not match (line 2)
+#1 WARN: FromAsCasing: 'as' and 'FROM' keywords' casing do not match (line 13)
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/node:16-alpine
+#2 DONE 0.6s
+
+#3 [internal] load metadata for docker.io/library/nginx:stable-alpine
+#3 DONE 0.6s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 2B done
+#4 DONE 0.0s
+
+#5 [build-stage 1/7] FROM docker.io/library/node:16-alpine@sha256:a1f9d027912b58a7c75be7716c97cfbc6d3099f3a97ed84aa490be9dee20e787
+#5 resolve docker.io/library/node:16-alpine@sha256:a1f9d027912b58a7c75be7716c97cfbc6d3099f3a97ed84aa490be9dee20e787 0.0s done
+#5 DONE 0.0s
+
+#6 [build-stage 2/7] WORKDIR /app
+#6 CACHED
+
+#7 [production-stage 1/2] FROM docker.io/library/nginx:stable-alpine@sha256:aed99734248e851764f1f2146835ecad42b5f994081fa6631cc5d79240891ec9
+#7 resolve docker.io/library/nginx:stable-alpine@sha256:aed99734248e851764f1f2146835ecad42b5f994081fa6631cc5d79240891ec9 0.0s done
+#7 CACHED
+
+#8 [internal] load build context
+#8 transferring context: 4.00kB done
+#8 DONE 0.0s
+
+#9 [build-stage 3/7] COPY package*.json ./
+#9 DONE 0.1s
+
+#10 [build-stage 4/7] RUN npm install -g @quasar/cli
+#10 11.21 
+#10 11.21 added 230 packages, and audited 231 packages in 11s
+#10 11.21 
+#10 11.21 80 packages are looking for funding
+#10 11.21   run `npm fund` for details
+#10 11.21 
+#10 11.21 found 0 vulnerabilities
+#10 11.21 npm notice 
+#10 11.21 npm notice New major version of npm available! 8.19.4 -> 11.4.2
+#10 11.21 npm notice Changelog: <https://github.com/npm/cli/releases/tag/v11.4.2>
+#10 11.21 npm notice Run `npm install -g npm@11.4.2` to update!
+#10 11.21 npm notice 
+#10 DONE 11.3s
+
+#11 [build-stage 5/7] RUN npm install
+#11 26.47 npm WARN EBADENGINE Unsupported engine {
+#11 26.47 npm WARN EBADENGINE   package: '@quasar/vite-plugin@1.9.0',
+#11 26.47 npm WARN EBADENGINE   required: { node: '>=18' },
+#11 26.47 npm WARN EBADENGINE   current: { node: 'v16.20.2', npm: '8.19.4' }
+#11 26.47 npm WARN EBADENGINE }
+#11 26.47 npm WARN EBADENGINE Unsupported engine {
+#11 26.47 npm WARN EBADENGINE   package: 'isbinaryfile@5.0.4',
+#11 26.47 npm WARN EBADENGINE   required: { node: '>= 18.0.0' },
+#11 26.47 npm WARN EBADENGINE   current: { node: 'v16.20.2', npm: '8.19.4' }
+#11 26.47 npm WARN EBADENGINE }
+#11 27.68 npm WARN deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+#11 27.71 npm WARN deprecated rimraf@3.0.2: Rimraf versions prior to v4 are no longer supported
+#11 27.84 npm WARN deprecated @humanwhocodes/object-schema@2.0.3: Use @eslint/object-schema instead
+#11 27.92 npm WARN deprecated @humanwhocodes/config-array@0.13.0: Use @eslint/config-array instead
+#11 28.05 npm WARN deprecated glob@7.2.3: Glob versions prior to v9 are no longer supported
+#11 28.81 npm WARN deprecated eslint@8.57.1: This version is no longer supported. Please see https://eslint.org/version-support for other options.
+#11 29.91 
+#11 29.91 added 469 packages, and audited 470 packages in 30s
+#11 29.91 
+#11 29.91 92 packages are looking for funding
+#11 29.91   run `npm fund` for details
+#11 29.92 
+#11 29.92 5 vulnerabilities (3 moderate, 2 high)
+#11 29.92 
+#11 29.92 To address issues that do not require attention, run:
+#11 29.92   npm audit fix
+#11 29.92 
+#11 29.92 To address all issues (including breaking changes), run:
+#11 29.92   npm audit fix --force
+#11 29.92 
+#11 29.92 Run `npm audit` for details.
+#11 DONE 30.0s
+
+#12 [build-stage 6/7] COPY . .
+#12 DONE 0.1s
+
+#13 [build-stage 7/7] RUN quasar build
+#13 0.312 
+#13 0.312  .d88888b.
+#13 0.312 d88P" "Y88b
+#13 0.312 888     888
+#13 0.312 888     888 888  888  8888b.  .d8888b   8888b.  888d888
+#13 0.312 888     888 888  888     "88b 88K          "88b 888P"
+#13 0.312 888 Y8b 888 888  888 .d888888 "Y8888b. .d888888 888
+#13 0.312 Y88b.Y8b88P Y88b 888 888  888      X88 888  888 888
+#13 0.312  "Y888888"   "Y88888 "Y888888  88888P' "Y888888 888
+#13 0.312        Y8b
+#13 0.312 
+#13 0.314 
+#13 0.314  Build mode............. spa
+#13 0.314  Pkg quasar............. v2.18.1
+#13 0.314  Pkg @quasar/app-vite... v1.11.0
+#13 0.314  Pkg vite............... v2.9.18
+#13 0.314  Debugging.............. no
+#13 0.314  Publishing............. no
+#13 0.314 
+#13 0.474  App •  WAIT  • Compiling of SPA UI with Vite in progress...
+#13 2.541 [vite:css] $map: 0 is not a map.
+#13 2.541      ╷
+#13 2.541 7303 │     padding: map.get($value, "y") map.get($value, "x")
+#13 2.541      │              ^^^^^^^^^^^^^^^^^^^^
+#13 2.541      ╵
+#13 2.541   node_modules/quasar/dist/quasar.sass 7303:14  root stylesheet
+#13 2.541 file: /app/node_modules/quasar/dist/quasar.sass
+#13 2.541 Error: $map: 0 is not a map.
+#13 2.541      ╷
+#13 2.541 7303 │     padding: map.get($value, "y") map.get($value, "x")
+#13 2.541      │              ^^^^^^^^^^^^^^^^^^^^
+#13 2.541      ╵
+#13 2.541   node_modules/quasar/dist/quasar.sass 7303:14  root stylesheet
+#13 2.543 Error: $map: 0 is not a map.
+#13 2.543      ╷
+#13 2.543 7303 │     padding: map.get($value, "y") map.get($value, "x")
+#13 2.543      │              ^^^^^^^^^^^^^^^^^^^^
+#13 2.543      ╵
+#13 2.543   node_modules/quasar/dist/quasar.sass 7303:14  root stylesheet
+#13 2.543     at Object.throwExpression (/app/node_modules/sass/sass.dart.js:2321:64)
+#13 2.543     at UnitlessSassNumber0.assertMap$1 (/app/node_modules/sass/sass.dart.js:123978:16)
+#13 2.543     at _get_closure0.call$1 (/app/node_modules/sass/sass.dart.js:109593:40)
+#13 2.543     at _EvaluateVisitor__runBuiltInCallable_closure9.call$0 (/app/node_modules/sass/sass.dart.js:94208:35)
+#13 2.543     at /app/node_modules/sass/sass.dart.js:91231:29
+#13 2.543     at _wrapJsFunctionForAsync_closure.$protected (/app/node_modules/sass/sass.dart.js:4921:15)
+#13 2.543     at _wrapJsFunctionForAsync_closure.call$2 (/app/node_modules/sass/sass.dart.js:38012:12)
+#13 2.543     at Object._asyncStartSync (/app/node_modules/sass/sass.dart.js:4885:20)
+#13 2.543     at _EvaluateVisitor2._addExceptionSpanAsync$body$_EvaluateVisitor0 (/app/node_modules/sass/sass.dart.js:91275:16)
+#13 2.543     at _EvaluateVisitor2._async_evaluate0$_addExceptionSpanAsync$1$3$addStackFrame (/app/node_modules/sass/sass.dart.js:91211:19) {
+#13 2.543   formatted: 'Error: $map: 0 is not a map.\n' +
+#13 2.543     '     ╷\n' +
+#13 2.543     '7303 │     padding: map.get($value, "y") map.get($value, "x")\r\n' +
+#13 2.543     '     │              ^^^^^^^^^^^^^^^^^^^^\n' +
+#13 2.543     '     ╵\n' +
+#13 2.543     '  node_modules/quasar/dist/quasar.sass 7303:14  root stylesheet',
+#13 2.543   line: 7303,
+#13 2.543   column: 14,
+#13 2.543   file: '/app/node_modules/quasar/dist/quasar.sass',
+#13 2.543   status: 1,
+#13 2.543   id: '/app/node_modules/quasar/dist/quasar.sass',
+#13 2.543   frame: 'Error: $map: 0 is not a map.\n' +
+#13 2.543     '     ╷\n' +
+#13 2.543     '7303 │     padding: map.get($value, "y") map.get($value, "x")\r\n' +
+#13 2.543     '     │              ^^^^^^^^^^^^^^^^^^^^\n' +
+#13 2.543     '     ╵\n' +
+#13 2.543     '  node_modules/quasar/dist/quasar.sass 7303:14  root stylesheet',
+#13 2.543   code: 'PLUGIN_ERROR',
+#13 2.543   plugin: 'vite:css',
+#13 2.543   hook: 'transform',
+#13 2.543   watchFiles: [
+#13 2.543     '/app/index.html',
+#13 2.543     '/app/.quasar/client-entry.js',
+#13 2.543     '/app/node_modules/vite/package.json',
+#13 2.543     '/app/node_modules/vue/package.json',
+#13 2.543     '/app/node_modules/@quasar/extras/package.json',
+#13 2.543     '/app/node_modules/quasar/package.json',
+#13 2.543     '/app/node_modules/vue/dist/vue.runtime.esm-bundler.js',
+#13 2.543     '/app/node_modules/@quasar/extras/roboto-font/roboto-font.css',
+#13 2.543     '/app/node_modules/@quasar/extras/material-icons/material-icons.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/bounce.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/flash.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/flip.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/headShake.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/heartBeat.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/hinge.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/jello.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/pulse.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/rubberBand.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/shake.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/shakeX.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/shakeY.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/swing.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/tada.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/wobble.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/backInDown.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/backInLeft.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/backInRight.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/backInUp.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/bounceIn.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/bounceInDown.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/bounceInLeft.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/bounceInRight.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/bounceInUp.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/fadeIn.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/fadeInBottomLeft.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/fadeInBottomRight.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/fadeInDown.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/fadeInDownBig.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/fadeInLeft.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/fadeInLeftBig.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/fadeInRight.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/fadeInRightBig.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/fadeInTopLeft.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/fadeInTopRight.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/fadeInUp.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/fadeInUpBig.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/flipInX.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/flipInY.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/jackInTheBox.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/lightSpeedInLeft.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/lightSpeedInRight.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/rollIn.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/rotateIn.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/rotateInDownLeft.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/rotateInDownRight.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/rotateInUpLeft.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/rotateInUpRight.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/slideInDown.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/slideInLeft.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/slideInRight.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/slideInUp.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/zoomIn.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/zoomInDown.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/zoomInLeft.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/zoomInRight.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/zoomInUp.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/backOutDown.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/backOutLeft.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/backOutRight.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/backOutUp.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/bounceOut.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/bounceOutDown.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/bounceOutLeft.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/bounceOutRight.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/bounceOutUp.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/fadeOut.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/fadeOutBottomLeft.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/fadeOutBottomRight.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/fadeOutDown.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/fadeOutDownBig.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/fadeOutLeft.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/fadeOutLeftBig.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/fadeOutRight.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/fadeOutRightBig.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/fadeOutTopLeft.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/fadeOutTopRight.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/fadeOutUp.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/fadeOutUpBig.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/flipOutX.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/flipOutY.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/lightSpeedOutLeft.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/lightSpeedOutRight.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/rollOut.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/rotateOut.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/rotateOutDownLeft.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/rotateOutDownRight.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/rotateOutUpLeft.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/rotateOutUpRight.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/slideOutDown.css',
+#13 2.543     '/app/node_modules/@quasar/extras/animate/slideOutLeft.css',
+#13 2.543     ... 157 more items
+#13 2.543   ]
+#13 2.543 }
+#13 2.543 
+#13 2.543  App • ⚠️   FAIL  App build failed (check the log above)
+#13 2.543 
+#13 ERROR: process "/bin/sh -c quasar build" did not complete successfully: exit code: 1
+------
+ > [build-stage 7/7] RUN quasar build:
+2.543     '/app/node_modules/@quasar/extras/animate/rotateOutUpLeft.css',
+2.543     '/app/node_modules/@quasar/extras/animate/rotateOutUpRight.css',
+2.543     '/app/node_modules/@quasar/extras/animate/slideOutDown.css',
+2.543     '/app/node_modules/@quasar/extras/animate/slideOutLeft.css',
+2.543     ... 157 more items
+2.543   ]
+2.543 }
+2.543 
+2.543  App • ⚠️   FAIL  App build failed (check the log above)
+2.543 
+------
+
+ [33m2 warnings found (use docker --debug to expand):
+[0m - FromAsCasing: 'as' and 'FROM' keywords' casing do not match (line 2)
+ - FromAsCasing: 'as' and 'FROM' keywords' casing do not match (line 13)
+Dockerfile:10
+--------------------
+   8 |     
+   9 |     COPY . .
+  10 | >>> RUN quasar build
+  11 |     
+  12 |     # Production stage
+--------------------
+ERROR: failed to solve: process "/bin/sh -c quasar build" did not complete successfully: exit code: 1
+Service 'frontend' failed to build : Build failed
+2025-06-27 13:08:23 [ERROR] Falha ao construir imagens Docker

@@ -1,0 +1,1150 @@
+Attaching to biuai-frontend-1
+[36mbiuai-frontend-1 |[0m 
+[36mbiuai-frontend-1 |[0m > biuai-frontend@1.0.0 dev
+[36mbiuai-frontend-1 |[0m > vite
+[36mbiuai-frontend-1 |[0m 
+[36mbiuai-frontend-1 |[0m [33mThe CJS build of Vite's Node API is deprecated. See https://vite.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated for more details.[39m
+[36mbiuai-frontend-1 |[0m 
+[36mbiuai-frontend-1 |[0m   VITE v5.4.19  ready in 174 ms
+[36mbiuai-frontend-1 |[0m 
+[36mbiuai-frontend-1 |[0m   ➜  Local:   http://localhost:8080/
+[36mbiuai-frontend-1 |[0m   ➜  Network: http://172.18.0.7:8080/
+[36mbiuai-frontend-1 |[0m 4:47:29 PM [vite] vite.config.js changed, restarting server...
+[36mbiuai-frontend-1 |[0m Re-optimizing dependencies because vite config has changed
+[36mbiuai-frontend-1 |[0m 4:47:29 PM [vite] server restarted.
+[36mbiuai-frontend-1 |[0m 
+[36mbiuai-frontend-1 |[0m   ➜  Local:   http://localhost:8080/
+[36mbiuai-frontend-1 |[0m   ➜  Network: http://172.18.0.7:8080/
+[36mbiuai-frontend-1 |[0m 
+[36mbiuai-frontend-1 |[0m > biuai-frontend@1.0.0 dev
+[36mbiuai-frontend-1 |[0m > vite
+[36mbiuai-frontend-1 |[0m 
+[36mbiuai-frontend-1 |[0m [33mThe CJS build of Vite's Node API is deprecated. See https://vite.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated for more details.[39m
+[36mbiuai-frontend-1 |[0m 
+[36mbiuai-frontend-1 |[0m   VITE v5.4.19  ready in 143 ms
+[36mbiuai-frontend-1 |[0m 
+[36mbiuai-frontend-1 |[0m   ➜  Local:   http://localhost:8080/
+[36mbiuai-frontend-1 |[0m   ➜  Network: http://172.18.0.5:8080/
+[36mbiuai-frontend-1 |[0m 
+[36mbiuai-frontend-1 |[0m > biuai-frontend@1.0.0 dev
+[36mbiuai-frontend-1 |[0m > vite
+[36mbiuai-frontend-1 |[0m 
+[36mbiuai-frontend-1 |[0m [33mThe CJS build of Vite's Node API is deprecated. See https://vite.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated for more details.[39m
+[36mbiuai-frontend-1 |[0m 
+[36mbiuai-frontend-1 |[0m   VITE v5.4.19  ready in 145 ms
+[36mbiuai-frontend-1 |[0m 
+[36mbiuai-frontend-1 |[0m   ➜  Local:   http://localhost:8080/
+[36mbiuai-frontend-1 |[0m   ➜  Network: http://172.18.0.5:8080/
+[36mbiuai-frontend-1 |[0m 4:51:14 PM [vite] page reload index.html
+[36mbiuai-frontend-1 |[0m 4:51:14 PM [vite] Pre-transform error: Failed to resolve import "pages/Lancamentos.vue" from "src/router/index.js". Does the file exist?
+[36mbiuai-frontend-1 |[0m 4:51:14 PM [vite] Internal server error: Failed to resolve import "pages/Lancamentos.vue" from "src/router/index.js". Does the file exist?
+[36mbiuai-frontend-1 |[0m   Plugin: vite:import-analysis
+[36mbiuai-frontend-1 |[0m   File: /app/src/router/index.js:17:33
+[36mbiuai-frontend-1 |[0m   15 |          path: '/lancamentos',
+[36mbiuai-frontend-1 |[0m   16 |          name: 'lancamentos',
+[36mbiuai-frontend-1 |[0m   17 |          component: () => import('pages/Lancamentos.vue')
+[36mbiuai-frontend-1 |[0m      |                                  ^
+[36mbiuai-frontend-1 |[0m   18 |        },
+[36mbiuai-frontend-1 |[0m   19 |        {
+[36mbiuai-frontend-1 |[0m       at TransformPluginContext._formatError (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49258:41)
+[36mbiuai-frontend-1 |[0m       at TransformPluginContext.error (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49253:16)
+[36mbiuai-frontend-1 |[0m       at normalizeUrl (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64291:23)
+[36mbiuai-frontend-1 |[0m       at async file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64423:39
+[36mbiuai-frontend-1 |[0m       at async Promise.all (index 3)
+[36mbiuai-frontend-1 |[0m       at async TransformPluginContext.transform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64350:7)
+[36mbiuai-frontend-1 |[0m       at async PluginContainer.transform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49099:18)
+[36mbiuai-frontend-1 |[0m       at async loadAndTransform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:51977:27)
+[36mbiuai-frontend-1 |[0m       at async viteTransformMiddleware (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:62105:24)
+[36mbiuai-frontend-1 |[0m 4:51:15 PM [vite] Internal server error: [sass] $map: 0 is not a map.
+[36mbiuai-frontend-1 |[0m    ╷
+[36mbiuai-frontend-1 |[0m 34 │     padding: map.get($value, "y") map.get($value, "x")
+[36mbiuai-frontend-1 |[0m    │              ^^^^^^^^^^^^^^^^^^^^
+[36mbiuai-frontend-1 |[0m    ╵
+[36mbiuai-frontend-1 |[0m   node_modules/quasar/src/css/core/size.sass 34:14  @import
+[36mbiuai-frontend-1 |[0m   node_modules/quasar/src/css/index.sass 99:9       root stylesheet
+[36mbiuai-frontend-1 |[0m   Plugin: vite:css
+[36mbiuai-frontend-1 |[0m   File: /app/node_modules/quasar/src/css/index.sass
+[36mbiuai-frontend-1 |[0m       at Object.throwExpression (/app/node_modules/sass/sass.dart.js:2321:64)
+[36mbiuai-frontend-1 |[0m       at UnitlessSassNumber0.assertMap$1 (/app/node_modules/sass/sass.dart.js:123978:16)
+[36mbiuai-frontend-1 |[0m       at _get_closure0.call$1 (/app/node_modules/sass/sass.dart.js:109593:40)
+[36mbiuai-frontend-1 |[0m       at _EvaluateVisitor__runBuiltInCallable_closure9.call$0 (/app/node_modules/sass/sass.dart.js:94208:35)
+[36mbiuai-frontend-1 |[0m       at /app/node_modules/sass/sass.dart.js:91231:29
+[36mbiuai-frontend-1 |[0m       at _wrapJsFunctionForAsync_closure.$protected (/app/node_modules/sass/sass.dart.js:4921:15)
+[36mbiuai-frontend-1 |[0m       at _wrapJsFunctionForAsync_closure.call$2 (/app/node_modules/sass/sass.dart.js:38012:12)
+[36mbiuai-frontend-1 |[0m       at Object._asyncStartSync (/app/node_modules/sass/sass.dart.js:4885:20)
+[36mbiuai-frontend-1 |[0m       at _EvaluateVisitor2._addExceptionSpanAsync$body$_EvaluateVisitor0 (/app/node_modules/sass/sass.dart.js:91275:16)
+[36mbiuai-frontend-1 |[0m       at _EvaluateVisitor2._async_evaluate0$_addExceptionSpanAsync$1$3$addStackFrame (/app/node_modules/sass/sass.dart.js:91211:19)
+[36mbiuai-frontend-1 |[0m 4:51:15 PM [vite] Pre-transform error: [sass] $map: 0 is not a map.
+[36mbiuai-frontend-1 |[0m    ╷
+[36mbiuai-frontend-1 |[0m 34 │     padding: map.get($value, "y") map.get($value, "x")
+[36mbiuai-frontend-1 |[0m    │              ^^^^^^^^^^^^^^^^^^^^
+[36mbiuai-frontend-1 |[0m    ╵
+[36mbiuai-frontend-1 |[0m   node_modules/quasar/src/css/core/size.sass 34:14  @import
+[36mbiuai-frontend-1 |[0m   node_modules/quasar/src/css/index.sass 99:9       root stylesheet
+[36mbiuai-frontend-1 |[0m 4:51:15 PM [vite] ✨ new dependencies optimized: quasar/dist/quasar.client.js, vue, vue-router
+[36mbiuai-frontend-1 |[0m 4:51:47 PM [vite] Internal server error: Failed to resolve import "pages/Lancamentos.vue" from "src/router/index.js". Does the file exist?
+[36mbiuai-frontend-1 |[0m   Plugin: vite:import-analysis
+[36mbiuai-frontend-1 |[0m   File: /app/src/router/index.js:17:33
+[36mbiuai-frontend-1 |[0m   15 |          path: '/lancamentos',
+[36mbiuai-frontend-1 |[0m   16 |          name: 'lancamentos',
+[36mbiuai-frontend-1 |[0m   17 |          component: () => import('pages/Lancamentos.vue')
+[36mbiuai-frontend-1 |[0m      |                                  ^
+[36mbiuai-frontend-1 |[0m   18 |        },
+[36mbiuai-frontend-1 |[0m   19 |        {
+[36mbiuai-frontend-1 |[0m       at TransformPluginContext._formatError (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49258:41)
+[36mbiuai-frontend-1 |[0m       at TransformPluginContext.error (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49253:16)
+[36mbiuai-frontend-1 |[0m       at normalizeUrl (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64291:23)
+[36mbiuai-frontend-1 |[0m       at async file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64423:39
+[36mbiuai-frontend-1 |[0m       at async Promise.all (index 3)
+[36mbiuai-frontend-1 |[0m       at async TransformPluginContext.transform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64350:7)
+[36mbiuai-frontend-1 |[0m       at async PluginContainer.transform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49099:18)
+[36mbiuai-frontend-1 |[0m       at async loadAndTransform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:51977:27)
+[36mbiuai-frontend-1 |[0m       at async viteTransformMiddleware (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:62105:24)
+[36mbiuai-frontend-1 |[0m 4:51:48 PM [vite] Internal server error: [sass] $map: 0 is not a map.
+[36mbiuai-frontend-1 |[0m    ╷
+[36mbiuai-frontend-1 |[0m 34 │     padding: map.get($value, "y") map.get($value, "x")
+[36mbiuai-frontend-1 |[0m    │              ^^^^^^^^^^^^^^^^^^^^
+[36mbiuai-frontend-1 |[0m    ╵
+[36mbiuai-frontend-1 |[0m   node_modules/quasar/src/css/core/size.sass 34:14  @import
+[36mbiuai-frontend-1 |[0m   node_modules/quasar/src/css/index.sass 99:9       root stylesheet
+[36mbiuai-frontend-1 |[0m   Plugin: vite:css
+[36mbiuai-frontend-1 |[0m   File: /app/node_modules/quasar/src/css/index.sass
+[36mbiuai-frontend-1 |[0m       at Object.throwExpression (/app/node_modules/sass/sass.dart.js:2321:64)
+[36mbiuai-frontend-1 |[0m       at UnitlessSassNumber0.assertMap$1 (/app/node_modules/sass/sass.dart.js:123978:16)
+[36mbiuai-frontend-1 |[0m       at _get_closure0.call$1 (/app/node_modules/sass/sass.dart.js:109593:40)
+[36mbiuai-frontend-1 |[0m       at _EvaluateVisitor__runBuiltInCallable_closure9.call$0 (/app/node_modules/sass/sass.dart.js:94208:35)
+[36mbiuai-frontend-1 |[0m       at /app/node_modules/sass/sass.dart.js:91231:29
+[36mbiuai-frontend-1 |[0m       at _wrapJsFunctionForAsync_closure.$protected (/app/node_modules/sass/sass.dart.js:4921:15)
+[36mbiuai-frontend-1 |[0m       at _wrapJsFunctionForAsync_closure.call$2 (/app/node_modules/sass/sass.dart.js:38012:12)
+[36mbiuai-frontend-1 |[0m       at Object._asyncStartSync (/app/node_modules/sass/sass.dart.js:4885:20)
+[36mbiuai-frontend-1 |[0m       at _EvaluateVisitor2._addExceptionSpanAsync$body$_EvaluateVisitor0 (/app/node_modules/sass/sass.dart.js:91275:16)
+[36mbiuai-frontend-1 |[0m       at _EvaluateVisitor2._async_evaluate0$_addExceptionSpanAsync$1$3$addStackFrame (/app/node_modules/sass/sass.dart.js:91211:19)
+[36mbiuai-frontend-1 |[0m 4:52:24 PM [vite] vite.config.js changed, restarting server...
+[36mbiuai-frontend-1 |[0m 4:52:24 PM [vite] server restarted.
+[36mbiuai-frontend-1 |[0m 4:52:25 PM [vite] Pre-transform error: Failed to resolve import "pages/Lancamentos.vue" from "src/router/index.js". Does the file exist?
+[36mbiuai-frontend-1 |[0m 4:52:25 PM [vite] Internal server error: Failed to resolve import "pages/Lancamentos.vue" from "src/router/index.js". Does the file exist?
+[36mbiuai-frontend-1 |[0m   Plugin: vite:import-analysis
+[36mbiuai-frontend-1 |[0m   File: /app/src/router/index.js:17:33
+[36mbiuai-frontend-1 |[0m   15 |          path: '/lancamentos',
+[36mbiuai-frontend-1 |[0m   16 |          name: 'lancamentos',
+[36mbiuai-frontend-1 |[0m   17 |          component: () => import('pages/Lancamentos.vue')
+[36mbiuai-frontend-1 |[0m      |                                  ^
+[36mbiuai-frontend-1 |[0m   18 |        },
+[36mbiuai-frontend-1 |[0m   19 |        {
+[36mbiuai-frontend-1 |[0m       at TransformPluginContext._formatError (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49258:41)
+[36mbiuai-frontend-1 |[0m       at TransformPluginContext.error (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49253:16)
+[36mbiuai-frontend-1 |[0m       at normalizeUrl (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64291:23)
+[36mbiuai-frontend-1 |[0m       at async file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64423:39
+[36mbiuai-frontend-1 |[0m       at async Promise.all (index 3)
+[36mbiuai-frontend-1 |[0m       at async TransformPluginContext.transform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64350:7)
+[36mbiuai-frontend-1 |[0m       at async PluginContainer.transform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49099:18)
+[36mbiuai-frontend-1 |[0m       at async loadAndTransform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:51977:27)
+[36mbiuai-frontend-1 |[0m       at async viteTransformMiddleware (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:62105:24)
+[36mbiuai-frontend-1 |[0m 4:52:25 PM [vite] Internal server error: [sass] $map: 0 is not a map.
+[36mbiuai-frontend-1 |[0m    ╷
+[36mbiuai-frontend-1 |[0m 34 │     padding: map.get($value, "y") map.get($value, "x")
+[36mbiuai-frontend-1 |[0m    │              ^^^^^^^^^^^^^^^^^^^^
+[36mbiuai-frontend-1 |[0m    ╵
+[36mbiuai-frontend-1 |[0m   node_modules/quasar/src/css/core/size.sass 34:14  @import
+[36mbiuai-frontend-1 |[0m   node_modules/quasar/src/css/index.sass 99:9       root stylesheet
+[36mbiuai-frontend-1 |[0m   Plugin: vite:css
+[36mbiuai-frontend-1 |[0m   File: /app/node_modules/quasar/src/css/index.sass
+[36mbiuai-frontend-1 |[0m       at Object.throwExpression (/app/node_modules/sass/sass.dart.js:2321:64)
+[36mbiuai-frontend-1 |[0m       at UnitlessSassNumber0.assertMap$1 (/app/node_modules/sass/sass.dart.js:123978:16)
+[36mbiuai-frontend-1 |[0m       at _get_closure0.call$1 (/app/node_modules/sass/sass.dart.js:109593:40)
+[36mbiuai-frontend-1 |[0m       at _EvaluateVisitor__runBuiltInCallable_closure9.call$0 (/app/node_modules/sass/sass.dart.js:94208:35)
+[36mbiuai-frontend-1 |[0m       at /app/node_modules/sass/sass.dart.js:91231:29
+[36mbiuai-frontend-1 |[0m       at _wrapJsFunctionForAsync_closure.$protected (/app/node_modules/sass/sass.dart.js:4921:15)
+[36mbiuai-frontend-1 |[0m       at _wrapJsFunctionForAsync_closure.call$2 (/app/node_modules/sass/sass.dart.js:38012:12)
+[36mbiuai-frontend-1 |[0m       at Object._asyncStartSync (/app/node_modules/sass/sass.dart.js:4885:20)
+[36mbiuai-frontend-1 |[0m       at _EvaluateVisitor2._addExceptionSpanAsync$body$_EvaluateVisitor0 (/app/node_modules/sass/sass.dart.js:91275:16)
+[36mbiuai-frontend-1 |[0m       at _EvaluateVisitor2._async_evaluate0$_addExceptionSpanAsync$1$3$addStackFrame (/app/node_modules/sass/sass.dart.js:91211:19)
+[36mbiuai-frontend-1 |[0m 4:52:25 PM [vite] Pre-transform error: [sass] $map: 0 is not a map.
+[36mbiuai-frontend-1 |[0m    ╷
+[36mbiuai-frontend-1 |[0m 34 │     padding: map.get($value, "y") map.get($value, "x")
+[36mbiuai-frontend-1 |[0m    │              ^^^^^^^^^^^^^^^^^^^^
+[36mbiuai-frontend-1 |[0m    ╵
+[36mbiuai-frontend-1 |[0m   node_modules/quasar/src/css/core/size.sass 34:14  @import
+[36mbiuai-frontend-1 |[0m   node_modules/quasar/src/css/index.sass 99:9       root stylesheet
+[36mbiuai-frontend-1 |[0m 4:52:32 PM [vite] page reload src/main.js
+[36mbiuai-frontend-1 |[0m 4:52:32 PM [vite] Pre-transform error: Failed to resolve import "pages/Lancamentos.vue" from "src/router/index.js". Does the file exist?
+[36mbiuai-frontend-1 |[0m 4:52:33 PM [vite] Pre-transform error: [sass] $map: 0 is not a map.
+[36mbiuai-frontend-1 |[0m    ╷
+[36mbiuai-frontend-1 |[0m 34 │     padding: map.get($value, "y") map.get($value, "x")
+[36mbiuai-frontend-1 |[0m    │              ^^^^^^^^^^^^^^^^^^^^
+[36mbiuai-frontend-1 |[0m    ╵
+[36mbiuai-frontend-1 |[0m   node_modules/quasar/src/css/core/size.sass 34:14  @import
+[36mbiuai-frontend-1 |[0m   node_modules/quasar/src/css/index.sass 99:9       root stylesheet
+[36mbiuai-frontend-1 |[0m 4:52:33 PM [vite] Internal server error: Failed to resolve import "pages/Lancamentos.vue" from "src/router/index.js". Does the file exist?
+[36mbiuai-frontend-1 |[0m   Plugin: vite:import-analysis
+[36mbiuai-frontend-1 |[0m   File: /app/src/router/index.js:17:33
+[36mbiuai-frontend-1 |[0m   15 |          path: '/lancamentos',
+[36mbiuai-frontend-1 |[0m   16 |          name: 'lancamentos',
+[36mbiuai-frontend-1 |[0m   17 |          component: () => import('pages/Lancamentos.vue')
+[36mbiuai-frontend-1 |[0m      |                                  ^
+[36mbiuai-frontend-1 |[0m   18 |        },
+[36mbiuai-frontend-1 |[0m   19 |        {
+[36mbiuai-frontend-1 |[0m       at TransformPluginContext._formatError (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49258:41)
+[36mbiuai-frontend-1 |[0m       at TransformPluginContext.error (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49253:16)
+[36mbiuai-frontend-1 |[0m       at normalizeUrl (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64291:23)
+[36mbiuai-frontend-1 |[0m       at async file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64423:39
+[36mbiuai-frontend-1 |[0m       at async Promise.all (index 3)
+[36mbiuai-frontend-1 |[0m       at async TransformPluginContext.transform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64350:7)
+[36mbiuai-frontend-1 |[0m       at async PluginContainer.transform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49099:18)
+[36mbiuai-frontend-1 |[0m       at async loadAndTransform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:51977:27)
+[36mbiuai-frontend-1 |[0m       at async viteTransformMiddleware (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:62105:24)
+[36mbiuai-frontend-1 |[0m 4:52:33 PM [vite] Internal server error: [sass] $map: 0 is not a map.
+[36mbiuai-frontend-1 |[0m    ╷
+[36mbiuai-frontend-1 |[0m 34 │     padding: map.get($value, "y") map.get($value, "x")
+[36mbiuai-frontend-1 |[0m    │              ^^^^^^^^^^^^^^^^^^^^
+[36mbiuai-frontend-1 |[0m    ╵
+[36mbiuai-frontend-1 |[0m   node_modules/quasar/src/css/core/size.sass 34:14  @import
+[36mbiuai-frontend-1 |[0m   node_modules/quasar/src/css/index.sass 99:9       root stylesheet
+[36mbiuai-frontend-1 |[0m   Plugin: vite:css
+[36mbiuai-frontend-1 |[0m   File: /app/node_modules/quasar/src/css/index.sass
+[36mbiuai-frontend-1 |[0m       at Object.throwExpression (/app/node_modules/sass/sass.dart.js:2321:64)
+[36mbiuai-frontend-1 |[0m       at UnitlessSassNumber0.assertMap$1 (/app/node_modules/sass/sass.dart.js:123978:16)
+[36mbiuai-frontend-1 |[0m       at _get_closure0.call$1 (/app/node_modules/sass/sass.dart.js:109593:40)
+[36mbiuai-frontend-1 |[0m       at _EvaluateVisitor__runBuiltInCallable_closure9.call$0 (/app/node_modules/sass/sass.dart.js:94208:35)
+[36mbiuai-frontend-1 |[0m       at /app/node_modules/sass/sass.dart.js:91231:29
+[36mbiuai-frontend-1 |[0m       at _wrapJsFunctionForAsync_closure.$protected (/app/node_modules/sass/sass.dart.js:4921:15)
+[36mbiuai-frontend-1 |[0m       at _wrapJsFunctionForAsync_closure.call$2 (/app/node_modules/sass/sass.dart.js:38012:12)
+[36mbiuai-frontend-1 |[0m       at Object._asyncStartSync (/app/node_modules/sass/sass.dart.js:4885:20)
+[36mbiuai-frontend-1 |[0m       at _EvaluateVisitor2._addExceptionSpanAsync$body$_EvaluateVisitor0 (/app/node_modules/sass/sass.dart.js:91275:16)
+[36mbiuai-frontend-1 |[0m       at _EvaluateVisitor2._async_evaluate0$_addExceptionSpanAsync$1$3$addStackFrame (/app/node_modules/sass/sass.dart.js:91211:19)
+[36mbiuai-frontend-1 |[0m 
+[36mbiuai-frontend-1 |[0m > biuai-frontend@1.0.0 dev
+[36mbiuai-frontend-1 |[0m > vite
+[36mbiuai-frontend-1 |[0m 
+[36mbiuai-frontend-1 |[0m [33mThe CJS build of Vite's Node API is deprecated. See https://vite.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated for more details.[39m
+[36mbiuai-frontend-1 |[0m 
+[36mbiuai-frontend-1 |[0m   VITE v5.4.19  ready in 149 ms
+[36mbiuai-frontend-1 |[0m 
+[36mbiuai-frontend-1 |[0m   ➜  Local:   http://localhost:8080/
+[36mbiuai-frontend-1 |[0m   ➜  Network: http://172.18.0.5:8080/
+[36mbiuai-frontend-1 |[0m 4:52:41 PM [vite] Pre-transform error: Failed to resolve import "pages/Lancamentos.vue" from "src/router/index.js". Does the file exist?
+[36mbiuai-frontend-1 |[0m 4:52:41 PM [vite] Internal server error: Failed to resolve import "pages/Lancamentos.vue" from "src/router/index.js". Does the file exist?
+[36mbiuai-frontend-1 |[0m   Plugin: vite:import-analysis
+[36mbiuai-frontend-1 |[0m   File: /app/src/router/index.js:17:33
+[36mbiuai-frontend-1 |[0m   15 |          path: '/lancamentos',
+[36mbiuai-frontend-1 |[0m   16 |          name: 'lancamentos',
+[36mbiuai-frontend-1 |[0m   17 |          component: () => import('pages/Lancamentos.vue')
+[36mbiuai-frontend-1 |[0m      |                                  ^
+[36mbiuai-frontend-1 |[0m   18 |        },
+[36mbiuai-frontend-1 |[0m   19 |        {
+[36mbiuai-frontend-1 |[0m       at TransformPluginContext._formatError (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49258:41)
+[36mbiuai-frontend-1 |[0m       at TransformPluginContext.error (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49253:16)
+[36mbiuai-frontend-1 |[0m       at normalizeUrl (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64291:23)
+[36mbiuai-frontend-1 |[0m       at async file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64423:39
+[36mbiuai-frontend-1 |[0m       at async Promise.all (index 3)
+[36mbiuai-frontend-1 |[0m       at async TransformPluginContext.transform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64350:7)
+[36mbiuai-frontend-1 |[0m       at async PluginContainer.transform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49099:18)
+[36mbiuai-frontend-1 |[0m       at async loadAndTransform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:51977:27)
+[36mbiuai-frontend-1 |[0m       at async viteTransformMiddleware (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:62105:24)
+[36mbiuai-frontend-1 |[0m 4:52:42 PM [vite] Internal server error: [sass] $map: 0 is not a map.
+[36mbiuai-frontend-1 |[0m    ╷
+[36mbiuai-frontend-1 |[0m 34 │     padding: map.get($value, "y") map.get($value, "x")
+[36mbiuai-frontend-1 |[0m    │              ^^^^^^^^^^^^^^^^^^^^
+[36mbiuai-frontend-1 |[0m    ╵
+[36mbiuai-frontend-1 |[0m   node_modules/quasar/src/css/core/size.sass 34:14  @import
+[36mbiuai-frontend-1 |[0m   node_modules/quasar/src/css/index.sass 99:9       root stylesheet
+[36mbiuai-frontend-1 |[0m   Plugin: vite:css
+[36mbiuai-frontend-1 |[0m   File: /app/node_modules/quasar/src/css/index.sass
+[36mbiuai-frontend-1 |[0m       at Object.throwExpression (/app/node_modules/sass/sass.dart.js:2321:64)
+[36mbiuai-frontend-1 |[0m       at UnitlessSassNumber0.assertMap$1 (/app/node_modules/sass/sass.dart.js:123978:16)
+[36mbiuai-frontend-1 |[0m       at _get_closure0.call$1 (/app/node_modules/sass/sass.dart.js:109593:40)
+[36mbiuai-frontend-1 |[0m       at _EvaluateVisitor__runBuiltInCallable_closure9.call$0 (/app/node_modules/sass/sass.dart.js:94208:35)
+[36mbiuai-frontend-1 |[0m       at /app/node_modules/sass/sass.dart.js:91231:29
+[36mbiuai-frontend-1 |[0m       at _wrapJsFunctionForAsync_closure.$protected (/app/node_modules/sass/sass.dart.js:4921:15)
+[36mbiuai-frontend-1 |[0m       at _wrapJsFunctionForAsync_closure.call$2 (/app/node_modules/sass/sass.dart.js:38012:12)
+[36mbiuai-frontend-1 |[0m       at Object._asyncStartSync (/app/node_modules/sass/sass.dart.js:4885:20)
+[36mbiuai-frontend-1 |[0m       at _EvaluateVisitor2._addExceptionSpanAsync$body$_EvaluateVisitor0 (/app/node_modules/sass/sass.dart.js:91275:16)
+[36mbiuai-frontend-1 |[0m       at _EvaluateVisitor2._async_evaluate0$_addExceptionSpanAsync$1$3$addStackFrame (/app/node_modules/sass/sass.dart.js:91211:19)
+[36mbiuai-frontend-1 |[0m 4:52:42 PM [vite] Pre-transform error: [sass] $map: 0 is not a map.
+[36mbiuai-frontend-1 |[0m    ╷
+[36mbiuai-frontend-1 |[0m 34 │     padding: map.get($value, "y") map.get($value, "x")
+[36mbiuai-frontend-1 |[0m    │              ^^^^^^^^^^^^^^^^^^^^
+[36mbiuai-frontend-1 |[0m    ╵
+[36mbiuai-frontend-1 |[0m   node_modules/quasar/src/css/core/size.sass 34:14  @import
+[36mbiuai-frontend-1 |[0m   node_modules/quasar/src/css/index.sass 99:9       root stylesheet
+[36mbiuai-frontend-1 |[0m 4:52:57 PM [vite] hmr update /src/css/app.scss, /src/App.vue?vue&type=style&index=0&lang.scss
+[36mbiuai-frontend-1 |[0m 4:52:57 PM [vite] Pre-transform error: Failed to resolve import "pages/Lancamentos.vue" from "src/router/index.js". Does the file exist?
+[36mbiuai-frontend-1 |[0m 4:52:58 PM [vite] Pre-transform error: [sass] $map: 0 is not a map.
+[36mbiuai-frontend-1 |[0m    ╷
+[36mbiuai-frontend-1 |[0m 34 │     padding: map.get($value, "y") map.get($value, "x")
+[36mbiuai-frontend-1 |[0m    │              ^^^^^^^^^^^^^^^^^^^^
+[36mbiuai-frontend-1 |[0m    ╵
+[36mbiuai-frontend-1 |[0m   node_modules/quasar/src/css/core/size.sass 34:14  @import
+[36mbiuai-frontend-1 |[0m   node_modules/quasar/src/css/index.sass 99:9       root stylesheet
+[36mbiuai-frontend-1 |[0m 4:52:58 PM [vite] Internal server error: Failed to resolve import "pages/Lancamentos.vue" from "src/router/index.js". Does the file exist?
+[36mbiuai-frontend-1 |[0m   Plugin: vite:import-analysis
+[36mbiuai-frontend-1 |[0m   File: /app/src/router/index.js:17:33
+[36mbiuai-frontend-1 |[0m   15 |          path: '/lancamentos',
+[36mbiuai-frontend-1 |[0m   16 |          name: 'lancamentos',
+[36mbiuai-frontend-1 |[0m   17 |          component: () => import('pages/Lancamentos.vue')
+[36mbiuai-frontend-1 |[0m      |                                  ^
+[36mbiuai-frontend-1 |[0m   18 |        },
+[36mbiuai-frontend-1 |[0m   19 |        {
+[36mbiuai-frontend-1 |[0m       at TransformPluginContext._formatError (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49258:41)
+[36mbiuai-frontend-1 |[0m       at TransformPluginContext.error (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49253:16)
+[36mbiuai-frontend-1 |[0m       at normalizeUrl (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64291:23)
+[36mbiuai-frontend-1 |[0m       at async file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64423:39
+[36mbiuai-frontend-1 |[0m       at async Promise.all (index 3)
+[36mbiuai-frontend-1 |[0m       at async TransformPluginContext.transform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64350:7)
+[36mbiuai-frontend-1 |[0m       at async PluginContainer.transform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49099:18)
+[36mbiuai-frontend-1 |[0m       at async loadAndTransform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:51977:27)
+[36mbiuai-frontend-1 |[0m       at async viteTransformMiddleware (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:62105:24)
+[36mbiuai-frontend-1 |[0m 4:52:58 PM [vite] Internal server error: [sass] $map: 0 is not a map.
+[36mbiuai-frontend-1 |[0m    ╷
+[36mbiuai-frontend-1 |[0m 34 │     padding: map.get($value, "y") map.get($value, "x")
+[36mbiuai-frontend-1 |[0m    │              ^^^^^^^^^^^^^^^^^^^^
+[36mbiuai-frontend-1 |[0m    ╵
+[36mbiuai-frontend-1 |[0m   node_modules/quasar/src/css/core/size.sass 34:14  @import
+[36mbiuai-frontend-1 |[0m   node_modules/quasar/src/css/index.sass 99:9       root stylesheet
+[36mbiuai-frontend-1 |[0m   Plugin: vite:css
+[36mbiuai-frontend-1 |[0m   File: /app/node_modules/quasar/src/css/index.sass
+[36mbiuai-frontend-1 |[0m       at Object.throwExpression (/app/node_modules/sass/sass.dart.js:2321:64)
+[36mbiuai-frontend-1 |[0m       at UnitlessSassNumber0.assertMap$1 (/app/node_modules/sass/sass.dart.js:123978:16)
+[36mbiuai-frontend-1 |[0m       at _get_closure0.call$1 (/app/node_modules/sass/sass.dart.js:109593:40)
+[36mbiuai-frontend-1 |[0m       at _EvaluateVisitor__runBuiltInCallable_closure9.call$0 (/app/node_modules/sass/sass.dart.js:94208:35)
+[36mbiuai-frontend-1 |[0m       at /app/node_modules/sass/sass.dart.js:91231:29
+[36mbiuai-frontend-1 |[0m       at _wrapJsFunctionForAsync_closure.$protected (/app/node_modules/sass/sass.dart.js:4921:15)
+[36mbiuai-frontend-1 |[0m       at _wrapJsFunctionForAsync_closure.call$2 (/app/node_modules/sass/sass.dart.js:38012:12)
+[36mbiuai-frontend-1 |[0m       at Object._asyncStartSync (/app/node_modules/sass/sass.dart.js:4885:20)
+[36mbiuai-frontend-1 |[0m       at _EvaluateVisitor2._addExceptionSpanAsync$body$_EvaluateVisitor0 (/app/node_modules/sass/sass.dart.js:91275:16)
+[36mbiuai-frontend-1 |[0m       at _EvaluateVisitor2._async_evaluate0$_addExceptionSpanAsync$1$3$addStackFrame (/app/node_modules/sass/sass.dart.js:91211:19)
+[36mbiuai-frontend-1 |[0m 4:53:07 PM [vite] hmr update /src/css/app.scss, /src/App.vue?vue&type=style&index=0&lang.scss
+[36mbiuai-frontend-1 |[0m 4:53:07 PM [vite] Pre-transform error: Failed to resolve import "pages/Lancamentos.vue" from "src/router/index.js". Does the file exist?
+[36mbiuai-frontend-1 |[0m 4:53:08 PM [vite] Pre-transform error: [sass] $map: 0 is not a map.
+[36mbiuai-frontend-1 |[0m    ╷
+[36mbiuai-frontend-1 |[0m 34 │     padding: map.get($value, "y") map.get($value, "x")
+[36mbiuai-frontend-1 |[0m    │              ^^^^^^^^^^^^^^^^^^^^
+[36mbiuai-frontend-1 |[0m    ╵
+[36mbiuai-frontend-1 |[0m   node_modules/quasar/src/css/core/size.sass 34:14  @import
+[36mbiuai-frontend-1 |[0m   node_modules/quasar/src/css/index.sass 99:9       root stylesheet
+[36mbiuai-frontend-1 |[0m 4:53:08 PM [vite] Internal server error: Failed to resolve import "pages/Lancamentos.vue" from "src/router/index.js". Does the file exist?
+[36mbiuai-frontend-1 |[0m   Plugin: vite:import-analysis
+[36mbiuai-frontend-1 |[0m   File: /app/src/router/index.js:17:33
+[36mbiuai-frontend-1 |[0m   15 |          path: '/lancamentos',
+[36mbiuai-frontend-1 |[0m   16 |          name: 'lancamentos',
+[36mbiuai-frontend-1 |[0m   17 |          component: () => import('pages/Lancamentos.vue')
+[36mbiuai-frontend-1 |[0m      |                                  ^
+[36mbiuai-frontend-1 |[0m   18 |        },
+[36mbiuai-frontend-1 |[0m   19 |        {
+[36mbiuai-frontend-1 |[0m       at TransformPluginContext._formatError (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49258:41)
+[36mbiuai-frontend-1 |[0m       at TransformPluginContext.error (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49253:16)
+[36mbiuai-frontend-1 |[0m       at normalizeUrl (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64291:23)
+[36mbiuai-frontend-1 |[0m       at async file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64423:39
+[36mbiuai-frontend-1 |[0m       at async Promise.all (index 3)
+[36mbiuai-frontend-1 |[0m       at async TransformPluginContext.transform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64350:7)
+[36mbiuai-frontend-1 |[0m       at async PluginContainer.transform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49099:18)
+[36mbiuai-frontend-1 |[0m       at async loadAndTransform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:51977:27)
+[36mbiuai-frontend-1 |[0m       at async viteTransformMiddleware (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:62105:24)
+[36mbiuai-frontend-1 |[0m 4:53:08 PM [vite] Internal server error: [sass] $map: 0 is not a map.
+[36mbiuai-frontend-1 |[0m    ╷
+[36mbiuai-frontend-1 |[0m 34 │     padding: map.get($value, "y") map.get($value, "x")
+[36mbiuai-frontend-1 |[0m    │              ^^^^^^^^^^^^^^^^^^^^
+[36mbiuai-frontend-1 |[0m    ╵
+[36mbiuai-frontend-1 |[0m   node_modules/quasar/src/css/core/size.sass 34:14  @import
+[36mbiuai-frontend-1 |[0m   node_modules/quasar/src/css/index.sass 99:9       root stylesheet
+[36mbiuai-frontend-1 |[0m   Plugin: vite:css
+[36mbiuai-frontend-1 |[0m   File: /app/node_modules/quasar/src/css/index.sass
+[36mbiuai-frontend-1 |[0m       at Object.throwExpression (/app/node_modules/sass/sass.dart.js:2321:64)
+[36mbiuai-frontend-1 |[0m       at UnitlessSassNumber0.assertMap$1 (/app/node_modules/sass/sass.dart.js:123978:16)
+[36mbiuai-frontend-1 |[0m       at _get_closure0.call$1 (/app/node_modules/sass/sass.dart.js:109593:40)
+[36mbiuai-frontend-1 |[0m       at _EvaluateVisitor__runBuiltInCallable_closure9.call$0 (/app/node_modules/sass/sass.dart.js:94208:35)
+[36mbiuai-frontend-1 |[0m       at /app/node_modules/sass/sass.dart.js:91231:29
+[36mbiuai-frontend-1 |[0m       at _wrapJsFunctionForAsync_closure.$protected (/app/node_modules/sass/sass.dart.js:4921:15)
+[36mbiuai-frontend-1 |[0m       at _wrapJsFunctionForAsync_closure.call$2 (/app/node_modules/sass/sass.dart.js:38012:12)
+[36mbiuai-frontend-1 |[0m       at Object._asyncStartSync (/app/node_modules/sass/sass.dart.js:4885:20)
+[36mbiuai-frontend-1 |[0m       at _EvaluateVisitor2._addExceptionSpanAsync$body$_EvaluateVisitor0 (/app/node_modules/sass/sass.dart.js:91275:16)
+[36mbiuai-frontend-1 |[0m       at _EvaluateVisitor2._async_evaluate0$_addExceptionSpanAsync$1$3$addStackFrame (/app/node_modules/sass/sass.dart.js:91211:19)
+[36mbiuai-frontend-1 |[0m 4:53:18 PM [vite] page reload src/router/index.js
+[36mbiuai-frontend-1 |[0m 4:53:19 PM [vite] Pre-transform error: [sass] $map: 0 is not a map.
+[36mbiuai-frontend-1 |[0m    ╷
+[36mbiuai-frontend-1 |[0m 34 │     padding: map.get($value, "y") map.get($value, "x")
+[36mbiuai-frontend-1 |[0m    │              ^^^^^^^^^^^^^^^^^^^^
+[36mbiuai-frontend-1 |[0m    ╵
+[36mbiuai-frontend-1 |[0m   node_modules/quasar/src/css/core/size.sass 34:14  @import
+[36mbiuai-frontend-1 |[0m   node_modules/quasar/src/css/index.sass 99:9       root stylesheet
+[36mbiuai-frontend-1 |[0m 4:53:19 PM [vite] Internal server error: [sass] $map: 0 is not a map.
+[36mbiuai-frontend-1 |[0m    ╷
+[36mbiuai-frontend-1 |[0m 34 │     padding: map.get($value, "y") map.get($value, "x")
+[36mbiuai-frontend-1 |[0m    │              ^^^^^^^^^^^^^^^^^^^^
+[36mbiuai-frontend-1 |[0m    ╵
+[36mbiuai-frontend-1 |[0m   node_modules/quasar/src/css/core/size.sass 34:14  @import
+[36mbiuai-frontend-1 |[0m   node_modules/quasar/src/css/index.sass 99:9       root stylesheet
+[36mbiuai-frontend-1 |[0m   Plugin: vite:css
+[36mbiuai-frontend-1 |[0m   File: /app/node_modules/quasar/src/css/index.sass
+[36mbiuai-frontend-1 |[0m       at Object.throwExpression (/app/node_modules/sass/sass.dart.js:2321:64)
+[36mbiuai-frontend-1 |[0m       at UnitlessSassNumber0.assertMap$1 (/app/node_modules/sass/sass.dart.js:123978:16)
+[36mbiuai-frontend-1 |[0m       at _get_closure0.call$1 (/app/node_modules/sass/sass.dart.js:109593:40)
+[36mbiuai-frontend-1 |[0m       at _EvaluateVisitor__runBuiltInCallable_closure9.call$0 (/app/node_modules/sass/sass.dart.js:94208:35)
+[36mbiuai-frontend-1 |[0m       at /app/node_modules/sass/sass.dart.js:91231:29
+[36mbiuai-frontend-1 |[0m       at _wrapJsFunctionForAsync_closure.$protected (/app/node_modules/sass/sass.dart.js:4921:15)
+[36mbiuai-frontend-1 |[0m       at _wrapJsFunctionForAsync_closure.call$2 (/app/node_modules/sass/sass.dart.js:38012:12)
+[36mbiuai-frontend-1 |[0m       at Object._asyncStartSync (/app/node_modules/sass/sass.dart.js:4885:20)
+[36mbiuai-frontend-1 |[0m       at _EvaluateVisitor2._addExceptionSpanAsync$body$_EvaluateVisitor0 (/app/node_modules/sass/sass.dart.js:91275:16)
+[36mbiuai-frontend-1 |[0m       at _EvaluateVisitor2._async_evaluate0$_addExceptionSpanAsync$1$3$addStackFrame (/app/node_modules/sass/sass.dart.js:91211:19)
+[36mbiuai-frontend-1 |[0m 
+[36mbiuai-frontend-1 |[0m > biuai-frontend@1.0.0 dev
+[36mbiuai-frontend-1 |[0m > vite
+[36mbiuai-frontend-1 |[0m 
+[36mbiuai-frontend-1 |[0m [33mThe CJS build of Vite's Node API is deprecated. See https://vite.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated for more details.[39m
+[36mbiuai-frontend-1 |[0m 
+[36mbiuai-frontend-1 |[0m   VITE v5.4.19  ready in 144 ms
+[36mbiuai-frontend-1 |[0m 
+[36mbiuai-frontend-1 |[0m   ➜  Local:   http://localhost:8080/
+[36mbiuai-frontend-1 |[0m   ➜  Network: http://172.18.0.5:8080/
+[36mbiuai-frontend-1 |[0m 5:33:48 PM [vite] Internal server error: [sass] $map: 0 is not a map.
+[36mbiuai-frontend-1 |[0m    ╷
+[36mbiuai-frontend-1 |[0m 34 │     padding: map.get($value, "y") map.get($value, "x")
+[36mbiuai-frontend-1 |[0m    │              ^^^^^^^^^^^^^^^^^^^^
+[36mbiuai-frontend-1 |[0m    ╵
+[36mbiuai-frontend-1 |[0m   node_modules/quasar/src/css/core/size.sass 34:14  @import
+[36mbiuai-frontend-1 |[0m   node_modules/quasar/src/css/index.sass 99:9       root stylesheet
+[36mbiuai-frontend-1 |[0m   Plugin: vite:css
+[36mbiuai-frontend-1 |[0m   File: /app/node_modules/quasar/src/css/index.sass
+[36mbiuai-frontend-1 |[0m       at Object.throwExpression (/app/node_modules/sass/sass.dart.js:2321:64)
+[36mbiuai-frontend-1 |[0m       at UnitlessSassNumber0.assertMap$1 (/app/node_modules/sass/sass.dart.js:123978:16)
+[36mbiuai-frontend-1 |[0m       at _get_closure0.call$1 (/app/node_modules/sass/sass.dart.js:109593:40)
+[36mbiuai-frontend-1 |[0m       at _EvaluateVisitor__runBuiltInCallable_closure9.call$0 (/app/node_modules/sass/sass.dart.js:94208:35)
+[36mbiuai-frontend-1 |[0m       at /app/node_modules/sass/sass.dart.js:91231:29
+[36mbiuai-frontend-1 |[0m       at _wrapJsFunctionForAsync_closure.$protected (/app/node_modules/sass/sass.dart.js:4921:15)
+[36mbiuai-frontend-1 |[0m       at _wrapJsFunctionForAsync_closure.call$2 (/app/node_modules/sass/sass.dart.js:38012:12)
+[36mbiuai-frontend-1 |[0m       at Object._asyncStartSync (/app/node_modules/sass/sass.dart.js:4885:20)
+[36mbiuai-frontend-1 |[0m       at _EvaluateVisitor2._addExceptionSpanAsync$body$_EvaluateVisitor0 (/app/node_modules/sass/sass.dart.js:91275:16)
+[36mbiuai-frontend-1 |[0m       at _EvaluateVisitor2._async_evaluate0$_addExceptionSpanAsync$1$3$addStackFrame (/app/node_modules/sass/sass.dart.js:91211:19)
+[36mbiuai-frontend-1 |[0m 5:33:48 PM [vite] Pre-transform error: [sass] $map: 0 is not a map.
+[36mbiuai-frontend-1 |[0m    ╷
+[36mbiuai-frontend-1 |[0m 34 │     padding: map.get($value, "y") map.get($value, "x")
+[36mbiuai-frontend-1 |[0m    │              ^^^^^^^^^^^^^^^^^^^^
+[36mbiuai-frontend-1 |[0m    ╵
+[36mbiuai-frontend-1 |[0m   node_modules/quasar/src/css/core/size.sass 34:14  @import
+[36mbiuai-frontend-1 |[0m   node_modules/quasar/src/css/index.sass 99:9       root stylesheet
+[36mbiuai-frontend-1 |[0m 
+[36mbiuai-frontend-1 |[0m > biuai-frontend@1.0.0 dev
+[36mbiuai-frontend-1 |[0m > vite
+[36mbiuai-frontend-1 |[0m 
+[36mbiuai-frontend-1 |[0m [33mThe CJS build of Vite's Node API is deprecated. See https://vite.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated for more details.[39m
+[36mbiuai-frontend-1 |[0m 
+[36mbiuai-frontend-1 |[0m   VITE v5.4.19  ready in 145 ms
+[36mbiuai-frontend-1 |[0m 
+[36mbiuai-frontend-1 |[0m   ➜  Local:   http://localhost:8080/
+[36mbiuai-frontend-1 |[0m   ➜  Network: http://172.18.0.5:8080/
+[36mbiuai-frontend-1 |[0m 5:35:09 PM [vite] Internal server error: [sass] $map: 0 is not a map.
+[36mbiuai-frontend-1 |[0m    ╷
+[36mbiuai-frontend-1 |[0m 34 │     padding: map.get($value, "y") map.get($value, "x")
+[36mbiuai-frontend-1 |[0m    │              ^^^^^^^^^^^^^^^^^^^^
+[36mbiuai-frontend-1 |[0m    ╵
+[36mbiuai-frontend-1 |[0m   node_modules/quasar/src/css/core/size.sass 34:14  @import
+[36mbiuai-frontend-1 |[0m   node_modules/quasar/src/css/index.sass 99:9       root stylesheet
+[36mbiuai-frontend-1 |[0m   Plugin: vite:css
+[36mbiuai-frontend-1 |[0m   File: /app/node_modules/quasar/src/css/index.sass
+[36mbiuai-frontend-1 |[0m       at Object.throwExpression (/app/node_modules/sass/sass.dart.js:2321:64)
+[36mbiuai-frontend-1 |[0m       at UnitlessSassNumber0.assertMap$1 (/app/node_modules/sass/sass.dart.js:123978:16)
+[36mbiuai-frontend-1 |[0m       at _get_closure0.call$1 (/app/node_modules/sass/sass.dart.js:109593:40)
+[36mbiuai-frontend-1 |[0m       at _EvaluateVisitor__runBuiltInCallable_closure9.call$0 (/app/node_modules/sass/sass.dart.js:94208:35)
+[36mbiuai-frontend-1 |[0m       at /app/node_modules/sass/sass.dart.js:91231:29
+[36mbiuai-frontend-1 |[0m       at _wrapJsFunctionForAsync_closure.$protected (/app/node_modules/sass/sass.dart.js:4921:15)
+[36mbiuai-frontend-1 |[0m       at _wrapJsFunctionForAsync_closure.call$2 (/app/node_modules/sass/sass.dart.js:38012:12)
+[36mbiuai-frontend-1 |[0m       at Object._asyncStartSync (/app/node_modules/sass/sass.dart.js:4885:20)
+[36mbiuai-frontend-1 |[0m       at _EvaluateVisitor2._addExceptionSpanAsync$body$_EvaluateVisitor0 (/app/node_modules/sass/sass.dart.js:91275:16)
+[36mbiuai-frontend-1 |[0m       at _EvaluateVisitor2._async_evaluate0$_addExceptionSpanAsync$1$3$addStackFrame (/app/node_modules/sass/sass.dart.js:91211:19)
+[36mbiuai-frontend-1 |[0m 5:35:09 PM [vite] Pre-transform error: [sass] $map: 0 is not a map.
+[36mbiuai-frontend-1 |[0m    ╷
+[36mbiuai-frontend-1 |[0m 34 │     padding: map.get($value, "y") map.get($value, "x")
+[36mbiuai-frontend-1 |[0m    │              ^^^^^^^^^^^^^^^^^^^^
+[36mbiuai-frontend-1 |[0m    ╵
+[36mbiuai-frontend-1 |[0m   node_modules/quasar/src/css/core/size.sass 34:14  @import
+[36mbiuai-frontend-1 |[0m   node_modules/quasar/src/css/index.sass 99:9       root stylesheet
+[36mbiuai-frontend-1 |[0m 5:35:37 PM [vite] page reload src/main.js
+[36mbiuai-frontend-1 |[0m 5:35:48 PM [vite] vite.config.js changed, restarting server...
+[36mbiuai-frontend-1 |[0m Re-optimizing dependencies because vite config has changed
+[36mbiuai-frontend-1 |[0m 5:35:48 PM [vite] server restarted.
+[36mbiuai-frontend-1 |[0m 
+[36mbiuai-frontend-1 |[0m   ➜  Local:   http://localhost:8080/
+[36mbiuai-frontend-1 |[0m   ➜  Network: use --host to expose
+[36mbiuai-frontend-1 |[0m Error: The following dependencies are imported but could not be resolved:
+[36mbiuai-frontend-1 |[0m 
+[36mbiuai-frontend-1 |[0m   layouts/MainLayout.vue (imported by /app/src/router/index.js)
+[36mbiuai-frontend-1 |[0m   pages/Dashboard.vue (imported by /app/src/router/index.js)
+[36mbiuai-frontend-1 |[0m   layouts/AuthLayout.vue (imported by /app/src/router/index.js)
+[36mbiuai-frontend-1 |[0m   pages/Login.vue (imported by /app/src/router/index.js)
+[36mbiuai-frontend-1 |[0m   pages/Registro.vue (imported by /app/src/router/index.js)
+[36mbiuai-frontend-1 |[0m 
+[36mbiuai-frontend-1 |[0m Are they installed?
+[36mbiuai-frontend-1 |[0m     at file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:50669:15
+[36mbiuai-frontend-1 |[0m     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+[36mbiuai-frontend-1 |[0m     at async file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:50174:26
+[36mbiuai-frontend-1 |[0m 
+[36mbiuai-frontend-1 |[0m > biuai-frontend@1.0.0 dev
+[36mbiuai-frontend-1 |[0m > vite
+[36mbiuai-frontend-1 |[0m 
+[36mbiuai-frontend-1 |[0m [33mThe CJS build of Vite's Node API is deprecated. See https://vite.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated for more details.[39m
+[36mbiuai-frontend-1 |[0m 
+[36mbiuai-frontend-1 |[0m   VITE v5.4.19  ready in 152 ms
+[36mbiuai-frontend-1 |[0m 
+[36mbiuai-frontend-1 |[0m   ➜  Local:   http://localhost:8080/
+[36mbiuai-frontend-1 |[0m   ➜  Network: http://172.18.0.5:8080/
+[36mbiuai-frontend-1 |[0m 5:41:11 PM [vite] Internal server error: [sass] Can't find stylesheet to import.
+[36mbiuai-frontend-1 |[0m     ╷
+[36mbiuai-frontend-1 |[0m 158 │ @import 'quasar.variables.scss';
+[36mbiuai-frontend-1 |[0m     │         ^^^^^^^^^^^^^^^^^^^^^^^
+[36mbiuai-frontend-1 |[0m     ╵
+[36mbiuai-frontend-1 |[0m   src/css/app.scss 158:9  root stylesheet
+[36mbiuai-frontend-1 |[0m   Plugin: vite:css
+[36mbiuai-frontend-1 |[0m   File: /app/src/css/app.scss
+[36mbiuai-frontend-1 |[0m       at Object.wrapException (/app/node_modules/sass/sass.dart.js:2302:47)
+[36mbiuai-frontend-1 |[0m       at /app/node_modules/sass/sass.dart.js:87480:25
+[36mbiuai-frontend-1 |[0m       at _wrapJsFunctionForAsync_closure.$protected (/app/node_modules/sass/sass.dart.js:4921:15)
+[36mbiuai-frontend-1 |[0m       at _wrapJsFunctionForAsync_closure.call$2 (/app/node_modules/sass/sass.dart.js:38012:12)
+[36mbiuai-frontend-1 |[0m       at _awaitOnObject_closure.call$1 (/app/node_modules/sass/sass.dart.js:38000:32)
+[36mbiuai-frontend-1 |[0m       at Object._rootRunUnary (/app/node_modules/sass/sass.dart.js:5339:18)
+[36mbiuai-frontend-1 |[0m       at StaticClosure.<anonymous> (/app/node_modules/sass/sass.dart.js:124453:16)
+[36mbiuai-frontend-1 |[0m       at _CustomZone.runUnary$2$2 (/app/node_modules/sass/sass.dart.js:39444:39)
+[36mbiuai-frontend-1 |[0m       at _Future__propagateToListeners_handleValueCallback.call$0 (/app/node_modules/sass/sass.dart.js:38502:51)
+[36mbiuai-frontend-1 |[0m       at Object._Future__propagateToListeners (/app/node_modules/sass/sass.dart.js:5131:93)
+[36mbiuai-frontend-1 |[0m 5:41:11 PM [vite] Pre-transform error: [sass] Can't find stylesheet to import.
+[36mbiuai-frontend-1 |[0m     ╷
+[36mbiuai-frontend-1 |[0m 158 │ @import 'quasar.variables.scss';
+[36mbiuai-frontend-1 |[0m     │         ^^^^^^^^^^^^^^^^^^^^^^^
+[36mbiuai-frontend-1 |[0m     ╵
+[36mbiuai-frontend-1 |[0m   src/css/app.scss 158:9  root stylesheet
+[36mbiuai-frontend-1 |[0m 5:41:11 PM [vite] Internal server error: [sass] Can't find stylesheet to import.
+[36mbiuai-frontend-1 |[0m     ╷
+[36mbiuai-frontend-1 |[0m 157 │ @import 'quasar.variables.scss';
+[36mbiuai-frontend-1 |[0m     │         ^^^^^^^^^^^^^^^^^^^^^^^
+[36mbiuai-frontend-1 |[0m     ╵
+[36mbiuai-frontend-1 |[0m   src/css/app.scss 157:9  @import
+[36mbiuai-frontend-1 |[0m   src/App.vue 3:9         root stylesheet
+[36mbiuai-frontend-1 |[0m   Plugin: vite:css
+[36mbiuai-frontend-1 |[0m   File: /app/src/App.vue?vue&type=style&index=0&lang.scss
+[36mbiuai-frontend-1 |[0m       at Object.wrapException (/app/node_modules/sass/sass.dart.js:2302:47)
+[36mbiuai-frontend-1 |[0m       at /app/node_modules/sass/sass.dart.js:87480:25
+[36mbiuai-frontend-1 |[0m       at _wrapJsFunctionForAsync_closure.$protected (/app/node_modules/sass/sass.dart.js:4921:15)
+[36mbiuai-frontend-1 |[0m       at _wrapJsFunctionForAsync_closure.call$2 (/app/node_modules/sass/sass.dart.js:38012:12)
+[36mbiuai-frontend-1 |[0m       at _awaitOnObject_closure.call$1 (/app/node_modules/sass/sass.dart.js:38000:32)
+[36mbiuai-frontend-1 |[0m       at Object._rootRunUnary (/app/node_modules/sass/sass.dart.js:5339:18)
+[36mbiuai-frontend-1 |[0m       at StaticClosure.<anonymous> (/app/node_modules/sass/sass.dart.js:124453:16)
+[36mbiuai-frontend-1 |[0m       at _CustomZone.runUnary$2$2 (/app/node_modules/sass/sass.dart.js:39444:39)
+[36mbiuai-frontend-1 |[0m       at _Future__propagateToListeners_handleValueCallback.call$0 (/app/node_modules/sass/sass.dart.js:38502:51)
+[36mbiuai-frontend-1 |[0m       at Object._Future__propagateToListeners (/app/node_modules/sass/sass.dart.js:5131:93)
+[36mbiuai-frontend-1 |[0m 5:41:11 PM [vite] Pre-transform error: [sass] Can't find stylesheet to import.
+[36mbiuai-frontend-1 |[0m     ╷
+[36mbiuai-frontend-1 |[0m 157 │ @import 'quasar.variables.scss';
+[36mbiuai-frontend-1 |[0m     │         ^^^^^^^^^^^^^^^^^^^^^^^
+[36mbiuai-frontend-1 |[0m     ╵
+[36mbiuai-frontend-1 |[0m   src/css/app.scss 157:9  @import
+[36mbiuai-frontend-1 |[0m   src/App.vue 3:9         root stylesheet
+[36mbiuai-frontend-1 |[0m 5:41:57 PM [vite] vite.config.js changed, restarting server...
+[36mbiuai-frontend-1 |[0m 5:41:57 PM [vite] server restarted.
+[36mbiuai-frontend-1 |[0m 
+[36mbiuai-frontend-1 |[0m > biuai-frontend@1.0.0 dev
+[36mbiuai-frontend-1 |[0m > vite
+[36mbiuai-frontend-1 |[0m 
+[36mbiuai-frontend-1 |[0m [33mThe CJS build of Vite's Node API is deprecated. See https://vite.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated for more details.[39m
+[36mbiuai-frontend-1 |[0m 
+[36mbiuai-frontend-1 |[0m   VITE v5.4.19  ready in 146 ms
+[36mbiuai-frontend-1 |[0m 
+[36mbiuai-frontend-1 |[0m   ➜  Local:   http://localhost:8080/
+[36mbiuai-frontend-1 |[0m   ➜  Network: http://172.18.0.5:8080/
+[36mbiuai-frontend-1 |[0m 5:43:26 PM [vite] hmr update /src/css/app.scss, /src/App.vue?vue&type=style&index=0&lang.scss
+[36mbiuai-frontend-1 |[0m 5:43:34 PM [vite] hmr update /src/App.vue
+[36mbiuai-frontend-1 |[0m 5:43:46 PM [vite] vite.config.js changed, restarting server...
+[36mbiuai-frontend-1 |[0m 5:43:46 PM [vite] server restarted.
+[36mbiuai-frontend-1 |[0m 5:43:55 PM [vite] page reload src/main.js
+[36mbiuai-frontend-1 |[0m 
+[36mbiuai-frontend-1 |[0m > biuai-frontend@1.0.0 dev
+[36mbiuai-frontend-1 |[0m > vite
+[36mbiuai-frontend-1 |[0m 
+[36mbiuai-frontend-1 |[0m [33mThe CJS build of Vite's Node API is deprecated. See https://vite.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated for more details.[39m
+[36mbiuai-frontend-1 |[0m 
+[36mbiuai-frontend-1 |[0m   VITE v5.4.19  ready in 148 ms
+[36mbiuai-frontend-1 |[0m 
+[36mbiuai-frontend-1 |[0m   ➜  Local:   http://localhost:8080/
+[36mbiuai-frontend-1 |[0m   ➜  Network: http://172.18.0.5:8080/
+[36mbiuai-frontend-1 |[0m 5:45:49 PM [vite] hmr update /src/layouts/AuthLayout.vue, /src/layouts/AuthLayout.vue?vue&type=style&index=0&scoped=36e5fd82&lang.scss
+[36mbiuai-frontend-1 |[0m 5:46:29 PM [vite] hmr update /src/pages/Login.vue
+[36mbiuai-frontend-1 |[0m 5:47:05 PM [vite] page reload src/router/index.js
+[36mbiuai-frontend-1 |[0m 5:47:05 PM [vite] page reload src/router/index.js
+[36mbiuai-frontend-1 |[0m 
+[36mbiuai-frontend-1 |[0m > biuai-frontend@1.0.0 dev
+[36mbiuai-frontend-1 |[0m > vite
+[36mbiuai-frontend-1 |[0m 
+[36mbiuai-frontend-1 |[0m [33mThe CJS build of Vite's Node API is deprecated. See https://vite.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated for more details.[39m
+[36mbiuai-frontend-1 |[0m 
+[36mbiuai-frontend-1 |[0m   VITE v5.4.19  ready in 146 ms
+[36mbiuai-frontend-1 |[0m 
+[36mbiuai-frontend-1 |[0m   ➜  Local:   http://localhost:8080/
+[36mbiuai-frontend-1 |[0m   ➜  Network: http://172.18.0.5:8080/
+[36mbiuai-frontend-1 |[0m 5:48:02 PM [vite] vite.config.js changed, restarting server...
+[36mbiuai-frontend-1 |[0m Re-optimizing dependencies because vite config has changed
+[36mbiuai-frontend-1 |[0m 5:48:02 PM [vite] server restarted.
+[36mbiuai-frontend-1 |[0m 5:48:28 PM [vite] hmr update /src/css/app.scss, /src/App.vue?vue&type=style&index=0&lang.scss
+[36mbiuai-frontend-1 |[0m 
+[36mbiuai-frontend-1 |[0m > biuai-frontend@1.0.0 dev
+[36mbiuai-frontend-1 |[0m > vite
+[36mbiuai-frontend-1 |[0m 
+[36mbiuai-frontend-1 |[0m [33mThe CJS build of Vite's Node API is deprecated. See https://vite.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated for more details.[39m
+[36mbiuai-frontend-1 |[0m 
+[36mbiuai-frontend-1 |[0m   VITE v5.4.19  ready in 145 ms
+[36mbiuai-frontend-1 |[0m 
+[36mbiuai-frontend-1 |[0m   ➜  Local:   http://localhost:8080/
+[36mbiuai-frontend-1 |[0m   ➜  Network: http://172.18.0.5:8080/
+[36mbiuai-frontend-1 |[0m 5:50:00 PM [vite] vite.config.js changed, restarting server...
+[36mbiuai-frontend-1 |[0m 5:50:00 PM [vite] server restarted.
+[36mbiuai-frontend-1 |[0m 5:50:08 PM [vite] hmr update /src/css/app.scss, /src/App.vue?vue&type=style&index=0&lang.scss
+[36mbiuai-frontend-1 |[0m 5:50:08 PM [vite] hmr update /src/css/app.scss, /src/App.vue?vue&type=style&index=0&lang.scss
+[36mbiuai-frontend-1 |[0m 
+[36mbiuai-frontend-1 |[0m > biuai-frontend@1.0.0 dev
+[36mbiuai-frontend-1 |[0m > vite
+[36mbiuai-frontend-1 |[0m 
+[36mbiuai-frontend-1 |[0m [33mThe CJS build of Vite's Node API is deprecated. See https://vite.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated for more details.[39m
+[36mbiuai-frontend-1 |[0m 
+[36mbiuai-frontend-1 |[0m   VITE v5.4.19  ready in 148 ms
+[36mbiuai-frontend-1 |[0m 
+[36mbiuai-frontend-1 |[0m   ➜  Local:   http://localhost:8080/
+[36mbiuai-frontend-1 |[0m   ➜  Network: http://172.18.0.5:8080/
+[36mbiuai-frontend-1 |[0m 5:50:51 PM [vite] vite.config.js changed, restarting server...
+[36mbiuai-frontend-1 |[0m Re-optimizing dependencies because vite config has changed
+[36mbiuai-frontend-1 |[0m 5:50:51 PM [vite] server restarted.
+[36mbiuai-frontend-1 |[0m 5:51:00 PM [vite] hmr update /src/css/app.scss, /src/App.vue?vue&type=style&index=0&lang.scss
+[36mbiuai-frontend-1 |[0m 5:52:02 PM [vite] hmr update /src/components/LancamentoForm.vue
+[36mbiuai-frontend-1 |[0m 5:52:12 PM [vite] page reload src/router/index.js
+[36mbiuai-frontend-1 |[0m 5:52:13 PM [vite] Pre-transform error: Failed to resolve import "@/stores/auth" from "src/router/index.js". Does the file exist?
+[36mbiuai-frontend-1 |[0m 5:52:13 PM [vite] Internal server error: Failed to resolve import "@/stores/auth" from "src/router/index.js". Does the file exist?
+[36mbiuai-frontend-1 |[0m   Plugin: vite:import-analysis
+[36mbiuai-frontend-1 |[0m   File: /app/src/router/index.js:2:31
+[36mbiuai-frontend-1 |[0m   1  |  import { createRouter, createWebHistory } from 'vue-router'
+[36mbiuai-frontend-1 |[0m   2  |  import { useAuthStore } from '@/stores/auth'
+[36mbiuai-frontend-1 |[0m      |                                ^
+[36mbiuai-frontend-1 |[0m   3  |  
+[36mbiuai-frontend-1 |[0m   4  |  const routes = [
+[36mbiuai-frontend-1 |[0m       at TransformPluginContext._formatError (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49258:41)
+[36mbiuai-frontend-1 |[0m       at TransformPluginContext.error (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49253:16)
+[36mbiuai-frontend-1 |[0m       at normalizeUrl (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64291:23)
+[36mbiuai-frontend-1 |[0m       at async file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64423:39
+[36mbiuai-frontend-1 |[0m       at async Promise.all (index 1)
+[36mbiuai-frontend-1 |[0m       at async TransformPluginContext.transform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64350:7)
+[36mbiuai-frontend-1 |[0m       at async PluginContainer.transform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49099:18)
+[36mbiuai-frontend-1 |[0m       at async loadAndTransform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:51977:27)
+[36mbiuai-frontend-1 |[0m       at async viteTransformMiddleware (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:62105:24)
+[36mbiuai-frontend-1 |[0m 5:52:27 PM [vite] hmr update /src/layouts/MainLayout.vue
+[36mbiuai-frontend-1 |[0m 5:52:27 PM [vite] Pre-transform error: Failed to resolve import "@/stores/auth" from "src/router/index.js". Does the file exist?
+[36mbiuai-frontend-1 |[0m 5:52:27 PM [vite] Internal server error: Failed to resolve import "@/stores/auth" from "src/router/index.js". Does the file exist?
+[36mbiuai-frontend-1 |[0m   Plugin: vite:import-analysis
+[36mbiuai-frontend-1 |[0m   File: /app/src/router/index.js:2:31
+[36mbiuai-frontend-1 |[0m   1  |  import { createRouter, createWebHistory } from 'vue-router'
+[36mbiuai-frontend-1 |[0m   2  |  import { useAuthStore } from '@/stores/auth'
+[36mbiuai-frontend-1 |[0m      |                                ^
+[36mbiuai-frontend-1 |[0m   3  |  
+[36mbiuai-frontend-1 |[0m   4  |  const routes = [
+[36mbiuai-frontend-1 |[0m       at TransformPluginContext._formatError (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49258:41)
+[36mbiuai-frontend-1 |[0m       at TransformPluginContext.error (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49253:16)
+[36mbiuai-frontend-1 |[0m       at normalizeUrl (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64291:23)
+[36mbiuai-frontend-1 |[0m       at async file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64423:39
+[36mbiuai-frontend-1 |[0m       at async Promise.all (index 1)
+[36mbiuai-frontend-1 |[0m       at async TransformPluginContext.transform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64350:7)
+[36mbiuai-frontend-1 |[0m       at async PluginContainer.transform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49099:18)
+[36mbiuai-frontend-1 |[0m       at async loadAndTransform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:51977:27)
+[36mbiuai-frontend-1 |[0m       at async viteTransformMiddleware (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:62105:24)
+[36mbiuai-frontend-1 |[0m 5:52:34 PM [vite] page reload src/services/lancamentos.js
+[36mbiuai-frontend-1 |[0m 5:52:34 PM [vite] Pre-transform error: Failed to resolve import "@/stores/auth" from "src/router/index.js". Does the file exist?
+[36mbiuai-frontend-1 |[0m 5:52:34 PM [vite] Internal server error: Failed to resolve import "@/stores/auth" from "src/router/index.js". Does the file exist?
+[36mbiuai-frontend-1 |[0m   Plugin: vite:import-analysis
+[36mbiuai-frontend-1 |[0m   File: /app/src/router/index.js:2:31
+[36mbiuai-frontend-1 |[0m   1  |  import { createRouter, createWebHistory } from 'vue-router'
+[36mbiuai-frontend-1 |[0m   2  |  import { useAuthStore } from '@/stores/auth'
+[36mbiuai-frontend-1 |[0m      |                                ^
+[36mbiuai-frontend-1 |[0m   3  |  
+[36mbiuai-frontend-1 |[0m   4  |  const routes = [
+[36mbiuai-frontend-1 |[0m       at TransformPluginContext._formatError (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49258:41)
+[36mbiuai-frontend-1 |[0m       at TransformPluginContext.error (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49253:16)
+[36mbiuai-frontend-1 |[0m       at normalizeUrl (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64291:23)
+[36mbiuai-frontend-1 |[0m       at async file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64423:39
+[36mbiuai-frontend-1 |[0m       at async Promise.all (index 1)
+[36mbiuai-frontend-1 |[0m       at async TransformPluginContext.transform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64350:7)
+[36mbiuai-frontend-1 |[0m       at async PluginContainer.transform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49099:18)
+[36mbiuai-frontend-1 |[0m       at async loadAndTransform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:51977:27)
+[36mbiuai-frontend-1 |[0m       at async viteTransformMiddleware (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:62105:24)
+[36mbiuai-frontend-1 |[0m 5:52:48 PM [vite] page reload src/stores/lancamentos.js
+[36mbiuai-frontend-1 |[0m 5:52:48 PM [vite] Pre-transform error: Failed to resolve import "@/stores/auth" from "src/router/index.js". Does the file exist?
+[36mbiuai-frontend-1 |[0m 5:52:48 PM [vite] Internal server error: Failed to resolve import "@/stores/auth" from "src/router/index.js". Does the file exist?
+[36mbiuai-frontend-1 |[0m   Plugin: vite:import-analysis
+[36mbiuai-frontend-1 |[0m   File: /app/src/router/index.js:2:31
+[36mbiuai-frontend-1 |[0m   1  |  import { createRouter, createWebHistory } from 'vue-router'
+[36mbiuai-frontend-1 |[0m   2  |  import { useAuthStore } from '@/stores/auth'
+[36mbiuai-frontend-1 |[0m      |                                ^
+[36mbiuai-frontend-1 |[0m   3  |  
+[36mbiuai-frontend-1 |[0m   4  |  const routes = [
+[36mbiuai-frontend-1 |[0m       at TransformPluginContext._formatError (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49258:41)
+[36mbiuai-frontend-1 |[0m       at TransformPluginContext.error (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49253:16)
+[36mbiuai-frontend-1 |[0m       at normalizeUrl (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64291:23)
+[36mbiuai-frontend-1 |[0m       at async file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64423:39
+[36mbiuai-frontend-1 |[0m       at async Promise.all (index 1)
+[36mbiuai-frontend-1 |[0m       at async TransformPluginContext.transform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64350:7)
+[36mbiuai-frontend-1 |[0m       at async PluginContainer.transform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49099:18)
+[36mbiuai-frontend-1 |[0m       at async loadAndTransform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:51977:27)
+[36mbiuai-frontend-1 |[0m       at async viteTransformMiddleware (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:62105:24)
+[36mbiuai-frontend-1 |[0m 5:53:09 PM [vite] Internal server error: Failed to resolve import "@/stores/auth" from "src/router/index.js". Does the file exist?
+[36mbiuai-frontend-1 |[0m   Plugin: vite:import-analysis
+[36mbiuai-frontend-1 |[0m   File: /app/src/router/index.js:2:31
+[36mbiuai-frontend-1 |[0m   1  |  import { createRouter, createWebHistory } from 'vue-router'
+[36mbiuai-frontend-1 |[0m   2  |  import { useAuthStore } from '@/stores/auth'
+[36mbiuai-frontend-1 |[0m      |                                ^
+[36mbiuai-frontend-1 |[0m   3  |  
+[36mbiuai-frontend-1 |[0m   4  |  const routes = [
+[36mbiuai-frontend-1 |[0m       at TransformPluginContext._formatError (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49258:41)
+[36mbiuai-frontend-1 |[0m       at TransformPluginContext.error (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49253:16)
+[36mbiuai-frontend-1 |[0m       at normalizeUrl (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64291:23)
+[36mbiuai-frontend-1 |[0m       at async file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64423:39
+[36mbiuai-frontend-1 |[0m       at async Promise.all (index 1)
+[36mbiuai-frontend-1 |[0m       at async TransformPluginContext.transform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64350:7)
+[36mbiuai-frontend-1 |[0m       at async PluginContainer.transform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49099:18)
+[36mbiuai-frontend-1 |[0m       at async loadAndTransform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:51977:27)
+[36mbiuai-frontend-1 |[0m       at async viteTransformMiddleware (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:62105:24)
+[36mbiuai-frontend-1 |[0m 5:53:18 PM [vite] hmr update /src/pages/Lancamentos.vue
+[36mbiuai-frontend-1 |[0m 5:53:18 PM [vite] Pre-transform error: Failed to resolve import "@/stores/auth" from "src/router/index.js". Does the file exist?
+[36mbiuai-frontend-1 |[0m 5:53:18 PM [vite] Internal server error: Failed to resolve import "@/stores/auth" from "src/router/index.js". Does the file exist?
+[36mbiuai-frontend-1 |[0m   Plugin: vite:import-analysis
+[36mbiuai-frontend-1 |[0m   File: /app/src/router/index.js:2:31
+[36mbiuai-frontend-1 |[0m   1  |  import { createRouter, createWebHistory } from 'vue-router'
+[36mbiuai-frontend-1 |[0m   2  |  import { useAuthStore } from '@/stores/auth'
+[36mbiuai-frontend-1 |[0m      |                                ^
+[36mbiuai-frontend-1 |[0m   3  |  
+[36mbiuai-frontend-1 |[0m   4  |  const routes = [
+[36mbiuai-frontend-1 |[0m       at TransformPluginContext._formatError (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49258:41)
+[36mbiuai-frontend-1 |[0m       at TransformPluginContext.error (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49253:16)
+[36mbiuai-frontend-1 |[0m       at normalizeUrl (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64291:23)
+[36mbiuai-frontend-1 |[0m       at async file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64423:39
+[36mbiuai-frontend-1 |[0m       at async Promise.all (index 1)
+[36mbiuai-frontend-1 |[0m       at async TransformPluginContext.transform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64350:7)
+[36mbiuai-frontend-1 |[0m       at async PluginContainer.transform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49099:18)
+[36mbiuai-frontend-1 |[0m       at async loadAndTransform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:51977:27)
+[36mbiuai-frontend-1 |[0m       at async viteTransformMiddleware (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:62105:24)
+[36mbiuai-frontend-1 |[0m 5:53:38 PM [vite] hmr update /src/pages/Dashboard.vue, /src/pages/Dashboard.vue?vue&type=style&index=0&scoped=52e31af6&lang.scss
+[36mbiuai-frontend-1 |[0m 5:53:38 PM [vite] Pre-transform error: Failed to resolve import "@/stores/auth" from "src/router/index.js". Does the file exist?
+[36mbiuai-frontend-1 |[0m 5:53:38 PM [vite] Internal server error: Failed to resolve import "@/stores/auth" from "src/router/index.js". Does the file exist?
+[36mbiuai-frontend-1 |[0m   Plugin: vite:import-analysis
+[36mbiuai-frontend-1 |[0m   File: /app/src/router/index.js:2:31
+[36mbiuai-frontend-1 |[0m   1  |  import { createRouter, createWebHistory } from 'vue-router'
+[36mbiuai-frontend-1 |[0m   2  |  import { useAuthStore } from '@/stores/auth'
+[36mbiuai-frontend-1 |[0m      |                                ^
+[36mbiuai-frontend-1 |[0m   3  |  
+[36mbiuai-frontend-1 |[0m   4  |  const routes = [
+[36mbiuai-frontend-1 |[0m       at TransformPluginContext._formatError (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49258:41)
+[36mbiuai-frontend-1 |[0m       at TransformPluginContext.error (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49253:16)
+[36mbiuai-frontend-1 |[0m       at normalizeUrl (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64291:23)
+[36mbiuai-frontend-1 |[0m       at async file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64423:39
+[36mbiuai-frontend-1 |[0m       at async Promise.all (index 1)
+[36mbiuai-frontend-1 |[0m       at async TransformPluginContext.transform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64350:7)
+[36mbiuai-frontend-1 |[0m       at async PluginContainer.transform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49099:18)
+[36mbiuai-frontend-1 |[0m       at async loadAndTransform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:51977:27)
+[36mbiuai-frontend-1 |[0m       at async viteTransformMiddleware (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:62105:24)
+[36mbiuai-frontend-1 |[0m 5:53:51 PM [vite] hmr update /src/css/app.scss, /src/App.vue?vue&type=style&index=0&lang.scss
+[36mbiuai-frontend-1 |[0m 5:53:51 PM [vite] Pre-transform error: Failed to resolve import "@/stores/auth" from "src/router/index.js". Does the file exist?
+[36mbiuai-frontend-1 |[0m 5:53:52 PM [vite] Internal server error: Failed to resolve import "@/stores/auth" from "src/router/index.js". Does the file exist?
+[36mbiuai-frontend-1 |[0m   Plugin: vite:import-analysis
+[36mbiuai-frontend-1 |[0m   File: /app/src/router/index.js:2:31
+[36mbiuai-frontend-1 |[0m   1  |  import { createRouter, createWebHistory } from 'vue-router'
+[36mbiuai-frontend-1 |[0m   2  |  import { useAuthStore } from '@/stores/auth'
+[36mbiuai-frontend-1 |[0m      |                                ^
+[36mbiuai-frontend-1 |[0m   3  |  
+[36mbiuai-frontend-1 |[0m   4  |  const routes = [
+[36mbiuai-frontend-1 |[0m       at TransformPluginContext._formatError (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49258:41)
+[36mbiuai-frontend-1 |[0m       at TransformPluginContext.error (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49253:16)
+[36mbiuai-frontend-1 |[0m       at normalizeUrl (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64291:23)
+[36mbiuai-frontend-1 |[0m       at async file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64423:39
+[36mbiuai-frontend-1 |[0m       at async Promise.all (index 1)
+[36mbiuai-frontend-1 |[0m       at async TransformPluginContext.transform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64350:7)
+[36mbiuai-frontend-1 |[0m       at async PluginContainer.transform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49099:18)
+[36mbiuai-frontend-1 |[0m       at async loadAndTransform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:51977:27)
+[36mbiuai-frontend-1 |[0m       at async viteTransformMiddleware (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:62105:24)
+[36mbiuai-frontend-1 |[0m 5:54:02 PM [vite] hmr update /src/App.vue?vue&type=style&index=0&lang.scss, /src/css/app.scss
+[36mbiuai-frontend-1 |[0m 5:54:02 PM [vite] Pre-transform error: Failed to resolve import "@/stores/auth" from "src/router/index.js". Does the file exist?
+[36mbiuai-frontend-1 |[0m 5:54:02 PM [vite] Internal server error: Failed to resolve import "@/stores/auth" from "src/router/index.js". Does the file exist?
+[36mbiuai-frontend-1 |[0m   Plugin: vite:import-analysis
+[36mbiuai-frontend-1 |[0m   File: /app/src/router/index.js:2:31
+[36mbiuai-frontend-1 |[0m   1  |  import { createRouter, createWebHistory } from 'vue-router'
+[36mbiuai-frontend-1 |[0m   2  |  import { useAuthStore } from '@/stores/auth'
+[36mbiuai-frontend-1 |[0m      |                                ^
+[36mbiuai-frontend-1 |[0m   3  |  
+[36mbiuai-frontend-1 |[0m   4  |  const routes = [
+[36mbiuai-frontend-1 |[0m       at TransformPluginContext._formatError (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49258:41)
+[36mbiuai-frontend-1 |[0m       at TransformPluginContext.error (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49253:16)
+[36mbiuai-frontend-1 |[0m       at normalizeUrl (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64291:23)
+[36mbiuai-frontend-1 |[0m       at async file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64423:39
+[36mbiuai-frontend-1 |[0m       at async Promise.all (index 1)
+[36mbiuai-frontend-1 |[0m       at async TransformPluginContext.transform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64350:7)
+[36mbiuai-frontend-1 |[0m       at async PluginContainer.transform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49099:18)
+[36mbiuai-frontend-1 |[0m       at async loadAndTransform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:51977:27)
+[36mbiuai-frontend-1 |[0m       at async viteTransformMiddleware (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:62105:24)
+[36mbiuai-frontend-1 |[0m 5:54:10 PM [vite] vite.config.js changed, restarting server...
+[36mbiuai-frontend-1 |[0m 5:54:10 PM [vite] server restarted.
+[36mbiuai-frontend-1 |[0m 5:54:45 PM [vite] Pre-transform error: Failed to resolve import "@/stores/auth" from "src/router/index.js". Does the file exist?
+[36mbiuai-frontend-1 |[0m 5:54:45 PM [vite] Internal server error: Failed to resolve import "@/stores/auth" from "src/router/index.js". Does the file exist?
+[36mbiuai-frontend-1 |[0m   Plugin: vite:import-analysis
+[36mbiuai-frontend-1 |[0m   File: /app/src/router/index.js:2:31
+[36mbiuai-frontend-1 |[0m   1  |  import { createRouter, createWebHistory } from 'vue-router'
+[36mbiuai-frontend-1 |[0m   2  |  import { useAuthStore } from '@/stores/auth'
+[36mbiuai-frontend-1 |[0m      |                                ^
+[36mbiuai-frontend-1 |[0m   3  |  
+[36mbiuai-frontend-1 |[0m   4  |  const routes = [
+[36mbiuai-frontend-1 |[0m       at TransformPluginContext._formatError (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49258:41)
+[36mbiuai-frontend-1 |[0m       at TransformPluginContext.error (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49253:16)
+[36mbiuai-frontend-1 |[0m       at normalizeUrl (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64291:23)
+[36mbiuai-frontend-1 |[0m       at async file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64423:39
+[36mbiuai-frontend-1 |[0m       at async Promise.all (index 1)
+[36mbiuai-frontend-1 |[0m       at async TransformPluginContext.transform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64350:7)
+[36mbiuai-frontend-1 |[0m       at async PluginContainer.transform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49099:18)
+[36mbiuai-frontend-1 |[0m       at async loadAndTransform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:51977:27)
+[36mbiuai-frontend-1 |[0m       at async viteTransformMiddleware (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:62105:24)
+[36mbiuai-frontend-1 |[0m 5:54:47 PM [vite] page reload index.html
+[36mbiuai-frontend-1 |[0m 5:54:47 PM [vite] Internal server error: Failed to resolve import "@/stores/auth" from "src/router/index.js". Does the file exist?
+[36mbiuai-frontend-1 |[0m   Plugin: vite:import-analysis
+[36mbiuai-frontend-1 |[0m   File: /app/src/router/index.js:2:31
+[36mbiuai-frontend-1 |[0m   1  |  import { createRouter, createWebHistory } from 'vue-router'
+[36mbiuai-frontend-1 |[0m   2  |  import { useAuthStore } from '@/stores/auth'
+[36mbiuai-frontend-1 |[0m      |                                ^
+[36mbiuai-frontend-1 |[0m   3  |  
+[36mbiuai-frontend-1 |[0m   4  |  const routes = [
+[36mbiuai-frontend-1 |[0m       at TransformPluginContext._formatError (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49258:41)
+[36mbiuai-frontend-1 |[0m       at TransformPluginContext.error (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49253:16)
+[36mbiuai-frontend-1 |[0m       at normalizeUrl (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64291:23)
+[36mbiuai-frontend-1 |[0m       at async file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64423:39
+[36mbiuai-frontend-1 |[0m       at async Promise.all (index 1)
+[36mbiuai-frontend-1 |[0m       at async TransformPluginContext.transform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64350:7)
+[36mbiuai-frontend-1 |[0m       at async PluginContainer.transform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49099:18)
+[36mbiuai-frontend-1 |[0m       at async loadAndTransform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:51977:27)
+[36mbiuai-frontend-1 |[0m       at async viteTransformMiddleware (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:62105:24)
+[36mbiuai-frontend-1 |[0m 5:54:48 PM [vite] Internal server error: Failed to resolve import "@/stores/auth" from "src/router/index.js". Does the file exist?
+[36mbiuai-frontend-1 |[0m   Plugin: vite:import-analysis
+[36mbiuai-frontend-1 |[0m   File: /app/src/router/index.js:2:31
+[36mbiuai-frontend-1 |[0m   1  |  import { createRouter, createWebHistory } from 'vue-router'
+[36mbiuai-frontend-1 |[0m   2  |  import { useAuthStore } from '@/stores/auth'
+[36mbiuai-frontend-1 |[0m      |                                ^
+[36mbiuai-frontend-1 |[0m   3  |  
+[36mbiuai-frontend-1 |[0m   4  |  const routes = [
+[36mbiuai-frontend-1 |[0m       at TransformPluginContext._formatError (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49258:41)
+[36mbiuai-frontend-1 |[0m       at TransformPluginContext.error (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49253:16)
+[36mbiuai-frontend-1 |[0m       at normalizeUrl (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64291:23)
+[36mbiuai-frontend-1 |[0m       at async file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64423:39
+[36mbiuai-frontend-1 |[0m       at async Promise.all (index 1)
+[36mbiuai-frontend-1 |[0m       at async TransformPluginContext.transform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64350:7)
+[36mbiuai-frontend-1 |[0m       at async PluginContainer.transform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49099:18)
+[36mbiuai-frontend-1 |[0m       at async loadAndTransform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:51977:27)
+[36mbiuai-frontend-1 |[0m       at async viteTransformMiddleware (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:62105:24)
+[36mbiuai-frontend-1 |[0m 5:54:57 PM [vite] page reload src/main.js
+[36mbiuai-frontend-1 |[0m 5:54:57 PM [vite] Pre-transform error: Failed to resolve import "@/stores/auth" from "src/router/index.js". Does the file exist?
+[36mbiuai-frontend-1 |[0m 5:54:57 PM [vite] Internal server error: Failed to resolve import "@/stores/auth" from "src/router/index.js". Does the file exist?
+[36mbiuai-frontend-1 |[0m   Plugin: vite:import-analysis
+[36mbiuai-frontend-1 |[0m   File: /app/src/router/index.js:2:31
+[36mbiuai-frontend-1 |[0m   1  |  import { createRouter, createWebHistory } from 'vue-router'
+[36mbiuai-frontend-1 |[0m   2  |  import { useAuthStore } from '@/stores/auth'
+[36mbiuai-frontend-1 |[0m      |                                ^
+[36mbiuai-frontend-1 |[0m   3  |  
+[36mbiuai-frontend-1 |[0m   4  |  const routes = [
+[36mbiuai-frontend-1 |[0m       at TransformPluginContext._formatError (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49258:41)
+[36mbiuai-frontend-1 |[0m       at TransformPluginContext.error (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49253:16)
+[36mbiuai-frontend-1 |[0m       at normalizeUrl (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64291:23)
+[36mbiuai-frontend-1 |[0m       at async file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64423:39
+[36mbiuai-frontend-1 |[0m       at async Promise.all (index 1)
+[36mbiuai-frontend-1 |[0m       at async TransformPluginContext.transform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64350:7)
+[36mbiuai-frontend-1 |[0m       at async PluginContainer.transform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49099:18)
+[36mbiuai-frontend-1 |[0m       at async loadAndTransform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:51977:27)
+[36mbiuai-frontend-1 |[0m       at async viteTransformMiddleware (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:62105:24)
+[36mbiuai-frontend-1 |[0m 5:55:26 PM [vite] page reload src/stores/auth.js
+[36mbiuai-frontend-1 |[0m 5:55:29 PM [vite] page reload src/stores/auth.js
+[36mbiuai-frontend-1 |[0m 5:55:29 PM [vite] Pre-transform error: Failed to resolve import "pinia" from "src/stores/auth.js". Does the file exist?
+[36mbiuai-frontend-1 |[0m 5:55:29 PM [vite] Internal server error: Failed to resolve import "pinia" from "src/stores/auth.js". Does the file exist?
+[36mbiuai-frontend-1 |[0m   Plugin: vite:import-analysis
+[36mbiuai-frontend-1 |[0m   File: /app/src/stores/auth.js:1:30
+[36mbiuai-frontend-1 |[0m   1  |  import { defineStore } from 'pinia'
+[36mbiuai-frontend-1 |[0m      |                               ^
+[36mbiuai-frontend-1 |[0m   2  |  import { api } from '@/boot/axios'
+[36mbiuai-frontend-1 |[0m   3  |  
+[36mbiuai-frontend-1 |[0m       at TransformPluginContext._formatError (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49258:41)
+[36mbiuai-frontend-1 |[0m       at TransformPluginContext.error (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49253:16)
+[36mbiuai-frontend-1 |[0m       at normalizeUrl (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64291:23)
+[36mbiuai-frontend-1 |[0m       at async file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64423:39
+[36mbiuai-frontend-1 |[0m       at async Promise.all (index 0)
+[36mbiuai-frontend-1 |[0m       at async TransformPluginContext.transform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64350:7)
+[36mbiuai-frontend-1 |[0m       at async PluginContainer.transform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49099:18)
+[36mbiuai-frontend-1 |[0m       at async loadAndTransform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:51977:27)
+[36mbiuai-frontend-1 |[0m       at async viteTransformMiddleware (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:62105:24)
+[36mbiuai-frontend-1 |[0m 5:55:29 PM [vite] ✨ new dependencies optimized: quasar/wrappers, axios
+[36mbiuai-frontend-1 |[0m 5:55:29 PM [vite] ✨ optimized dependencies changed. reloading
+[36mbiuai-frontend-1 |[0m 5:55:29 PM [vite] Pre-transform error: Failed to resolve import "pinia" from "src/stores/auth.js". Does the file exist?
+[36mbiuai-frontend-1 |[0m 5:55:29 PM [vite] Internal server error: Failed to resolve import "pinia" from "src/stores/auth.js". Does the file exist?
+[36mbiuai-frontend-1 |[0m   Plugin: vite:import-analysis
+[36mbiuai-frontend-1 |[0m   File: /app/src/stores/auth.js:1:30
+[36mbiuai-frontend-1 |[0m   1  |  import { defineStore } from 'pinia'
+[36mbiuai-frontend-1 |[0m      |                               ^
+[36mbiuai-frontend-1 |[0m   2  |  import { api } from '@/boot/axios'
+[36mbiuai-frontend-1 |[0m   3  |  
+[36mbiuai-frontend-1 |[0m       at TransformPluginContext._formatError (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49258:41)
+[36mbiuai-frontend-1 |[0m       at TransformPluginContext.error (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49253:16)
+[36mbiuai-frontend-1 |[0m       at normalizeUrl (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64291:23)
+[36mbiuai-frontend-1 |[0m       at async file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64423:39
+[36mbiuai-frontend-1 |[0m       at async Promise.all (index 0)
+[36mbiuai-frontend-1 |[0m       at async TransformPluginContext.transform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64350:7)
+[36mbiuai-frontend-1 |[0m       at async PluginContainer.transform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49099:18)
+[36mbiuai-frontend-1 |[0m       at async loadAndTransform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:51977:27)
+[36mbiuai-frontend-1 |[0m       at async viteTransformMiddleware (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:62105:24)
+[36mbiuai-frontend-1 |[0m 5:56:22 PM [vite] page reload .gitignore
+[36mbiuai-frontend-1 |[0m 5:56:22 PM [vite] Pre-transform error: Failed to resolve import "pinia" from "src/stores/auth.js". Does the file exist?
+[36mbiuai-frontend-1 |[0m 5:56:22 PM [vite] Internal server error: Failed to resolve import "pinia" from "src/stores/auth.js". Does the file exist?
+[36mbiuai-frontend-1 |[0m   Plugin: vite:import-analysis
+[36mbiuai-frontend-1 |[0m   File: /app/src/stores/auth.js:1:30
+[36mbiuai-frontend-1 |[0m   1  |  import { defineStore } from 'pinia'
+[36mbiuai-frontend-1 |[0m      |                               ^
+[36mbiuai-frontend-1 |[0m   2  |  import { api } from '@/boot/axios'
+[36mbiuai-frontend-1 |[0m   3  |  
+[36mbiuai-frontend-1 |[0m       at TransformPluginContext._formatError (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49258:41)
+[36mbiuai-frontend-1 |[0m       at TransformPluginContext.error (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49253:16)
+[36mbiuai-frontend-1 |[0m       at normalizeUrl (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64291:23)
+[36mbiuai-frontend-1 |[0m       at async file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64423:39
+[36mbiuai-frontend-1 |[0m       at async Promise.all (index 0)
+[36mbiuai-frontend-1 |[0m       at async TransformPluginContext.transform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64350:7)
+[36mbiuai-frontend-1 |[0m       at async PluginContainer.transform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49099:18)
+[36mbiuai-frontend-1 |[0m       at async loadAndTransform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:51977:27)
+[36mbiuai-frontend-1 |[0m       at async viteTransformMiddleware (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:62105:24)
+[36mbiuai-frontend-1 |[0m 5:56:40 PM [vite] page reload README.md
+[36mbiuai-frontend-1 |[0m 5:56:40 PM [vite] Pre-transform error: Failed to resolve import "pinia" from "src/stores/auth.js". Does the file exist?
+[36mbiuai-frontend-1 |[0m 5:56:40 PM [vite] Internal server error: Failed to resolve import "pinia" from "src/stores/auth.js". Does the file exist?
+[36mbiuai-frontend-1 |[0m   Plugin: vite:import-analysis
+[36mbiuai-frontend-1 |[0m   File: /app/src/stores/auth.js:1:30
+[36mbiuai-frontend-1 |[0m   1  |  import { defineStore } from 'pinia'
+[36mbiuai-frontend-1 |[0m      |                               ^
+[36mbiuai-frontend-1 |[0m   2  |  import { api } from '@/boot/axios'
+[36mbiuai-frontend-1 |[0m   3  |  
+[36mbiuai-frontend-1 |[0m       at TransformPluginContext._formatError (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49258:41)
+[36mbiuai-frontend-1 |[0m       at TransformPluginContext.error (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49253:16)
+[36mbiuai-frontend-1 |[0m       at normalizeUrl (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64291:23)
+[36mbiuai-frontend-1 |[0m       at async file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64423:39
+[36mbiuai-frontend-1 |[0m       at async Promise.all (index 0)
+[36mbiuai-frontend-1 |[0m       at async TransformPluginContext.transform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64350:7)
+[36mbiuai-frontend-1 |[0m       at async PluginContainer.transform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49099:18)
+[36mbiuai-frontend-1 |[0m       at async loadAndTransform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:51977:27)
+[36mbiuai-frontend-1 |[0m       at async viteTransformMiddleware (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:62105:24)
+[36mbiuai-frontend-1 |[0m 6:01:33 PM [vite] page reload package-lock.json
+[36mbiuai-frontend-1 |[0m 6:01:33 PM [vite] Pre-transform error: Failed to resolve import "pinia" from "src/stores/auth.js". Does the file exist?
+[36mbiuai-frontend-1 |[0m 6:01:33 PM [vite] Internal server error: Failed to resolve import "pinia" from "src/stores/auth.js". Does the file exist?
+[36mbiuai-frontend-1 |[0m   Plugin: vite:import-analysis
+[36mbiuai-frontend-1 |[0m   File: /app/src/stores/auth.js:1:30
+[36mbiuai-frontend-1 |[0m   1  |  import { defineStore } from 'pinia'
+[36mbiuai-frontend-1 |[0m      |                               ^
+[36mbiuai-frontend-1 |[0m   2  |  import { api } from '@/boot/axios'
+[36mbiuai-frontend-1 |[0m   3  |  
+[36mbiuai-frontend-1 |[0m       at TransformPluginContext._formatError (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49258:41)
+[36mbiuai-frontend-1 |[0m       at TransformPluginContext.error (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49253:16)
+[36mbiuai-frontend-1 |[0m       at normalizeUrl (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64291:23)
+[36mbiuai-frontend-1 |[0m       at async file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64423:39
+[36mbiuai-frontend-1 |[0m       at async Promise.all (index 0)
+[36mbiuai-frontend-1 |[0m       at async TransformPluginContext.transform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64350:7)
+[36mbiuai-frontend-1 |[0m       at async PluginContainer.transform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49099:18)
+[36mbiuai-frontend-1 |[0m       at async loadAndTransform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:51977:27)
+[36mbiuai-frontend-1 |[0m       at async viteTransformMiddleware (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:62105:24)
+[36mbiuai-frontend-1 |[0m 6:01:55 PM [vite] Internal server error: Failed to resolve import "pinia" from "src/stores/auth.js". Does the file exist?
+[36mbiuai-frontend-1 |[0m   Plugin: vite:import-analysis
+[36mbiuai-frontend-1 |[0m   File: /app/src/stores/auth.js:1:30
+[36mbiuai-frontend-1 |[0m   1  |  import { defineStore } from 'pinia'
+[36mbiuai-frontend-1 |[0m      |                               ^
+[36mbiuai-frontend-1 |[0m   2  |  import { api } from '@/boot/axios'
+[36mbiuai-frontend-1 |[0m   3  |  
+[36mbiuai-frontend-1 |[0m       at TransformPluginContext._formatError (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49258:41)
+[36mbiuai-frontend-1 |[0m       at TransformPluginContext.error (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49253:16)
+[36mbiuai-frontend-1 |[0m       at normalizeUrl (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64291:23)
+[36mbiuai-frontend-1 |[0m       at async file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64423:39
+[36mbiuai-frontend-1 |[0m       at async Promise.all (index 0)
+[36mbiuai-frontend-1 |[0m       at async TransformPluginContext.transform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64350:7)
+[36mbiuai-frontend-1 |[0m       at async PluginContainer.transform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49099:18)
+[36mbiuai-frontend-1 |[0m       at async loadAndTransform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:51977:27)
+[36mbiuai-frontend-1 |[0m       at async viteTransformMiddleware (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:62105:24)
+[36mbiuai-frontend-1 |[0m 6:01:57 PM [vite] Internal server error: Failed to resolve import "pinia" from "src/stores/auth.js". Does the file exist?
+[36mbiuai-frontend-1 |[0m   Plugin: vite:import-analysis
+[36mbiuai-frontend-1 |[0m   File: /app/src/stores/auth.js:1:30
+[36mbiuai-frontend-1 |[0m   1  |  import { defineStore } from 'pinia'
+[36mbiuai-frontend-1 |[0m      |                               ^
+[36mbiuai-frontend-1 |[0m   2  |  import { api } from '@/boot/axios'
+[36mbiuai-frontend-1 |[0m   3  |  
+[36mbiuai-frontend-1 |[0m       at TransformPluginContext._formatError (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49258:41)
+[36mbiuai-frontend-1 |[0m       at TransformPluginContext.error (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49253:16)
+[36mbiuai-frontend-1 |[0m       at normalizeUrl (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64291:23)
+[36mbiuai-frontend-1 |[0m       at async file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64423:39
+[36mbiuai-frontend-1 |[0m       at async Promise.all (index 0)
+[36mbiuai-frontend-1 |[0m       at async TransformPluginContext.transform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64350:7)
+[36mbiuai-frontend-1 |[0m       at async PluginContainer.transform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49099:18)
+[36mbiuai-frontend-1 |[0m       at async loadAndTransform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:51977:27)
+[36mbiuai-frontend-1 |[0m       at async viteTransformMiddleware (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:62105:24)
+[36mbiuai-frontend-1 |[0m 6:02:44 PM [vite] page reload nginx.conf
+[36mbiuai-frontend-1 |[0m 6:02:44 PM [vite] Pre-transform error: Failed to resolve import "pinia" from "src/stores/auth.js". Does the file exist?
+[36mbiuai-frontend-1 |[0m 6:02:44 PM [vite] Internal server error: Failed to resolve import "pinia" from "src/stores/auth.js". Does the file exist?
+[36mbiuai-frontend-1 |[0m   Plugin: vite:import-analysis
+[36mbiuai-frontend-1 |[0m   File: /app/src/stores/auth.js:1:30
+[36mbiuai-frontend-1 |[0m   1  |  import { defineStore } from 'pinia'
+[36mbiuai-frontend-1 |[0m      |                               ^
+[36mbiuai-frontend-1 |[0m   2  |  import { api } from '@/boot/axios'
+[36mbiuai-frontend-1 |[0m   3  |  
+[36mbiuai-frontend-1 |[0m       at TransformPluginContext._formatError (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49258:41)
+[36mbiuai-frontend-1 |[0m       at TransformPluginContext.error (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49253:16)
+[36mbiuai-frontend-1 |[0m       at normalizeUrl (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64291:23)
+[36mbiuai-frontend-1 |[0m       at async file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64423:39
+[36mbiuai-frontend-1 |[0m       at async Promise.all (index 0)
+[36mbiuai-frontend-1 |[0m       at async TransformPluginContext.transform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64350:7)
+[36mbiuai-frontend-1 |[0m       at async PluginContainer.transform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49099:18)
+[36mbiuai-frontend-1 |[0m       at async loadAndTransform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:51977:27)
+[36mbiuai-frontend-1 |[0m       at async viteTransformMiddleware (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:62105:24)
+[36mbiuai-frontend-1 |[0m 6:17:04 PM [vite] Internal server error: Failed to resolve import "pinia" from "src/stores/auth.js". Does the file exist?
+[36mbiuai-frontend-1 |[0m   Plugin: vite:import-analysis
+[36mbiuai-frontend-1 |[0m   File: /app/src/stores/auth.js:1:30
+[36mbiuai-frontend-1 |[0m   1  |  import { defineStore } from 'pinia'
+[36mbiuai-frontend-1 |[0m      |                               ^
+[36mbiuai-frontend-1 |[0m   2  |  import { api } from '@/boot/axios'
+[36mbiuai-frontend-1 |[0m   3  |  
+[36mbiuai-frontend-1 |[0m       at TransformPluginContext._formatError (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49258:41)
+[36mbiuai-frontend-1 |[0m       at TransformPluginContext.error (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49253:16)
+[36mbiuai-frontend-1 |[0m       at normalizeUrl (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64291:23)
+[36mbiuai-frontend-1 |[0m       at async file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64423:39
+[36mbiuai-frontend-1 |[0m       at async Promise.all (index 0)
+[36mbiuai-frontend-1 |[0m       at async TransformPluginContext.transform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64350:7)
+[36mbiuai-frontend-1 |[0m       at async PluginContainer.transform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49099:18)
+[36mbiuai-frontend-1 |[0m       at async loadAndTransform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:51977:27)
+[36mbiuai-frontend-1 |[0m       at async viteTransformMiddleware (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:62105:24)
+[36mbiuai-frontend-1 |[0m 6:18:56 PM [vite] page reload src/boot/pinia.js
+[36mbiuai-frontend-1 |[0m 6:18:57 PM [vite] Pre-transform error: Failed to resolve import "pinia" from "src/stores/auth.js". Does the file exist?
+[36mbiuai-frontend-1 |[0m 6:18:57 PM [vite] Internal server error: Failed to resolve import "pinia" from "src/stores/auth.js". Does the file exist?
+[36mbiuai-frontend-1 |[0m   Plugin: vite:import-analysis
+[36mbiuai-frontend-1 |[0m   File: /app/src/stores/auth.js:1:30
+[36mbiuai-frontend-1 |[0m   1  |  import { defineStore } from 'pinia'
+[36mbiuai-frontend-1 |[0m      |                               ^
+[36mbiuai-frontend-1 |[0m   2  |  import { api } from '@/boot/axios'
+[36mbiuai-frontend-1 |[0m   3  |  
+[36mbiuai-frontend-1 |[0m       at TransformPluginContext._formatError (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49258:41)
+[36mbiuai-frontend-1 |[0m       at TransformPluginContext.error (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49253:16)
+[36mbiuai-frontend-1 |[0m       at normalizeUrl (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64291:23)
+[36mbiuai-frontend-1 |[0m       at async file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64423:39
+[36mbiuai-frontend-1 |[0m       at async Promise.all (index 0)
+[36mbiuai-frontend-1 |[0m       at async TransformPluginContext.transform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64350:7)
+[36mbiuai-frontend-1 |[0m       at async PluginContainer.transform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49099:18)
+[36mbiuai-frontend-1 |[0m       at async loadAndTransform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:51977:27)
+[36mbiuai-frontend-1 |[0m       at async viteTransformMiddleware (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:62105:24)
+[36mbiuai-frontend-1 |[0m 6:19:07 PM [vite] page reload src/main.js
+[36mbiuai-frontend-1 |[0m 6:19:07 PM [vite] Pre-transform error: Failed to resolve import "pinia" from "src/main.js". Does the file exist?
+[36mbiuai-frontend-1 |[0m 6:19:07 PM [vite] Internal server error: Failed to resolve import "pinia" from "src/main.js". Does the file exist?
+[36mbiuai-frontend-1 |[0m   Plugin: vite:import-analysis
+[36mbiuai-frontend-1 |[0m   File: /app/src/main.js:2:30
+[36mbiuai-frontend-1 |[0m   1  |  import { createApp } from 'vue'
+[36mbiuai-frontend-1 |[0m   2  |  import { createPinia } from 'pinia'
+[36mbiuai-frontend-1 |[0m      |                               ^
+[36mbiuai-frontend-1 |[0m   3  |  import { Quasar } from 'quasar'
+[36mbiuai-frontend-1 |[0m   4  |  import { createRouter, createWebHistory } from 'vue-router'
+[36mbiuai-frontend-1 |[0m       at TransformPluginContext._formatError (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49258:41)
+[36mbiuai-frontend-1 |[0m       at TransformPluginContext.error (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49253:16)
+[36mbiuai-frontend-1 |[0m       at normalizeUrl (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64291:23)
+[36mbiuai-frontend-1 |[0m       at async file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64423:39
+[36mbiuai-frontend-1 |[0m       at async Promise.all (index 1)
+[36mbiuai-frontend-1 |[0m       at async TransformPluginContext.transform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64350:7)
+[36mbiuai-frontend-1 |[0m       at async PluginContainer.transform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49099:18)
+[36mbiuai-frontend-1 |[0m       at async loadAndTransform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:51977:27)
+[36mbiuai-frontend-1 |[0m       at async viteTransformMiddleware (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:62105:24)
+[36mbiuai-frontend-1 |[0m 6:19:07 PM [vite] Pre-transform error: Failed to resolve import "pinia" from "src/main.js". Does the file exist?
+[36mbiuai-frontend-1 |[0m 6:19:08 PM [vite] Pre-transform error: Failed to resolve import "pinia" from "src/main.js". Does the file exist?
+[36mbiuai-frontend-1 |[0m 6:19:08 PM [vite] Pre-transform error: Failed to resolve import "pinia" from "src/main.js". Does the file exist?
+[36mbiuai-frontend-1 |[0m 6:19:08 PM [vite] Pre-transform error: Failed to resolve import "pinia" from "src/main.js". Does the file exist?
+[36mbiuai-frontend-1 |[0m 6:19:08 PM [vite] Pre-transform error: Failed to resolve import "pinia" from "src/main.js". Does the file exist?
+[36mbiuai-frontend-1 |[0m 6:19:19 PM [vite] page reload src/stores/auth.js
+[36mbiuai-frontend-1 |[0m 6:19:20 PM [vite] Pre-transform error: Failed to resolve import "pinia" from "src/main.js". Does the file exist?
+[36mbiuai-frontend-1 |[0m 6:19:20 PM [vite] Pre-transform error: Failed to resolve import "pinia" from "src/stores/auth.js". Does the file exist?
+[36mbiuai-frontend-1 |[0m 6:19:20 PM [vite] Internal server error: Failed to resolve import "pinia" from "src/main.js". Does the file exist?
+[36mbiuai-frontend-1 |[0m   Plugin: vite:import-analysis
+[36mbiuai-frontend-1 |[0m   File: /app/src/main.js:2:30
+[36mbiuai-frontend-1 |[0m   1  |  import { createApp } from 'vue'
+[36mbiuai-frontend-1 |[0m   2  |  import { createPinia } from 'pinia'
+[36mbiuai-frontend-1 |[0m      |                               ^
+[36mbiuai-frontend-1 |[0m   3  |  import { Quasar } from 'quasar'
+[36mbiuai-frontend-1 |[0m   4  |  import { createRouter, createWebHistory } from 'vue-router'
+[36mbiuai-frontend-1 |[0m       at TransformPluginContext._formatError (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49258:41)
+[36mbiuai-frontend-1 |[0m       at TransformPluginContext.error (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49253:16)
+[36mbiuai-frontend-1 |[0m       at normalizeUrl (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64291:23)
+[36mbiuai-frontend-1 |[0m       at async file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64423:39
+[36mbiuai-frontend-1 |[0m       at async Promise.all (index 1)
+[36mbiuai-frontend-1 |[0m       at async TransformPluginContext.transform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64350:7)
+[36mbiuai-frontend-1 |[0m       at async PluginContainer.transform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49099:18)
+[36mbiuai-frontend-1 |[0m       at async loadAndTransform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:51977:27)
+[36mbiuai-frontend-1 |[0m       at async viteTransformMiddleware (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:62105:24)
+[36mbiuai-frontend-1 |[0m 6:19:20 PM [vite] Pre-transform error: Failed to resolve import "pinia" from "src/main.js". Does the file exist?
+[36mbiuai-frontend-1 |[0m 6:19:20 PM [vite] Pre-transform error: Failed to resolve import "pinia" from "src/main.js". Does the file exist?
+[36mbiuai-frontend-1 |[0m 6:19:20 PM [vite] Pre-transform error: Failed to resolve import "pinia" from "src/main.js". Does the file exist?
+[36mbiuai-frontend-1 |[0m 6:19:20 PM [vite] Pre-transform error: Failed to resolve import "pinia" from "src/main.js". Does the file exist?
+[36mbiuai-frontend-1 |[0m 6:19:20 PM [vite] Pre-transform error: Failed to resolve import "pinia" from "src/main.js". Does the file exist?
+[36mbiuai-frontend-1 |[0m 6:19:29 PM [vite] vite.config.js changed, restarting server...
+[36mbiuai-frontend-1 |[0m Re-optimizing dependencies because lockfile has changed
+[36mbiuai-frontend-1 |[0m 6:19:29 PM [vite] server restarted.
+[36mbiuai-frontend-1 |[0m Error: The following dependencies are imported but could not be resolved:
+[36mbiuai-frontend-1 |[0m 
+[36mbiuai-frontend-1 |[0m   pinia (imported by /app/src/stores/lancamentos.js)
+[36mbiuai-frontend-1 |[0m 
+[36mbiuai-frontend-1 |[0m Are they installed?
+[36mbiuai-frontend-1 |[0m     at file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:50669:15
+[36mbiuai-frontend-1 |[0m     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+[36mbiuai-frontend-1 |[0m     at async file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:50174:26
+[36mbiuai-frontend-1 |[0m 6:19:52 PM [vite] page reload index.html
+[36mbiuai-frontend-1 |[0m 6:20:14 PM [vite] Pre-transform error: Failed to resolve import "pinia" from "src/main.js". Does the file exist?
+[36mbiuai-frontend-1 |[0m 6:20:14 PM [vite] Pre-transform error: Failed to resolve import "pinia" from "src/stores/auth.js". Does the file exist?
+[36mbiuai-frontend-1 |[0m 6:20:14 PM [vite] Pre-transform error: Failed to resolve import "pinia" from "src/main.js". Does the file exist?
+[36mbiuai-frontend-1 |[0m 6:20:14 PM [vite] Internal server error: Failed to resolve import "pinia" from "src/main.js". Does the file exist?
+[36mbiuai-frontend-1 |[0m   Plugin: vite:import-analysis
+[36mbiuai-frontend-1 |[0m   File: /app/src/main.js:2:30
+[36mbiuai-frontend-1 |[0m   1  |  import { createApp } from 'vue'
+[36mbiuai-frontend-1 |[0m   2  |  import { createPinia } from 'pinia'
+[36mbiuai-frontend-1 |[0m      |                               ^
+[36mbiuai-frontend-1 |[0m   3  |  import { Quasar } from 'quasar'
+[36mbiuai-frontend-1 |[0m   4  |  import { createRouter, createWebHistory } from 'vue-router'
+[36mbiuai-frontend-1 |[0m       at TransformPluginContext._formatError (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49258:41)
+[36mbiuai-frontend-1 |[0m       at TransformPluginContext.error (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49253:16)
+[36mbiuai-frontend-1 |[0m       at normalizeUrl (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64291:23)
+[36mbiuai-frontend-1 |[0m       at async file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64423:39
+[36mbiuai-frontend-1 |[0m       at async Promise.all (index 1)
+[36mbiuai-frontend-1 |[0m       at async TransformPluginContext.transform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64350:7)
+[36mbiuai-frontend-1 |[0m       at async PluginContainer.transform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49099:18)
+[36mbiuai-frontend-1 |[0m       at async loadAndTransform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:51977:27)
+[36mbiuai-frontend-1 |[0m 6:26:18 PM [vite] Pre-transform error: Failed to resolve import "pinia" from "src/main.js". Does the file exist?
+[36mbiuai-frontend-1 |[0m 6:26:18 PM [vite] Internal server error: Failed to resolve import "pinia" from "src/main.js". Does the file exist?
+[36mbiuai-frontend-1 |[0m   Plugin: vite:import-analysis
+[36mbiuai-frontend-1 |[0m   File: /app/src/main.js:2:30
+[36mbiuai-frontend-1 |[0m   1  |  import { createApp } from 'vue'
+[36mbiuai-frontend-1 |[0m   2  |  import { createPinia } from 'pinia'
+[36mbiuai-frontend-1 |[0m      |                               ^
+[36mbiuai-frontend-1 |[0m   3  |  import { Quasar } from 'quasar'
+[36mbiuai-frontend-1 |[0m   4  |  import { createRouter, createWebHistory } from 'vue-router'
+[36mbiuai-frontend-1 |[0m       at TransformPluginContext._formatError (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49258:41)
+[36mbiuai-frontend-1 |[0m       at TransformPluginContext.error (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49253:16)
+[36mbiuai-frontend-1 |[0m       at normalizeUrl (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64291:23)
+[36mbiuai-frontend-1 |[0m       at async file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64423:39
+[36mbiuai-frontend-1 |[0m       at async Promise.all (index 1)
+[36mbiuai-frontend-1 |[0m       at async TransformPluginContext.transform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64350:7)
+[36mbiuai-frontend-1 |[0m       at async PluginContainer.transform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49099:18)
+[36mbiuai-frontend-1 |[0m       at async loadAndTransform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:51977:27)
+[36mbiuai-frontend-1 |[0m       at async viteTransformMiddleware (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:62105:24)
+[36mbiuai-frontend-1 |[0m 6:26:18 PM [vite] Pre-transform error: Failed to resolve import "pinia" from "src/main.js". Does the file exist?
+[36mbiuai-frontend-1 |[0m 6:26:18 PM [vite] Pre-transform error: Failed to resolve import "pinia" from "src/main.js". Does the file exist?
+[36mbiuai-frontend-1 |[0m 6:26:18 PM [vite] Internal server error: Failed to resolve import "pinia" from "src/main.js". Does the file exist?
+[36mbiuai-frontend-1 |[0m   Plugin: vite:import-analysis
+[36mbiuai-frontend-1 |[0m   File: /app/src/main.js:2:30
+[36mbiuai-frontend-1 |[0m   1  |  import { createApp } from 'vue'
+[36mbiuai-frontend-1 |[0m   2  |  import { createPinia } from 'pinia'
+[36mbiuai-frontend-1 |[0m      |                               ^
+[36mbiuai-frontend-1 |[0m   3  |  import { Quasar } from 'quasar'
+[36mbiuai-frontend-1 |[0m   4  |  import { createRouter, createWebHistory } from 'vue-router'
+[36mbiuai-frontend-1 |[0m       at TransformPluginContext._formatError (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49258:41)
+[36mbiuai-frontend-1 |[0m       at TransformPluginContext.error (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49253:16)
+[36mbiuai-frontend-1 |[0m       at normalizeUrl (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64291:23)
+[36mbiuai-frontend-1 |[0m       at async file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64423:39
+[36mbiuai-frontend-1 |[0m       at async Promise.all (index 1)
+[36mbiuai-frontend-1 |[0m       at async TransformPluginContext.transform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64350:7)
+[36mbiuai-frontend-1 |[0m       at async PluginContainer.transform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49099:18)
+[36mbiuai-frontend-1 |[0m       at async loadAndTransform (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:51977:27)
+[36mbiuai-frontend-1 |[0m       at async viteTransformMiddleware (file:///app/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:62105:24)
+[36mbiuai-frontend-1 |[0m 6:26:18 PM [vite] Pre-transform error: Failed to resolve import "pinia" from "src/main.js". Does the file exist?

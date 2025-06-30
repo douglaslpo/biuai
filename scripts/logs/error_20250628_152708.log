@@ -1,0 +1,14 @@
+No such service: api
+2025-06-28 15:27:09 [ERROR] Falha ao salvar logs do serviço api
+No such service: cache
+2025-06-28 15:27:10 [ERROR] Falha ao salvar logs do serviço cache
+No such service: ml_service
+2025-06-28 15:27:10 [ERROR] Falha ao salvar logs do serviço ml_service
+No such service: etl_service
+2025-06-28 15:27:10 [ERROR] Falha ao salvar logs do serviço etl_service
+pg_dump: error: connection to database "finance_db" failed: FATAL:  role "user" does not exist
+2025-06-28 15:27:11 [ERROR] Falha ao criar backup do banco de dados
+Stopping biuai-frontend-1 ... 
+Stopping biuai-db-1       ... 
+Stopping biuai-db-1       ... done
+Stopping biuai-frontend-1 ... done

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="400" height="600" viewBox="0 0 400 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="0" y="0" width="400" height="600" fill="#F5F6FA"/>
+  <rect x="50" y="80" width="300" height="440" rx="24" fill="#FFF" stroke="#E0E0E0" stroke-width="2"/>
+  <text x="200" y="130" text-anchor="middle" font-size="22" font-family="Inter, Arial" font-weight="bold" fill="#1976D2">Sistema Financeiro</text>
+  <text x="200" y="170" text-anchor="middle" font-size="20" font-family="Inter, Arial" font-weight="bold" fill="#222">Login</text>
+  <rect x="90" y="200" width="220" height="40" rx="8" fill="#F0F0F0" stroke="#BDBDBD"/>
+  <text x="100" y="225" font-size="14" font-family="Inter, Arial" fill="#888">E-mail</text>
+  <rect x="90" y="250" width="220" height="40" rx="8" fill="#F0F0F0" stroke="#BDBDBD"/>
+  <text x="100" y="275" font-size="14" font-family="Inter, Arial" fill="#888">Senha</text>
+  <rect x="90" y="310" width="220" height="44" rx="8" fill="#1976D2"/>
+  <text x="200" y="338" text-anchor="middle" font-size="16" font-family="Inter, Arial" font-weight="bold" fill="#FFF">Entrar</text>
+  <text x="200" y="370" text-anchor="middle" font-size="13" font-family="Inter, Arial" fill="#1976D2" style="text-decoration: underline; cursor: pointer;">Esqueci minha senha?</text>
+  <text x="200" y="400" text-anchor="middle" font-size="13" font-family="Inter, Arial" fill="#888">Não tem conta? <tspan fill="#1976D2" style="text-decoration: underline; cursor: pointer;">Registrar-se</tspan></text>
+</svg> 

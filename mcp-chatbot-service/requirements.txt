@@ -1,0 +1,38 @@
+# FastAPI para API REST
+fastapi==0.115.0
+uvicorn[standard]==0.24.0
+pydantic==2.8.0
+python-multipart==0.0.6
+
+# WebSockets para chat em tempo real
+websockets==12.0
+
+# HTTP Client
+httpx==0.27.0
+
+# Ollama client
+ollama==0.3.3
+
+# Redis para cache e sessões
+redis==5.0.1
+aioredis==2.0.1
+
+# Utilities
+python-dotenv==1.0.0
+aiofiles==23.2.1
+pyyaml==6.0.1
+
+# Logging
+structlog==23.2.0
+
+# Date/Time
+python-dateutil==2.8.2
+
+# JSON processing
+orjson==3.9.10
+
+# Rate limiting
+slowapi==0.1.9
+
+# Markdown processing
+markdown==3.5.1 

@@ -1,0 +1,230 @@
+// Variáveis do Design System BIUAI
+:root {
+  // Cores principais
+  --biuai-primary: #1976D2;
+  --biuai-primary-light: #42A5F5;
+  --biuai-primary-dark: #0D47A1;
+  --biuai-secondary: #43A047;
+  --biuai-secondary-light: #66BB6A;
+  --biuai-secondary-dark: #2E7D32;
+  --biuai-accent: #FF6F00;
+  --biuai-error: #E53935;
+  --biuai-warning: #FB8C00;
+  --biuai-info: #1E88E5;
+  --biuai-success: #43A047;
+
+  // Tons de cinza
+  --biuai-grey-50: #FAFAFA;
+  --biuai-grey-100: #F5F5F5;
+  --biuai-grey-200: #EEEEEE;
+  --biuai-grey-300: #E0E0E0;
+  --biuai-grey-400: #BDBDBD;
+  --biuai-grey-500: #9E9E9E;
+  --biuai-grey-600: #757575;
+  --biuai-grey-700: #616161;
+  --biuai-grey-800: #424242;
+  --biuai-grey-900: #212121;
+
+  // Superfícies
+  --biuai-surface: #FFFFFF;
+  --biuai-surface-variant: #F8F9FA;
+  --biuai-background: #FAFAFA;
+  
+  // Sombras
+  --biuai-shadow-light: 0 2px 4px rgba(0,0,0,0.08);
+  --biuai-shadow-medium: 0 4px 12px rgba(0,0,0,0.12);
+  --biuai-shadow-strong: 0 8px 24px rgba(0,0,0,0.16);
+  
+  // Border radius
+  --biuai-radius-sm: 4px;
+  --biuai-radius-md: 8px;
+  --biuai-radius-lg: 12px;
+  --biuai-radius-xl: 16px;
+  
+  // Espaçamento (grid 8px)
+  --biuai-space-xs: 4px;
+  --biuai-space-sm: 8px;
+  --biuai-space-md: 16px;
+  --biuai-space-lg: 24px;
+  --biuai-space-xl: 32px;
+  --biuai-space-xxl: 48px;
+}
+
+// Tipografia
+.biuai-text-h1 { font-size: 2.5rem; font-weight: 600; line-height: 1.2; }
+.biuai-text-h2 { font-size: 2rem; font-weight: 600; line-height: 1.25; }
+.biuai-text-h3 { font-size: 1.75rem; font-weight: 600; line-height: 1.3; }
+.biuai-text-h4 { font-size: 1.5rem; font-weight: 600; line-height: 1.35; }
+.biuai-text-h5 { font-size: 1.25rem; font-weight: 600; line-height: 1.4; }
+.biuai-text-h6 { font-size: 1.125rem; font-weight: 600; line-height: 1.45; }
+.biuai-text-body1 { font-size: 1rem; font-weight: 400; line-height: 1.5; }
+.biuai-text-body2 { font-size: 0.875rem; font-weight: 400; line-height: 1.55; }
+.biuai-text-caption { font-size: 0.75rem; font-weight: 400; line-height: 1.6; }
+
+// Componentes customizados
+.biuai-card {
+  background: var(--biuai-surface);
+  border-radius: var(--biuai-radius-lg);
+  box-shadow: var(--biuai-shadow-light);
+  transition: all 0.3s ease;
+  
+  &:hover {
+    box-shadow: var(--biuai-shadow-medium);
+    transform: translateY(-2px);
+  }
+  
+  &.biuai-card-elevated {
+    box-shadow: var(--biuai-shadow-medium);
+    
+    &:hover {
+      box-shadow: var(--biuai-shadow-strong);
+      transform: translateY(-4px);
+    }
+  }
+}
+
+.biuai-btn {
+  border-radius: var(--biuai-radius-md);
+  font-weight: 600;
+  text-transform: none;
+  letter-spacing: 0.02em;
+  transition: all 0.2s ease;
+  
+  &.biuai-btn-primary {
+    background: var(--biuai-primary);
+    color: white;
+    
+    &:hover {
+      background: var(--biuai-primary-dark);
+      transform: translateY(-1px);
+      box-shadow: var(--biuai-shadow-medium);
+    }
+  }
+  
+  &.biuai-btn-secondary {
+    background: var(--biuai-secondary);
+    color: white;
+    
+    &:hover {
+      background: var(--biuai-secondary-dark);
+      transform: translateY(-1px);
+      box-shadow: var(--biuai-shadow-medium);
+    }
+  }
+}
+
+// Layout específicos
+.biuai-auth-card {
+  background: var(--biuai-surface);
+  border-radius: var(--biuai-radius-xl);
+  box-shadow: var(--biuai-shadow-strong);
+  padding: var(--biuai-space-xl);
+  max-width: 420px;
+  width: 100%;
+}
+
+.biuai-dashboard-card {
+  background: var(--biuai-surface);
+  border-radius: var(--biuai-radius-lg);
+  box-shadow: var(--biuai-shadow-light);
+  padding: var(--biuai-space-lg);
+  
+  &.positive {
+    background: linear-gradient(135deg, var(--biuai-success) 0%, #388E3C 100%);
+    color: white;
+  }
+  
+  &.negative {
+    background: linear-gradient(135deg, var(--biuai-error) 0%, #C62828 100%);
+    color: white;
+  }
+  
+  &.warning {
+    background: linear-gradient(135deg, var(--biuai-warning) 0%, #E65100 100%);
+    color: white;
+  }
+}
+
+.biuai-sidebar {
+  background: var(--biuai-surface);
+  border-right: 1px solid var(--biuai-grey-200);
+}
+
+.biuai-navbar {
+  background: var(--biuai-primary);
+  box-shadow: var(--biuai-shadow-medium);
+}
+
+// Estados de loading e feedback
+.biuai-loading {
+  position: relative;
+  overflow: hidden;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    animation: biuai-shimmer 1.5s infinite;
+  }
+}
+
+@keyframes biuai-shimmer {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+.biuai-fade-enter-active,
+.biuai-fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.biuai-fade-enter-from,
+.biuai-fade-leave-to {
+  opacity: 0;
+}
+
+// Responsividade
+@media (max-width: 600px) {
+  .biuai-auth-card {
+    padding: var(--biuai-space-lg);
+    margin: var(--biuai-space-md);
+  }
+  
+  .biuai-dashboard-card {
+    padding: var(--biuai-space-md);
+  }
+}
+
+// Acessibilidade
+.biuai-focus-visible {
+  outline: 2px solid var(--biuai-primary);
+  outline-offset: 2px;
+}
+
+.biuai-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+// Utilitários
+.biuai-text-primary { color: var(--biuai-primary) !important; }
+.biuai-text-secondary { color: var(--biuai-secondary) !important; }
+.biuai-text-success { color: var(--biuai-success) !important; }
+.biuai-text-error { color: var(--biuai-error) !important; }
+.biuai-text-warning { color: var(--biuai-warning) !important; }
+
+.biuai-bg-primary { background-color: var(--biuai-primary) !important; }
+.biuai-bg-secondary { background-color: var(--biuai-secondary) !important; }
+.biuai-bg-surface { background-color: var(--biuai-surface) !important; }
+.biuai-bg-background { background-color: var(--biuai-background) !important; } 
