@@ -11774,3 +11774,19 @@ AttributeError: module 'bcrypt' has no attribute '__about__'
 2025-06-30 16:20:34,247 - app.middleware - INFO - Request completed
 2025-06-30 16:36:12,422 - httpx - INFO - HTTP Request: GET http://mcp-chatbot-service:8002/health "HTTP/1.1 200 OK"
 2025-06-30 16:36:12,423 - app.middleware - INFO - Request completed
+2025-06-30 16:40:09,026 - app.middleware - INFO - Request completed
+2025-06-30 16:40:09,098 - app.middleware - INFO - Request completed
+2025-06-30 16:40:14,116 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-06-30 16:40:14,117 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.full_name, users.email, users.hashed_password, users.is_active, users.is_superuser, users.created_at, users.updated_at 
+FROM users 
+WHERE users.id = $1::INTEGER
+2025-06-30 16:40:14,117 - sqlalchemy.engine.Engine - INFO - [generated in 0.00011s] (1,)
+2025-06-30 16:40:14,120 - app.middleware - INFO - Request completed
+2025-06-30 16:40:14,120 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-06-30 16:40:22,213 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-06-30 16:40:22,214 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.full_name, users.email, users.hashed_password, users.is_active, users.is_superuser, users.created_at, users.updated_at 
+FROM users 
+WHERE users.id = $1::INTEGER
+2025-06-30 16:40:22,214 - sqlalchemy.engine.Engine - INFO - [cached since 8.097s ago] (1,)
+2025-06-30 16:40:22,215 - app.middleware - INFO - Request completed
+2025-06-30 16:40:22,215 - sqlalchemy.engine.Engine - INFO - ROLLBACK

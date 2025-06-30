@@ -195,7 +195,7 @@
     </v-footer>
 
     <!-- Chatbot Modal -->
-    <ChatbotModal v-if="user" />
+    <ChatbotModal />
   </v-app>
 </template>
 
