@@ -5,12 +5,13 @@
 import axios from 'axios'
 import { useAuthStore } from '../stores/auth'
 
-const API_BASE_URL = process.env.VUE_APP_API_URL || 'http://localhost:3000'
+// URL direta para o MCP Chatbot Service
+const CHATBOT_API_URL = process.env.VUE_APP_CHATBOT_URL || 'http://localhost:8002'
 
 class ChatbotService {
   constructor() {
     this.apiClient = axios.create({
-      baseURL: `${API_BASE_URL}/api/v1/chatbot`,
+      baseURL: CHATBOT_API_URL,
       timeout: 30000,
       headers: {
         'Content-Type': 'application/json'
@@ -77,9 +78,13 @@ class ChatbotService {
    */
   async sendMessage({ message, session_id = null, context = {} }) {
     try {
+      const authStore = useAuthStore()
+      const user = authStore.user
+      
       const payload = {
         message: message.trim(),
-        session_id,
+        user_id: user?.id?.toString() || "1",
+        session_id: session_id || this.generateSessionId(),
         context: {
           ...context,
           timestamp: new Date().toISOString(),
@@ -88,10 +93,10 @@ class ChatbotService {
         }
       }
 
-      const response = await this.apiClient.post('/message', payload)
+      const response = await this.apiClient.post('/chat', payload)
       
       return {
-        response: response.response,
+        message: response.response,
         session_id: response.session_id,
         timestamp: response.timestamp,
         bot_name: response.bot_name,
@@ -108,7 +113,7 @@ class ChatbotService {
    */
   async getChatHistory(sessionId) {
     try {
-      const response = await this.apiClient.get(`/history/${sessionId}`)
+      const response = await this.apiClient.get(`/chat/history/${sessionId}`)
       
       return {
         session_id: response.session_id,
@@ -136,7 +141,7 @@ class ChatbotService {
       const response = await this.apiClient.get('/config')
       
       return {
-        bot_name: response.bot_name,
+        bot_name: response.bot_name || 'Bi UAI Bot Administrador',
         model: response.model,
         features: response.features || [],
         personality: response.personality,
@@ -185,12 +190,12 @@ class ChatbotService {
   /**
    * Enviar feedback sobre o chatbot
    */
-  async submitFeedback({ session_id, rating, comment = '', helpful = true }) {
+  async sendFeedback({ session_id, message_index, helpful, rating = 5 }) {
     try {
       const payload = {
         session_id,
+        message_index,
         rating: Math.max(1, Math.min(5, rating)), // Garantir que está entre 1-5
-        comment: comment.trim(),
         helpful
       }
 
@@ -198,7 +203,7 @@ class ChatbotService {
       
       return {
         status: response.status,
-        message: response.message
+        message: response.message || 'Feedback enviado com sucesso'
       }
     } catch (error) {
       console.error('Erro ao enviar feedback:', error)
@@ -392,10 +397,10 @@ class ChatbotService {
    */
 
   /**
-   * Conectar via WebSocket para chat em tempo real
+   * Conectar WebSocket para chat em tempo real
    */
   connectWebSocket(sessionId, onMessage, onError = null) {
-    const wsUrl = `${API_BASE_URL.replace('http', 'ws')}/api/v1/chatbot/ws/${sessionId}`
+    const wsUrl = `${CHATBOT_API_URL.replace('http', 'ws')}/ws/${sessionId}`
     
     try {
       const ws = new WebSocket(wsUrl)
@@ -406,15 +411,15 @@ class ChatbotService {
       
       ws.onmessage = (event) => {
         try {
-          const data = JSON.parse(event.data)
-          onMessage(data)
+          const message = JSON.parse(event.data)
+          onMessage(message)
         } catch (error) {
           console.error('Erro ao processar mensagem WebSocket:', error)
         }
       }
       
       ws.onerror = (error) => {
-        console.error('Erro no WebSocket:', error)
+        console.error('Erro WebSocket:', error)
         if (onError) onError(error)
       }
       

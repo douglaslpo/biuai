@@ -66,7 +66,7 @@ class ChatResponse(BaseModel):
 class BotConfig(BaseModel):
     personality: str
     system_prompt: str
-    model_name: str = "llama3.2:3b"
+    model_name: str = "llama3.2:1b"  # Modelo menor para usar menos memória
     temperature: float = 0.7
     max_tokens: int = 1000
     enabled: bool = True
@@ -82,7 +82,7 @@ class ChatSession(BaseModel):
 class OllamaClient:
     def __init__(self):
         self.client = ollama.Client(host=OLLAMA_BASE_URL)
-        self.default_model = "llama3.2:3b"
+        self.default_model = "llama3.2:1b"
     
     async def ensure_model(self, model_name: str = None):
         """Garantir que o modelo está disponível"""
