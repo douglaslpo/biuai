@@ -65,8 +65,8 @@ Sistema completo de gestão financeira pessoal e empresarial com inteligência a
 
 ### 1. Clone o Repositório
 ```bash
-git clone https://github.com/seu-usuario/BIUAI.git
-cd BIUAI
+git clone https://github.com/douglaslpo/biuai.git
+cd biuai
 ```
 
 ### 2. Inicie o Sistema
@@ -197,90 +197,72 @@ docker-compose exec db pg_dump -U biuai biuai > backup.sql
 ```
 ┌─────────────────┐    ┌─────────────────┐
 │   Frontend      │    │   Backend API   │
-│   Vue.js +      │◄──►│   FastAPI +     │
-│   Vuetify       │    │   PostgreSQL    │
+│   Vue.js 3      │◄──►│   FastAPI       │
+│   Vuetify 3     │    │   Python 3.11   │
+│   Port: 8080    │    │   Port: 3000    │
 └─────────────────┘    └─────────────────┘
          │                       │
-         └──────────┬────────────┘
-                    │
-            ┌───────▼───────┐
-            │   Redis Cache │
-            └───────────────┘
-                    │
-        ┌───────────┼───────────┐
-        │           │           │
-┌───────▼───┐ ┌─────▼─────┐ ┌───▼───┐
-│  Ollama   │ │MCP Chatbot│ │  ML   │
-│   AI      │ │  Service  │ │Server │
-└───────────┘ └───────────┘ └───────┘
+         ▼                       ▼
+┌─────────────────┐    ┌─────────────────┐
+│   PostgreSQL    │    │   Redis Cache   │
+│   Port: 5432    │    │   Port: 6379    │
+└─────────────────┘    └─────────────────┘
+         │                       │
+         ▼                       ▼
+┌─────────────────┐    ┌─────────────────┐
+│   MCP Services  │    │   ML Services   │
+│   Chatbot: 8002 │    │   Model: 8000   │
+│   Memory: 8001  │    │   Jupyter: 8888 │
+└─────────────────┘    └─────────────────┘
 ```
-
-## 🛡️ Segurança
-
-- **Autenticação JWT**: Tokens seguros com expiração
-- **Rate Limiting**: Proteção contra ataques
-- **Validação Rigorosa**: Pydantic para validação de dados
-- **Headers de Segurança**: CORS, CSP, HSTS
-- **Criptografia**: Senhas com bcrypt
 
 ## 📚 Documentação
 
-### APIs
-- **Swagger UI**: http://localhost:3000/docs
-- **Redoc**: http://localhost:3000/redoc
-- **OpenAPI**: http://localhost:3000/api/v1/openapi.json
+- **API**: `/docs` - Documentação interativa da API
+- **Swagger**: `/redoc` - Documentação alternativa
+- **Arquitetura**: `/docs/architecture` - Diagramas e fluxos
+- **Deploy**: `/docs/deploy` - Guias de instalação
 
-### Chatbot
-- **Implementação**: [CHATBOT_IMPLEMENTATION.md](CHATBOT_IMPLEMENTATION.md)
-- **APIs**: [API_DOCS_MELHORIAS.md](API_DOCS_MELHORIAS.md)
+## 🧪 Testes
 
-## 🚀 Deploy em Produção
-
-### Variáveis de Ambiente
 ```bash
-# .env
-DATABASE_URL=postgresql://user:pass@host:port/db
-REDIS_URL=redis://host:port
-SECRET_KEY=your-secret-key
-OLLAMA_HOST=http://ollama:11434
+# Executar testes
+docker-compose exec backend pytest
+
+# Testes com coverage
+docker-compose exec backend pytest --cov=app
+
+# Testes específicos
+docker-compose exec backend pytest tests/test_api.py
 ```
 
-### Docker Compose Production
-```bash
-# Deploy em produção
-docker-compose -f docker-compose.prod.yml up -d
-
-# Com HTTPS
-docker-compose -f docker-compose.prod.yml -f docker-compose.https.yml up -d
-```
-
-## 🤝 Contribuindo
+## 🤝 Contribuição
 
 1. Fork o projeto
-2. Crie sua feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
-4. Push para a branch (`git push origin feature/AmazingFeature`)
+2. Crie uma branch: `git checkout -b feature/nova-funcionalidade`
+3. Commit: `git commit -m 'Adiciona nova funcionalidade'`
+4. Push: `git push origin feature/nova-funcionalidade`
 5. Abra um Pull Request
 
-## 📝 Licença
+## 📄 Licença
 
-Este projeto está licenciado sob a Licença MIT - veja o arquivo [LICENSE](LICENSE) para detalhes.
-
-## 👥 Equipe
-
-- **Desenvolvimento**: Equipe BIUAI
-- **IA & Machine Learning**: Especialistas em LLM
-- **Frontend**: Vue.js & Vuetify Experts
-- **Backend**: FastAPI & Python Developers
-- **DevOps**: Docker & Infrastructure
+Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 
 ## 📞 Suporte
 
-- **Email**: suporte@biuai.com
-- **Chat**: Use o Bi UAI Bot Administrador
-- **Issues**: GitHub Issues
-- **Documentação**: Wiki do projeto
+- **GitHub Issues**: Para bugs e melhorias
+- **Discussions**: Para perguntas e ideias
+- **Wiki**: Documentação adicional
+- **Chatbot**: Suporte integrado no sistema
 
 ---
 
-⭐ **Se este projeto foi útil para você, considere dar uma estrela!** ⭐ 
+<div align="center">
+
+**BIUAI** - Transformando a gestão financeira com inteligência artificial
+
+[![GitHub stars](https://img.shields.io/github/stars/douglaslpo/biuai.svg)](https://github.com/douglaslpo/biuai/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/douglaslpo/biuai.svg)](https://github.com/douglaslpo/biuai/network)
+[![GitHub issues](https://img.shields.io/github/issues/douglaslpo/biuai.svg)](https://github.com/douglaslpo/biuai/issues)
+
+</div>
