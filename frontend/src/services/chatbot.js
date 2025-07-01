@@ -5,8 +5,10 @@
 import axios from 'axios'
 import { useAuthStore } from '../stores/auth'
 
-// URL direta para o MCP Chatbot Service
-const CHATBOT_API_URL = process.env.VUE_APP_CHATBOT_URL || 'http://localhost:8002'
+// URL para o MCP Chatbot Service
+// No container usa nome interno, no browser usa localhost
+const CHATBOT_API_URL = process.env.VUE_APP_CHATBOT_URL || 
+  (typeof window !== 'undefined' ? 'http://localhost:8002' : 'http://biuai_mcp-chatbot-service_1:8002')
 
 class ChatbotService {
   constructor() {

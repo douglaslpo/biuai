@@ -98,7 +98,4 @@ aiocache==0.12.2
 ipython==8.18.1
 
 # Production Server
-gunicorn==21.2.0
-
-# MCP Framework - versão compatível com starlette>=0.39
-mcp==1.0.0 
+gunicorn==21.2.0 

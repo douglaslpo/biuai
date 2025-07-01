@@ -95,18 +95,12 @@ export default {
         const { confirmPassword, ...userData } = form.value
         await authStore.register(userData)
         
-        $q.notify({
-          type: 'positive',
-          message: 'Conta criada com sucesso!'
-        })
+        console.log('Conta criada com sucesso!')
         
         router.push('/dashboard')
       } catch (error) {
         console.error('Erro no registro:', error)
-        $q.notify({
-          type: 'negative',
-          message: authStore.error || 'Erro ao criar conta'
-        })
+        console.error(authStore.error || 'Erro ao criar conta')
       }
     }
 

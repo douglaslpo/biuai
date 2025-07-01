@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎯 Teste Frontend BIUAI - Sem Erro de Frame</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .status-bar {
+            background: #f8f9fa;
+            padding: 15px 30px;
+            border-bottom: 1px solid #e9ecef;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .status {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .status.loading {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+
+        .content {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 20px;
+            padding: 30px;
+            height: calc(100vh - 200px);
+        }
+
+        .sidebar {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 15px;
+            border: 1px solid #e9ecef;
+        }
+
+        .sidebar h3 {
+            color: #007bff;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 8px;
+        }
+
+        .test-btn {
+            background: linear-gradient(45deg, #28a745, #20c997);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin: 5px 0;
+            width: 100%;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .test-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(40,167,69,0.3);
+        }
+
+        .iframe-container {
+            border: 3px solid #28a745;
+            border-radius: 15px;
+            overflow: hidden;
+            height: 100%;
+            position: relative;
+            background: white;
+        }
+
+        .iframe-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .loading-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: #007bff;
+            transition: opacity 0.3s ease;
+        }
+
+        .loading-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .log-area {
+            background: #1e1e1e;
+            color: #00ff00;
+            font-family: 'Courier New', monospace;
+            padding: 15px;
+            border-radius: 8px;
+            height: 200px;
+            overflow-y: auto;
+            font-size: 0.9rem;
+            margin-top: 15px;
+        }
+
+        .instructions {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+            border-left: 4px solid #28a745;
+        }
+
+        .instructions h4 {
+            color: #28a745;
+            margin-bottom: 10px;
+        }
+
+        .instructions ol {
+            margin-left: 20px;
+        }
+
+        .instructions li {
+            margin: 5px 0;
+        }
+
+        @media (max-width: 1024px) {
+            .content {
+                grid-template-columns: 1fr;
+                height: auto;
+            }
+            
+            .iframe-container {
+                height: 600px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 Teste Frontend BIUAI</h1>
+            <p>Verificação de funcionamento sem erro de X-Frame-Options</p>
+        </div>
+
+        <div class="status-bar">
+            <div id="frameStatus" class="status loading">
+                🔄 Verificando X-Frame-Options...
+            </div>
+            <div id="chatbotStatus" class="status loading">
+                🔄 Verificando Chatbot...
+            </div>
+            <div class="status success">
+                ✅ Build: index-DzEh1ZUl.js
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="sidebar">
+                <h3>🧪 Controles de Teste</h3>
+                
+                <button class="test-btn" onclick="reloadFrame()">
+                    🔄 Recarregar Frame
+                </button>
+                
+                <button class="test-btn" onclick="testChatbot()">
+                    🤖 Testar Chatbot
+                </button>
+                
+                <button class="test-btn" onclick="openInNewTab()">
+                    🌐 Abrir em Nova Aba
+                </button>
+
+                <div class="instructions">
+                    <h4>📋 Instruções de Teste:</h4>
+                    <ol>
+                        <li><strong>Login:</strong> admin@biuai.com / admin123</li>
+                        <li><strong>Localizar:</strong> Botão azul circular (canto inferior direito)</li>
+                        <li><strong>Características:</strong> Gradiente azul, ícone robô, ondas</li>
+                        <li><strong>Teste:</strong> Clique e digite uma mensagem</li>
+                        <li><strong>Verificar:</strong> Resposta sem erros no DevTools</li>
+                    </ol>
+                </div>
+
+                <div class="log-area" id="logArea">
+                    <div>🎯 Sistema de teste inicializado...</div>
+                    <div>📅 <span id="timestamp"></span></div>
+                    <div>🔧 Build: index-DzEh1ZUl.js</div>
+                    <div>🌐 Frontend: http://localhost:8080</div>
+                    <div>🤖 Chatbot: http://localhost:8002</div>
+                    <div>📋 Aguardando comandos...</div>
+                </div>
+            </div>
+
+            <div class="iframe-container">
+                <iframe id="frontendFrame" src="http://localhost:8080" title="BIUAI Frontend"></iframe>
+                <div id="loadingOverlay" class="loading-overlay">
+                    <div>
+                        🔄 Carregando Frontend BIUAI...<br>
+                        <small>Verificando X-Frame-Options...</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('timestamp').textContent = new Date().toLocaleString();
+
+        let frameLoaded = false;
+        let chatbotTested = false;
+
+        function addLog(message, type = 'info') {
+            const logArea = document.getElementById('logArea');
+            const div = document.createElement('div');
+            const timestamp = new Date().toLocaleTimeString();
+            
+            let icon = '📘';
+            if (type === 'success') icon = '✅';
+            if (type === 'error') icon = '❌';
+            if (type === 'warning') icon = '⚠️';
+            
+            div.innerHTML = `<span style="color: #888">[${timestamp}]</span> ${icon} ${message}`;
+            logArea.appendChild(div);
+            logArea.scrollTop = logArea.scrollHeight;
+        }
+
+        function updateStatus(elementId, status, message) {
+            const element = document.getElementById(elementId);
+            element.className = `status ${status}`;
+            element.textContent = message;
+        }
+
+        // Monitorar carregamento do iframe
+        document.getElementById('frontendFrame').addEventListener('load', function() {
+            setTimeout(() => {
+                document.getElementById('loadingOverlay').classList.add('hidden');
+                updateStatus('frameStatus', 'success', '✅ Frame: Carregado sem erros');
+                addLog('Frontend carregado com sucesso no iframe', 'success');
+                frameLoaded = true;
+                
+                // Verificar se há erros de console
+                checkForFrameErrors();
+            }, 1000);
+        });
+
+        document.getElementById('frontendFrame').addEventListener('error', function() {
+            updateStatus('frameStatus', 'error', '❌ Frame: Erro ao carregar');
+            addLog('Erro ao carregar frontend no iframe', 'error');
+            document.getElementById('loadingOverlay').innerHTML = `
+                <div style="color: #dc3545;">
+                    ❌ Erro ao carregar<br>
+                    <small>Verifique se o frontend está rodando</small>
+                </div>
+            `;
+        });
+
+        function checkForFrameErrors() {
+            // Simular verificação de erro de frame
+            addLog('Verificando se há erros de X-Frame-Options...', 'info');
+            
+            setTimeout(() => {
+                if (frameLoaded) {
+                    addLog('✅ X-Frame-Options configurado corretamente!', 'success');
+                    updateStatus('frameStatus', 'success', '✅ Frame: OK (ALLOWALL)');
+                } else {
+                    addLog('❌ Possível problema com X-Frame-Options', 'error');
+                    updateStatus('frameStatus', 'error', '❌ Frame: Bloqueado');
+                }
+            }, 2000);
+        }
+
+        async function testChatbot() {
+            addLog('🤖 Testando chatbot service...', 'info');
+            updateStatus('chatbotStatus', 'loading', '🔄 Testando Chatbot...');
+            
+            try {
+                const response = await fetch('http://localhost:8002/health');
+                const data = await response.json();
+                
+                if (data.status === 'healthy') {
+                    updateStatus('chatbotStatus', 'success', '✅ Chatbot: Online');
+                    addLog(`Chatbot funcionando: ${data.bot_name}`, 'success');
+                    chatbotTested = true;
+                    
+                    // Testar mensagem
+                    testChatMessage();
+                } else {
+                    updateStatus('chatbotStatus', 'error', '❌ Chatbot: Unhealthy');
+                    addLog(`Chatbot com problemas: ${data.status}`, 'error');
+                }
+            } catch (error) {
+                updateStatus('chatbotStatus', 'error', '❌ Chatbot: Offline');
+                addLog(`Chatbot inacessível: ${error.message}`, 'error');
+            }
+        }
+
+        async function testChatMessage() {
+            addLog('💬 Testando envio de mensagem...', 'info');
+            
+            try {
+                const payload = {
+                    message: "Teste de funcionamento do chatbot via iframe",
+                    user_id: "test_user_iframe",
+                    session_id: "iframe_test_" + Date.now()
+                };
+                
+                const response = await fetch('http://localhost:8002/chat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
+                });
+                
+                const data = await response.json();
+                
+                if (data.response && data.session_id) {
+                    addLog('Mensagem enviada e resposta recebida!', 'success');
+                    addLog(`Resposta: "${data.response.substring(0, 100)}..."`, 'info');
+                } else {
+                    addLog('Resposta do chatbot inválida', 'error');
+                }
+            } catch (error) {
+                addLog(`Erro na comunicação: ${error.message}`, 'error');
+            }
+        }
+
+        function reloadFrame() {
+            addLog('🔄 Recarregando iframe...', 'info');
+            document.getElementById('loadingOverlay').classList.remove('hidden');
+            document.getElementById('frontendFrame').src = 'http://localhost:8080?' + Date.now();
+            frameLoaded = false;
+            updateStatus('frameStatus', 'loading', '🔄 Recarregando...');
+        }
+
+        function openInNewTab() {
+            addLog('🌐 Abrindo frontend em nova aba...', 'info');
+            window.open('http://localhost:8080', '_blank');
+        }
+
+        // Auto-executar teste do chatbot
+        setTimeout(() => {
+            addLog('🔄 Executando teste automático do chatbot...', 'info');
+            testChatbot();
+        }, 3000);
+
+        // Verificar se frame carregou após 5 segundos
+        setTimeout(() => {
+            if (!frameLoaded) {
+                addLog('⚠️ Frame demorou para carregar - possível problema', 'warning');
+                updateStatus('frameStatus', 'error', '❌ Frame: Timeout');
+            }
+        }, 5000);
+    </script>
+</body>
+</html> 

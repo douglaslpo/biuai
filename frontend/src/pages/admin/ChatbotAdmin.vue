@@ -598,15 +598,12 @@
 </template>
 
 <script>
-import { ref, reactive, computed, onMounted } from 'vue'
-import { useQuasar } from 'quasar'
+import { ref, reactive, computed, onMounted, watch } from 'vue'
 import { chatbotService } from '../../services/chatbot'
 
 export default {
   name: 'ChatbotAdmin',
   setup() {
-    const $q = useQuasar()
-    
     // Estado reativo
     const activeTab = ref('config')
     const refreshing = ref(false)
@@ -755,16 +752,10 @@ export default {
           loadSessions()
         ])
         
-        $q.notify({
-          type: 'positive',
-          message: 'Dados atualizados com sucesso'
-        })
+        console.log('Dados atualizados com sucesso')
       } catch (error) {
         console.error('Erro ao atualizar dados:', error)
-        $q.notify({
-          type: 'negative',
-          message: 'Erro ao atualizar dados'
-        })
+        console.error('Erro ao atualizar dados')
       } finally {
         refreshing.value = false
       }
@@ -819,16 +810,10 @@ export default {
       savingConfig.value = true
       try {
         // Implementar salvamento de configuração
-        $q.notify({
-          type: 'positive',
-          message: 'Configurações salvas com sucesso'
-        })
+        console.log('Configurações salvas com sucesso')
       } catch (error) {
         console.error('Erro ao salvar configuração:', error)
-        $q.notify({
-          type: 'negative',
-          message: 'Erro ao salvar configurações'
-        })
+        console.error('Erro ao salvar configurações')
       } finally {
         savingConfig.value = false
       }
@@ -905,19 +890,13 @@ FORMATO DE RESPOSTA:
       try {
         await chatbotService.sendBroadcast(broadcastMessage.value)
         
-        $q.notify({
-          type: 'positive',
-          message: 'Broadcast enviado com sucesso'
-        })
+        console.log('Broadcast enviado com sucesso')
         
         broadcastModal.value = false
         broadcastMessage.value = ''
       } catch (error) {
         console.error('Erro ao enviar broadcast:', error)
-        $q.notify({
-          type: 'negative',
-          message: 'Erro ao enviar broadcast'
-        })
+        console.error('Erro ao enviar broadcast')
       } finally {
         sendingBroadcast.value = false
       }
@@ -943,25 +922,14 @@ FORMATO DE RESPOSTA:
     
     const viewSession = (session) => {
       // Implementar visualização de sessão
-      $q.notify({
-        message: 'Visualização de sessão em desenvolvimento',
-        color: 'info'
-      })
+      console.log('Visualização de sessão em desenvolvimento')
     }
     
     const deleteSession = (session) => {
-      $q.dialog({
-        title: 'Confirmar Exclusão',
-        message: `Deseja excluir a sessão ${session.session_id}?`,
-        cancel: true,
-        persistent: true
-      }).onOk(() => {
+      if (confirm('Deseja excluir a sessão ' + session.session_id + '?')) {
         // Implementar exclusão
-        $q.notify({
-          type: 'positive',
-          message: 'Sessão excluída'
-        })
-      })
+        console.log('Sessão excluída')
+      }
     }
     
     // Base de conhecimento
@@ -987,31 +955,17 @@ FORMATO DE RESPOSTA:
     }
     
     const addKnowledgeItem = () => {
-      $q.notify({
-        message: 'Adicionar item em desenvolvimento',
-        color: 'info'
-      })
+      console.log('Adicionar item em desenvolvimento')
     }
     
     const editKnowledgeItem = (item) => {
-      $q.notify({
-        message: 'Editar item em desenvolvimento',
-        color: 'info'
-      })
+      console.log('Editar item em desenvolvimento')
     }
     
     const deleteKnowledgeItem = (item) => {
-      $q.dialog({
-        title: 'Confirmar Exclusão',
-        message: `Deseja excluir o item "${item.title}"?`,
-        cancel: true,
-        persistent: true
-      }).onOk(() => {
-        $q.notify({
-          type: 'positive',
-          message: 'Item excluído'
-        })
-      })
+      if (confirm('Deseja excluir o item "' + item.title + '"?')) {
+        console.log('Item excluído')
+      }
     }
     
     // Ciclo de vida

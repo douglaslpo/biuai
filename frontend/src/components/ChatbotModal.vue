@@ -1,30 +1,36 @@
 <template>
   <div class="chatbot-wrapper">
-    <!-- Botão Flutuante do Chatbot -->
-    <v-btn
+    <!-- Botão Flutuante do Chatbot - REDESIGN MODERNO -->
+    <div
       v-if="!modalOpen"
-      fab
-      color="primary"
-      size="large"
-      class="chatbot-fab"
+      class="chatbot-fab-container"
       @click="toggleModal"
-      :class="{ 'pulse': hasNotification }"
-      icon="mdi-robot"
-      elevation="4"
+      :class="{ 'pulse-animation': hasNotification }"
     >
-      <v-badge 
-        v-if="hasNotification" 
-        color="error" 
-        :content="notificationCount"
-        offset-x="10"
-        offset-y="10"
-      >
-        <v-icon>mdi-robot</v-icon>
-      </v-badge>
-      <v-tooltip activator="parent" location="left">
-        {{ botConfig?.bot_name || 'Bi UAI Bot' }}
-      </v-tooltip>
-    </v-btn>
+      <!-- Círculo principal com gradiente -->
+      <div class="chatbot-fab-main">
+        <!-- Ícone do robô -->
+        <v-icon class="chatbot-icon" size="28">mdi-robot</v-icon>
+        
+        <!-- Badge de notificação -->
+        <div v-if="hasNotification" class="notification-badge">
+          {{ notificationCount }}
+        </div>
+        
+        <!-- Ondas de animação -->
+        <div class="wave-animation wave-1"></div>
+        <div class="wave-animation wave-2"></div>
+        <div class="wave-animation wave-3"></div>
+      </div>
+      
+      <!-- Tooltip -->
+      <div class="chatbot-tooltip">
+        <div class="tooltip-content">
+          🤖 {{ botConfig?.bot_name || 'Bi UAI Bot' }}
+          <div class="tooltip-subtitle">Clique para conversar!</div>
+        </div>
+      </div>
+    </div>
 
     <!-- Modal do Chatbot -->
     <v-dialog
@@ -263,7 +269,7 @@
 <script setup>
 import { ref, computed, onMounted, nextTick, watch } from 'vue'
 import { useAuthStore } from '@/stores/auth'
-import chatbotService from '@/services/chatbot'
+import { chatbotService } from '@/services/chatbot'
 
 // Stores
 const authStore = useAuthStore()
@@ -466,50 +472,218 @@ watch(messages, () => {
 </script>
 
 <style scoped>
-.chatbot-wrapper {
+/* ========== NOVO DESIGN DO ÍCONE CHATBOT ========== */
+.chatbot-fab-container {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 1000;
+  bottom: 25px;
+  right: 25px;
+  z-index: 9999;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.chatbot-fab {
-  box-shadow: 0 4px 12px rgba(25, 118, 210, 0.3) !important;
-  transition: all 0.3s ease;
+.chatbot-fab-main {
+  position: relative;
+  width: 65px;
+  height: 65px;
+  background: linear-gradient(135deg, #1976d2, #42a5f5, #03dac6);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 
+    0 8px 25px rgba(25, 118, 210, 0.3),
+    0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 3px solid rgba(255, 255, 255, 0.2);
 }
 
-.chatbot-fab:hover {
-  transform: scale(1.1);
-  box-shadow: 0 6px 20px rgba(25, 118, 210, 0.4) !important;
+.chatbot-fab-container:hover .chatbot-fab-main {
+  transform: scale(1.1) translateY(-2px);
+  box-shadow: 
+    0 12px 35px rgba(25, 118, 210, 0.4),
+    0 6px 20px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(135deg, #1565c0, #2196f3, #00bcd4);
 }
 
-.chatbot-fab.pulse {
-  animation: pulse 2s infinite;
+.chatbot-icon {
+  color: white !important;
+  font-weight: bold;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-@keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.05); }
+/* Animação de pulso para notificações */
+.pulse-animation .chatbot-fab-main {
+  animation: pulse-glow 2s infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 
+      0 8px 25px rgba(25, 118, 210, 0.3),
+      0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 
+      0 0 0 15px rgba(25, 118, 210, 0),
+      0 0 0 30px rgba(25, 118, 210, 0),
+      0 8px 25px rgba(25, 118, 210, 0.4);
+  }
+}
+
+/* Badge de notificação */
+.notification-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background: linear-gradient(135deg, #f44336, #ff5722);
+  color: white;
+  border-radius: 12px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: bold;
+  border: 2px solid white;
+  box-shadow: 0 2px 8px rgba(244, 67, 54, 0.4);
+  animation: bounce-in 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes bounce-in {
+  0% { transform: scale(0); opacity: 0; }
+  60% { transform: scale(1.2); opacity: 1; }
   100% { transform: scale(1); }
+}
+
+/* Ondas de animação */
+.wave-animation {
+  position: absolute;
+  border: 2px solid rgba(25, 118, 210, 0.3);
+  border-radius: 50%;
+  animation: wave-expand 3s infinite;
+}
+
+.wave-1 {
+  width: 65px;
+  height: 65px;
+  animation-delay: 0s;
+}
+
+.wave-2 {
+  width: 65px;
+  height: 65px;
+  animation-delay: 1s;
+}
+
+.wave-3 {
+  width: 65px;
+  height: 65px;
+  animation-delay: 2s;
+}
+
+@keyframes wave-expand {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+/* Tooltip moderno */
+.chatbot-tooltip {
+  position: absolute;
+  right: 75px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(10px);
+  color: white;
+  padding: 12px 16px;
+  border-radius: 12px;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.chatbot-tooltip::after {
+  content: '';
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 8px solid transparent;
+  border-left-color: rgba(0, 0, 0, 0.85);
+}
+
+.chatbot-fab-container:hover .chatbot-tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(-50%) translateX(-8px);
+}
+
+.tooltip-content {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.tooltip-subtitle {
+  font-size: 12px;
+  opacity: 0.8;
+  margin-top: 2px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .chatbot-fab-container {
+    bottom: 20px;
+    right: 20px;
+  }
+  
+  .chatbot-fab-main {
+    width: 58px;
+    height: 58px;
+  }
+  
+  .chatbot-icon {
+    font-size: 24px !important;
+  }
+  
+  .chatbot-tooltip {
+    display: none; /* Ocultar tooltip em mobile */
+  }
+}
+
+/* ========== ESTILOS EXISTENTES ========== */
+.chatbot-wrapper {
+  position: relative;
 }
 
 .chatbot-dialog {
   position: fixed !important;
-  bottom: 90px !important;
+  bottom: 100px !important;
   right: 20px !important;
-  margin: 0 !important;
 }
 
 .chatbot-card {
-  width: 400px;
-  max-height: 600px;
   border-radius: 16px !important;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12) !important;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2) !important;
 }
 
 .chatbot-header {
-  background: linear-gradient(135deg, #1976D2 0%, #1565C0 100%);
-  border-radius: 16px 16px 0 0 !important;
+  background: linear-gradient(135deg, #1976d2, #1565c0) !important;
+  border-bottom: none !important;
 }
 
 .chatbot-messages {

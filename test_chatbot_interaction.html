@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🤖 Teste Interação Chatbot BIUAI</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1976d2, #42a5f5);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .test-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            padding: 30px;
+        }
+
+        .test-panel {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid #e9ecef;
+        }
+
+        .test-panel h3 {
+            color: #1976d2;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            border-bottom: 2px solid #1976d2;
+            padding-bottom: 10px;
+        }
+
+        .chat-container {
+            background: white;
+            border: 2px solid #1976d2;
+            border-radius: 15px;
+            height: 400px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-header {
+            background: linear-gradient(135deg, #1976d2, #42a5f5);
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-weight: bold;
+            border-radius: 13px 13px 0 0;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .message {
+            max-width: 80%;
+            padding: 12px 16px;
+            border-radius: 18px;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .message.user {
+            align-self: flex-end;
+            background: #1976d2;
+            color: white;
+        }
+
+        .message.bot {
+            align-self: flex-start;
+            background: #f0f0f0;
+            color: #333;
+            border: 1px solid #e0e0e0;
+        }
+
+        .message.system {
+            align-self: center;
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+            font-style: italic;
+            font-size: 0.8rem;
+        }
+
+        .chat-input {
+            display: flex;
+            padding: 15px;
+            border-top: 1px solid #e0e0e0;
+            gap: 10px;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            outline: none;
+        }
+
+        .chat-input input:focus {
+            border-color: #1976d2;
+        }
+
+        .send-btn {
+            background: #1976d2;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .send-btn:hover {
+            background: #1565c0;
+            transform: translateY(-1px);
+        }
+
+        .send-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .test-scenarios {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .scenario-btn {
+            background: linear-gradient(45deg, #4caf50, #45a049);
+            color: white;
+            border: none;
+            padding: 12px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            text-align: left;
+            transition: all 0.3s ease;
+        }
+
+        .scenario-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(76,175,80,0.3);
+        }
+
+        .status-area {
+            background: #1e1e1e;
+            color: #00ff00;
+            font-family: 'Courier New', monospace;
+            padding: 15px;
+            border-radius: 8px;
+            height: 200px;
+            overflow-y: auto;
+            font-size: 0.85rem;
+            margin-top: 15px;
+        }
+
+        .metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .metric {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid #e0e0e0;
+        }
+
+        .metric-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #1976d2;
+        }
+
+        .metric-label {
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .test-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🤖 Teste Interação Chatbot BIUAI</h1>
+            <p>Simulação real da interação com o chatbot como no frontend</p>
+        </div>
+
+        <div class="test-grid">
+            <div class="test-panel">
+                <h3>💬 Chat Interativo</h3>
+                
+                <div class="chat-container">
+                    <div class="chat-header">
+                        Bi UAI Bot Administrador
+                    </div>
+                    <div class="chat-messages" id="chatMessages">
+                        <div class="message system">
+                            Sistema iniciado. Pronto para receber mensagens.
+                        </div>
+                    </div>
+                    <div class="chat-input">
+                        <input type="text" id="messageInput" placeholder="Digite sua mensagem..." onkeypress="handleKeyPress(event)">
+                        <button class="send-btn" id="sendBtn" onclick="sendMessage()">Enviar</button>
+                    </div>
+                </div>
+
+                <div class="metrics">
+                    <div class="metric">
+                        <div class="metric-value" id="messageCount">0</div>
+                        <div class="metric-label">Mensagens Enviadas</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value" id="responseTime">0ms</div>
+                        <div class="metric-label">Tempo de Resposta</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value" id="successRate">100%</div>
+                        <div class="metric-label">Taxa de Sucesso</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="test-panel">
+                <h3>🧪 Cenários de Teste</h3>
+                
+                <div class="test-scenarios">
+                    <button class="scenario-btn" onclick="testScenario('Olá, como você pode me ajudar?')">
+                        👋 Saudação básica
+                    </button>
+                    
+                    <button class="scenario-btn" onclick="testScenario('Quais são as funcionalidades do dashboard?')">
+                        📊 Pergunta sobre dashboard
+                    </button>
+                    
+                    <button class="scenario-btn" onclick="testScenario('Como faço para adicionar um lançamento financeiro?')">
+                        💰 Pergunta sobre lançamentos
+                    </button>
+                    
+                    <button class="scenario-btn" onclick="testScenario('Explique as categorias do sistema BIUAI')">
+                        📁 Pergunta sobre categorias
+                    </button>
+                    
+                    <button class="scenario-btn" onclick="testScenario('Como interpretar os gráficos de análise?')">
+                        📈 Pergunta sobre análises
+                    </button>
+                    
+                    <button class="scenario-btn" onclick="testScenario('Preciso de ajuda com relatórios financeiros')">
+                        📋 Pergunta sobre relatórios
+                    </button>
+
+                    <button class="scenario-btn" onclick="testScenario('O que é IA e como é usada no BIUAI?')">
+                        🤖 Pergunta sobre IA
+                    </button>
+
+                    <button class="scenario-btn" onclick="runAllScenarios()">
+                        🚀 Executar Todos os Cenários
+                    </button>
+                </div>
+
+                <h3>📊 Log de Atividades</h3>
+                <div class="status-area" id="statusLog">
+                    <div>🎯 Sistema de teste inicializado...</div>
+                    <div>📅 Data: <span id="timestamp"></span></div>
+                    <div>🔗 Chatbot: http://localhost:8002</div>
+                    <div>📋 Aguardando interações...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('timestamp').textContent = new Date().toLocaleString();
+
+        let sessionId = 'test_interaction_' + Date.now();
+        let messageCount = 0;
+        let successCount = 0;
+        let totalResponseTime = 0;
+
+        function addLog(message, type = 'info') {
+            const statusLog = document.getElementById('statusLog');
+            const div = document.createElement('div');
+            const timestamp = new Date().toLocaleTimeString();
+            
+            let icon = '📘';
+            if (type === 'success') icon = '✅';
+            if (type === 'error') icon = '❌';
+            if (type === 'warning') icon = '⚠️';
+            if (type === 'user') icon = '👤';
+            if (type === 'bot') icon = '🤖';
+            
+            div.innerHTML = `<span style="color: #888">[${timestamp}]</span> ${icon} ${message}`;
+            statusLog.appendChild(div);
+            statusLog.scrollTop = statusLog.scrollHeight;
+        }
+
+        function addChatMessage(message, sender, isError = false) {
+            const chatMessages = document.getElementById('chatMessages');
+            const div = document.createElement('div');
+            div.className = `message ${sender}`;
+            
+            if (isError) {
+                div.style.background = '#ffebee';
+                div.style.color = '#c62828';
+                div.style.border = '1px solid #ef5350';
+            }
+            
+            if (sender === 'bot') {
+                div.innerHTML = message.replace(/\n/g, '<br>');
+            } else {
+                div.textContent = message;
+            }
+            
+            chatMessages.appendChild(div);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function updateMetrics() {
+            document.getElementById('messageCount').textContent = messageCount;
+            
+            if (messageCount > 0) {
+                const avgResponseTime = Math.round(totalResponseTime / messageCount);
+                document.getElementById('responseTime').textContent = avgResponseTime + 'ms';
+                
+                const successRate = Math.round((successCount / messageCount) * 100);
+                document.getElementById('successRate').textContent = successRate + '%';
+            }
+        }
+
+        async function sendMessage(messageText = null) {
+            const input = document.getElementById('messageInput');
+            const sendBtn = document.getElementById('sendBtn');
+            const message = messageText || input.value.trim();
+            
+            if (!message) return;
+            
+            if (!messageText) {
+                input.value = '';
+            }
+            
+            input.disabled = true;
+            sendBtn.disabled = true;
+            sendBtn.textContent = 'Enviando...';
+            
+            addChatMessage(message, 'user');
+            addLog(`Enviando: "${message}"`, 'user');
+            
+            const startTime = Date.now();
+            messageCount++;
+            
+            try {
+                const payload = {
+                    message: message,
+                    user_id: "test_user",
+                    session_id: sessionId,
+                    context: {
+                        test_mode: true,
+                        timestamp: new Date().toISOString(),
+                        frontend_simulation: true
+                    }
+                };
+                
+                const response = await fetch('http://localhost:8002/chat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
+                });
+                
+                const responseTime = Date.now() - startTime;
+                totalResponseTime += responseTime;
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    
+                    addChatMessage(data.response, 'bot');
+                    addLog(`Resposta recebida em ${responseTime}ms`, 'success');
+                    addLog(`Bot: "${data.response.substring(0, 100)}${data.response.length > 100 ? '...' : ''}"`, 'bot');
+                    
+                    successCount++;
+                } else {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+            } catch (error) {
+                addChatMessage(`Erro: ${error.message}`, 'bot', true);
+                addLog(`Erro ao enviar mensagem: ${error.message}`, 'error');
+            } finally {
+                input.disabled = false;
+                sendBtn.disabled = false;
+                sendBtn.textContent = 'Enviar';
+                input.focus();
+                updateMetrics();
+            }
+        }
+
+        function testScenario(message) {
+            addLog(`Executando cenário: "${message}"`, 'warning');
+            sendMessage(message);
+        }
+
+        async function runAllScenarios() {
+            addLog('🚀 Executando todos os cenários de teste...', 'warning');
+            
+            const scenarios = [
+                'Olá, como você pode me ajudar?',
+                'Quais são as funcionalidades do dashboard?',
+                'Como faço para adicionar um lançamento financeiro?',
+                'Explique as categorias do sistema BIUAI',
+                'Como interpretar os gráficos de análise?',
+                'Preciso de ajuda com relatórios financeiros',
+                'O que é IA e como é usada no BIUAI?'
+            ];
+            
+            for (let i = 0; i < scenarios.length; i++) {
+                setTimeout(() => {
+                    testScenario(scenarios[i]);
+                }, i * 3000); // 3 segundos entre cada teste
+            }
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        // Teste inicial automático
+        setTimeout(() => {
+            addLog('🔄 Executando teste inicial...', 'info');
+            sendMessage('Olá! Este é um teste de funcionamento do chatbot BIUAI.');
+        }, 2000);
+    </script>
+</body>
+</html> 
