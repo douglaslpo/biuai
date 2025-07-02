@@ -43,6 +43,16 @@ const routes = [
         component: () => import('@/pages/Categorias.vue')
       },
       {
+        path: '/metas',
+        name: 'metas',
+        component: () => import('@/pages/Metas.vue')
+      },
+      {
+        path: '/contas',
+        name: 'contas',
+        component: () => import('@/pages/Contas.vue')
+      },
+      {
         path: '/profile',
         name: 'profile',
         component: () => import('@/pages/Profile.vue')
