@@ -1,79 +1,44 @@
 <template>
   <v-card
-    :class="cardClass"
-    :elevation="computedElevation"
-    :variant="variant"
-    :color="color"
-    :rounded="rounded"
-    v-bind="$attrs"
+    :class="cardClasses"
+    :elevation="elevation"
+    :hover="hover"
+    :loading="loading"
   >
-    <!-- Header opcional -->
-    <v-card-title
-      v-if="title || $slots.title"
-      class="biuai-card-title"
-      :class="titleClass"
-    >
+    <!-- Header -->
+    <v-card-title v-if="title || $slots.title" :class="titleClasses">
       <slot name="title">
         <div class="d-flex align-center">
-          <v-icon
-            v-if="icon"
-            :icon="icon"
-            :color="iconColor"
-            class="me-3"
-            size="large"
-          />
-          <div>
-            <h3 class="text-h6 font-weight-bold">{{ title }}</h3>
-            <p v-if="subtitle" class="text-caption text-medium-emphasis mb-0">
-              {{ subtitle }}
-            </p>
-          </div>
+          <v-icon v-if="icon" :icon="icon" class="mr-3" />
+          <span>{{ title }}</span>
         </div>
       </slot>
     </v-card-title>
 
-    <!-- Conteúdo principal -->
-    <v-card-text
-      v-if="$slots.default"
-      :class="contentClass"
-    >
+    <!-- Subtitle -->
+    <v-card-subtitle v-if="subtitle || $slots.subtitle">
+      <slot name="subtitle">
+        {{ subtitle }}
+      </slot>
+    </v-card-subtitle>
+
+    <!-- Content -->
+    <v-card-text v-if="$slots.default" :class="contentClasses">
       <slot />
     </v-card-text>
 
-    <!-- Actions opcionais -->
-    <v-card-actions
-      v-if="$slots.actions"
-      class="biuai-card-actions"
-      :class="actionsClass"
-    >
+    <!-- Actions -->
+    <v-card-actions v-if="$slots.actions" class="pa-4">
       <slot name="actions" />
     </v-card-actions>
-
-    <!-- Loading overlay -->
-    <v-overlay
-      v-if="loading"
-      :model-value="loading"
-      contained
-      class="align-center justify-center"
-    >
-      <v-progress-circular
-        color="primary"
-        indeterminate
-        size="48"
-      />
-    </v-overlay>
   </v-card>
 </template>
 
 <script setup>
 import { computed } from 'vue'
 
-defineOptions({
-  inheritAttrs: false
-})
-
+// Props
 const props = defineProps({
-  // Conteúdo
   title: {
     type: String,
     default: ''
@@ -86,124 +51,121 @@ const props = defineProps({
     type: String,
     default: ''
   },
-  iconColor: {
-    type: String,
-    default: 'primary'
-  },
-
-  // Aparência
-  variant: {
-    type: String,
-    default: 'elevated',
-    validator: (value) => ['flat', 'elevated', 'tonal', 'outlined', 'text', 'plain'].includes(value)
-  },
-  color: {
-    type: String,
-    default: ''
-  },
-  rounded: {
-    type: [String, Number, Boolean],
-    default: 'lg'
-  },
   elevation: {
     type: [String, Number],
-    default: null
-  },
-
-  // Tipo especial
-  type: {
-    type: String,
-    default: 'default',
-    validator: (value) => ['default', 'success', 'error', 'warning', 'info'].includes(value)
-  },
-
-  // Estados
-  loading: {
-    type: Boolean,
-    default: false
+    default: 2
   },
   hover: {
     type: Boolean,
     default: false
   },
-
-  // Classes customizadas
-  titleClass: {
-    type: [String, Array, Object],
+  loading: {
+    type: Boolean,
+    default: false
+  },
+  color: {
+    type: String,
     default: ''
   },
-  contentClass: {
-    type: [String, Array, Object],
-    default: ''
+  variant: {
+    type: String,
+    default: 'elevated'
   },
-  actionsClass: {
-    type: [String, Array, Object],
-    default: ''
+  rounded: {
+    type: [String, Boolean],
+    default: 'lg'
+  },
+  border: {
+    type: Boolean,
+    default: false
+  },
+  density: {
+    type: String,
+    default: 'default'
   }
 })
 
-const cardClass = computed(() => {
-  const classes = ['biuai-card']
-  
-  if (props.type !== 'default') {
-    classes.push(`biuai-card--${props.type}`)
+// Computed
+const cardClasses = computed(() => [
+  'base-card',
+  {
+    [`base-card--${props.color}`]: props.color,
+    'base-card--border': props.border
   }
-  
-  if (props.hover) {
-    classes.push('biuai-card--hover')
-  }
-  
-  return classes
-})
+])
 
-const computedElevation = computed(() => {
-  if (props.elevation !== null) {
-    return props.elevation
+const titleClasses = computed(() => [
+  'base-card__title',
+  {
+    'pa-4 pb-2': props.density === 'default',
+    'pa-3 pb-1': props.density === 'compact',
+    'pa-2 pb-1': props.density === 'comfortable'
   }
-  
-  switch (props.type) {
-    case 'success':
-    case 'error':
-    case 'warning':
-    case 'info':
-      return 4
-    default:
-      return 2
+])
+
+const contentClasses = computed(() => [
+  'base-card__content',
+  {
+    'pa-4': props.density === 'default',
+    'pa-3': props.density === 'compact',
+    'pa-2': props.density === 'comfortable'
   }
-})
+])
 </script>
 
-<style lang="scss" scoped>
-.biuai-card {
+<style scoped>
+.base-card {
+  border-radius: 16px;
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-  
-  &--hover:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12) !important;
-  }
-  
-  &--success {
-    border-left: 4px solid rgb(var(--v-theme-success));
-  }
-  
-  &--error {
-    border-left: 4px solid rgb(var(--v-theme-error));
-  }
-  
-  &--warning {
-    border-left: 4px solid rgb(var(--v-theme-warning));
-  }
-  
-  &--info {
-    border-left: 4px solid rgb(var(--v-theme-info));
-  }
 }
 
-.biuai-card-title {
-  padding: 20px 24px 12px 24px;
+.base-card--border {
+  border: 1px solid rgba(var(--v-theme-surface), 0.12);
 }
 
-.biuai-card-actions {
-  padding: 12px 24px 20px 24px;
+.base-card__title {
+  font-weight: 600;
+  color: rgb(var(--v-theme-on-surface));
+}
+
+.base-card__content {
+  color: rgba(var(--v-theme-on-surface), 0.87);
+}
+
+/* Color variants */
+.base-card--primary {
+  background: rgba(var(--v-theme-primary), 0.05);
+  border-left: 4px solid rgb(var(--v-theme-primary));
+}
+
+.base-card--success {
+  background: rgba(var(--v-theme-success), 0.05);
+  border-left: 4px solid rgb(var(--v-theme-success));
+}
+
+.base-card--error {
+  background: rgba(var(--v-theme-error), 0.05);
+  border-left: 4px solid rgb(var(--v-theme-error));
+}
+
+.base-card--warning {
+  background: rgba(var(--v-theme-warning), 0.05);
+  border-left: 4px solid rgb(var(--v-theme-warning));
+}
+
+.base-card--info {
+  background: rgba(var(--v-theme-info), 0.05);
+  border-left: 4px solid rgb(var(--v-theme-info));
+}
+
+/* Hover effect */
+.base-card:hover {
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+/* Loading state */
+.base-card--loading {
+  opacity: 0.7;
+  pointer-events: none;
 }
 </style> 

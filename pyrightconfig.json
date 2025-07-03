@@ -1,0 +1,73 @@
+{
+    "include": [
+        "backend",
+        "scripts",
+        "frontend/src"
+    ],
+    "exclude": [
+        "**/node_modules",
+        "**/__pycache__",
+        "**/.*",
+        "signoz/**",
+        "frontend/dist",
+        "frontend/build"
+    ],
+    "pythonVersion": "3.9",
+    "pythonPlatform": "Linux",
+    "executionEnvironments": [
+        {
+            "root": "backend",
+            "pythonVersion": "3.9",
+            "pythonPlatform": "Linux",
+            "extraPaths": [
+                "backend",
+                "backend/app"
+            ]
+        },
+        {
+            "root": "scripts",
+            "pythonVersion": "3.9",
+            "pythonPlatform": "Linux",
+            "extraPaths": [
+                "backend",
+                "backend/app"
+            ]
+        }
+    ],
+    "typeCheckingMode": "basic",
+    "useLibraryCodeForTypes": true,
+    "autoSearchPaths": true,
+    "autoImportCompletions": true,
+    "strictListInference": false,
+    "strictDictionaryInference": false,
+    "strictSetInference": false,
+    "reportMissingImports": "warning",
+    "reportMissingTypeStubs": "none",
+    "reportUnusedImport": "information",
+    "reportUnusedClass": "information",
+    "reportUnusedFunction": "information",
+    "reportUnusedVariable": "information",
+    "reportDuplicateImport": "warning",
+    "reportOptionalSubscript": "none",
+    "reportOptionalMemberAccess": "none",
+    "reportOptionalCall": "none",
+    "reportOptionalIterable": "none",
+    "reportOptionalContextManager": "none",
+    "reportOptionalOperand": "none",
+    "reportTypedDictNotRequiredAccess": "none",
+    "reportPrivateImportUsage": "none",
+    "reportConstantRedefinition": "none",
+    "reportIncompatibleMethodOverride": "none",
+    "reportIncompatibleVariableOverride": "none",
+    "reportOverlappingOverloads": "none",
+    "reportAttributeAccessIssue": "warning",
+    "reportArgumentType": "warning",
+    "reportGeneralTypeIssues": "warning",
+    "reportUnknownMemberType": "none",
+    "reportUnknownParameterType": "none",
+    "reportUnknownVariableType": "none",
+    "reportUntypedFunctionDecorator": "none",
+    "reportUntypedClassDecorator": "none",
+    "reportUntypedBaseClass": "none",
+    "reportUntypedNamedTuple": "none"
+}

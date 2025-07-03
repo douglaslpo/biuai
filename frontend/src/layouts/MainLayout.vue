@@ -135,7 +135,9 @@
           :prepend-icon="item.icon"
           :title="item.title"
           :subtitle="item.subtitle"
+          :active="isActiveRoute(item.route)"
           color="primary"
+          class="nav-item"
         />
       </v-list>
 
@@ -150,7 +152,9 @@
           :to="tool.to"
           :prepend-icon="tool.icon"
           :title="tool.title"
+          :active="isActiveRoute(tool.route)"
           color="primary"
+          class="nav-item"
         />
       </v-list>
 
@@ -200,14 +204,15 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
-import { useRouter } from 'vue-router'
-import { useAuthStore } from '@/stores/auth'
 import ChatbotModal from '@/components/ChatbotModal.vue'
+import { useAuthStore } from '@/stores/auth'
+import { computed, onMounted, ref } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 
 // Stores
 const authStore = useAuthStore()
 const router = useRouter()
+const route = useRoute()
 
 // Data
 const drawer = ref(true)
@@ -228,43 +233,49 @@ const systemStatus = computed(() => ({
   text: 'Sistema Online'
 }))
 
-// Menu Items
+// Menu Items with route names for active detection
 const menuItems = ref([
   {
     title: 'Dashboard',
     subtitle: 'Visão geral',
     icon: 'mdi-view-dashboard',
-    to: '/dashboard'
+    to: '/dashboard',
+    route: 'dashboard'
   },
   {
     title: 'Lançamentos',
     subtitle: 'Receitas e despesas',
     icon: 'mdi-cash-multiple',
-    to: '/lancamentos'
+    to: '/lancamentos',
+    route: 'lancamentos'
   },
   {
     title: 'Categorias',
     subtitle: 'Organizar gastos',
     icon: 'mdi-tag-multiple',
-    to: '/categorias'
-  },
-  {
-    title: 'Relatórios',
-    subtitle: 'Análises financeiras',
-    icon: 'mdi-chart-line',
-    to: '/relatorios'
+    to: '/categorias',
+    route: 'categorias'
   },
   {
     title: 'Metas',
     subtitle: 'Objetivos financeiros',
     icon: 'mdi-target',
-    to: '/metas'
+    to: '/metas',
+    route: 'metas'
   },
   {
     title: 'Contas',
     subtitle: 'Contas bancárias',
     icon: 'mdi-bank',
-    to: '/contas'
+    to: '/contas',
+    route: 'contas'
+  },
+  {
+    title: 'Importar Dados',
+    subtitle: 'Análise inteligente e IA',
+    icon: 'mdi-brain',
+    to: '/importar-dados',
+    route: 'importar-dados'
   }
 ])
 
@@ -273,7 +284,8 @@ const toolItems = computed(() => {
     {
       title: 'Perfil',
       icon: 'mdi-account',
-      to: '/profile'
+      to: '/profile',
+      route: 'profile'
     }
   ]
   
@@ -283,27 +295,32 @@ const toolItems = computed(() => {
       {
         title: 'Chatbot Admin',
         icon: 'mdi-robot',
-        to: '/admin/chatbot'
+        to: '/admin/chatbot',
+        route: 'chatbot-admin'
       },
       {
         title: 'Importar Dados',
         icon: 'mdi-database-import',
-        to: '/admin/importar-dados'
+        to: '/admin/importar-dados',
+        route: 'importar-dados'
       },
       {
         title: 'Backup',
         icon: 'mdi-backup-restore',
-        to: '/admin/backup'
+        to: '/admin/backup',
+        route: 'backup'
       },
       {
         title: 'API Docs',
         icon: 'mdi-api',
-        to: '/admin/api-docs'
+        to: '/admin/api-docs',
+        route: 'api-docs'
       },
       {
         title: 'Logs do Sistema',
         icon: 'mdi-math-log',
-        to: '/admin/logs'
+        to: '/admin/logs',
+        route: 'logs-sistema'
       }
     )
   }
@@ -312,6 +329,10 @@ const toolItems = computed(() => {
 })
 
 // Methods
+const isActiveRoute = (routeName) => {
+  return route.name === routeName
+}
+
 const logout = async () => {
   await authStore.logout()
   router.push('/login')
@@ -340,5 +361,19 @@ onMounted(async () => {
 <style scoped>
 .v-toolbar-title {
   letter-spacing: 1px;
+}
+
+.nav-item {
+  margin: 2px 8px;
+  border-radius: 8px;
+}
+
+.nav-item.v-list-item--active {
+  background: rgba(var(--v-theme-primary), 0.12) !important;
+  color: rgb(var(--v-theme-primary)) !important;
+}
+
+.nav-item.v-list-item--active .v-icon {
+  color: rgb(var(--v-theme-primary)) !important;
 }
 </style> 

@@ -1,5 +1,5 @@
-import { createRouter, createWebHistory } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
+import { createRouter, createWebHistory } from 'vue-router'
 
 const routes = [
   {
@@ -65,9 +65,15 @@ const routes = [
         meta: { requiresAuth: true, requiresAdmin: true }
       },
       {
-        path: '/admin/importar-dados',
+        path: '/importar-dados',
         name: 'importar-dados',
-        component: () => import('@/pages/admin/ImportarDados.vue'),
+        component: () => import('@/pages/ImportarDados.vue'),
+        meta: { requiresAuth: true }
+      },
+      {
+        path: '/admin/importar-dados',
+        name: 'admin-importar-dados',
+        component: () => import('@/pages/ImportarDados.vue'),
         meta: { requiresAuth: true, requiresAdmin: true }
       },
       {

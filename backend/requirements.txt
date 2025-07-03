@@ -91,6 +91,9 @@ aiofiles==23.2.1
 # Natural Language Processing
 nltk==3.8.1
 
+# Data Generation & Synthetic Data
+faker==19.12.0
+
 # Cache Extensions
 aiocache==0.12.2
 
