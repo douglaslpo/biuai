@@ -1,0 +1,155 @@
+# Dependencies
+node_modules/
+*/node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Production builds
+dist/
+build/
+*/dist/
+*/build/
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.env
+
+# Docker
+.docker/
+docker-compose.override.yml
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+pgdata/
+postgres-data/
+
+# Logs
+logs/
+*.log
+scripts/logs_*.tar.gz
+
+# Cache
+.cache/
+.parcel-cache/
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Jupyter
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/
+
+# Data files
+data/temp/
+data/processed/
+data/raw/*.tmp
+data/backup/*.tmp
+
+# Models and AI
+models/*.bin
+models/*.safetensors
+models/temp/
+ollama/models/
+
+# ML/AI temp files
+*.pkl
+*.pickle
+*.joblib
+*.h5
+*.hdf5
+
+# Backup files
+*.bak
+*.backup
+*.old
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.temp
+
+# Frontend specific
+# Quasar
+.quasar/
+quasar.*.log
+
+# Vuetify
+.vuetify/
+
+# Vite
+vite.config.js.timestamp-*
+
+# Test coverage
+coverage/
+.nyc_output/
+
+# Security
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+
+# Large files
+*.zip
+*.tar.gz
+*.rar
+*.7z
+
+# Exclude specific directories but keep structure
+data/raw/*
+!data/raw/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+data/temp/*
+!data/temp/.gitkeep
+
+# SignOz (monitoring tool)
+signoz/data/
+signoz/logs/
+
+# Keep important config files
+!docker-compose.yml
+!Dockerfile*
+!requirements.txt
+!package.json
+!*.config.js
+!*.config.ts 

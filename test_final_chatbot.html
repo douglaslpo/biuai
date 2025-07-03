@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎯 Teste FINAL Chatbot - BIUAI</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2196F3, #21CBF3);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            padding: 30px;
+        }
+
+        .test-panel {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid #e9ecef;
+        }
+
+        .test-panel h3 {
+            color: #007bff;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
+        }
+
+        .status {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .status.info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #007bff, #0056b3);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,123,255,0.3);
+        }
+
+        .btn:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .chat-test {
+            background: white;
+            border: 2px solid #007bff;
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .message {
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 10px;
+            max-width: 80%;
+        }
+
+        .message.user {
+            background: #007bff;
+            color: white;
+            margin-left: auto;
+        }
+
+        .message.bot {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .input-group input {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: #007bff;
+        }
+
+        .log-area {
+            background: #1e1e1e;
+            color: #00ff00;
+            font-family: 'Courier New', monospace;
+            padding: 15px;
+            border-radius: 8px;
+            height: 300px;
+            overflow-y: auto;
+            font-size: 0.9rem;
+            margin-top: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 Teste FINAL do Chatbot BIUAI</h1>
+            <p>Teste completo de funcionalidade sem problemas de frame</p>
+        </div>
+
+        <div class="content">
+            <div class="test-panel">
+                <h3>🔧 Status do Sistema</h3>
+                
+                <div id="frontendStatus" class="status info">
+                    🔄 Verificando Frontend...
+                </div>
+                
+                <div id="chatbotStatus" class="status info">
+                    🔄 Verificando Chatbot Service...
+                </div>
+                
+                <div id="connectionStatus" class="status info">
+                    🔄 Testando Conectividade...
+                </div>
+
+                <h3>🧪 Testes Automatizados</h3>
+                <button class="btn" onclick="runAllTests()">🚀 Executar Todos os Testes</button>
+                <button class="btn" onclick="testDirectChatbot()">🤖 Teste Direto Chatbot</button>
+                <button class="btn" onclick="resetTests()">🔄 Resetar Testes</button>
+
+                <div class="log-area" id="logArea">
+                    <div>🎯 Sistema de teste inicializado...</div>
+                    <div>📅 Data: <span id="timestamp"></span></div>
+                    <div>🔗 Endpoints testados:</div>
+                    <div>   - Frontend: http://localhost:8080</div>
+                    <div>   - Chatbot: http://localhost:8002</div>
+                    <div>📋 Aguardando comandos...</div>
+                </div>
+            </div>
+
+            <div class="test-panel">
+                <h3>💬 Teste Interativo do Chatbot</h3>
+                
+                <div class="chat-test">
+                    <div id="chatMessages"></div>
+                    
+                    <div class="input-group">
+                        <input type="text" id="messageInput" placeholder="Digite sua mensagem..." 
+                               onkeypress="handleKeyPress(event)">
+                        <button class="btn" onclick="sendTestMessage()">Enviar</button>
+                    </div>
+                </div>
+
+                <h3>📊 Resultados dos Testes</h3>
+                <div id="testResults"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('timestamp').textContent = new Date().toLocaleString();
+
+        let sessionId = null;
+
+        function addLog(message, type = 'info') {
+            const logArea = document.getElementById('logArea');
+            const div = document.createElement('div');
+            const timestamp = new Date().toLocaleTimeString();
+            
+            let icon = '📘';
+            if (type === 'success') icon = '✅';
+            if (type === 'error') icon = '❌';
+            if (type === 'warning') icon = '⚠️';
+            
+            div.innerHTML = `<span style="color: #888">[${timestamp}]</span> ${icon} ${message}`;
+            logArea.appendChild(div);
+            logArea.scrollTop = logArea.scrollHeight;
+        }
+
+        function updateStatus(elementId, status, message) {
+            const element = document.getElementById(elementId);
+            element.className = `status ${status}`;
+            element.textContent = message;
+        }
+
+        async function testFrontend() {
+            addLog('🌐 Testando conexão com frontend...');
+            
+            try {
+                const response = await fetch('http://localhost:8080');
+                const html = await response.text();
+                
+                if (html.includes('BIUAI')) {
+                    updateStatus('frontendStatus', 'success', '✅ Frontend: Online');
+                    addLog('Frontend acessível e funcionando', 'success');
+                    return true;
+                } else {
+                    updateStatus('frontendStatus', 'error', '❌ Frontend: Conteúdo inválido');
+                    addLog('Frontend retornando conteúdo inesperado', 'error');
+                    return false;
+                }
+            } catch (error) {
+                updateStatus('frontendStatus', 'error', '❌ Frontend: Offline');
+                addLog(`Frontend inacessível: ${error.message}`, 'error');
+                return false;
+            }
+        }
+
+        async function testChatbotService() {
+            addLog('🤖 Testando chatbot service...');
+            
+            try {
+                const response = await fetch('http://localhost:8002/health');
+                const data = await response.json();
+                
+                if (data.status === 'healthy') {
+                    updateStatus('chatbotStatus', 'success', '✅ Chatbot: Online');
+                    addLog(`Chatbot respondendo: ${data.bot_name}`, 'success');
+                    return true;
+                } else {
+                    updateStatus('chatbotStatus', 'error', '❌ Chatbot: Unhealthy');
+                    addLog(`Chatbot com problemas: ${data.status}`, 'error');
+                    return false;
+                }
+            } catch (error) {
+                updateStatus('chatbotStatus', 'error', '❌ Chatbot: Offline');
+                addLog(`Chatbot inacessível: ${error.message}`, 'error');
+                return false;
+            }
+        }
+
+        async function testChatbotMessage() {
+            addLog('💬 Testando envio de mensagem...');
+            
+            try {
+                const payload = {
+                    message: "Olá, como você está funcionando?",
+                    user_id: "test_user",
+                    session_id: "test_session_" + Date.now()
+                };
+                
+                const response = await fetch('http://localhost:8002/chat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
+                });
+                
+                const data = await response.json();
+                
+                if (data.response && data.session_id) {
+                    updateStatus('connectionStatus', 'success', '✅ Comunicação: Funcionando');
+                    addLog('Mensagem enviada e resposta recebida com sucesso', 'success');
+                    
+                    // Exibir resultado no chat de teste
+                    addChatMessage('Olá, como você está funcionando?', 'user');
+                    addChatMessage(data.response, 'bot');
+                    sessionId = data.session_id;
+                    
+                    return true;
+                } else {
+                    updateStatus('connectionStatus', 'error', '❌ Comunicação: Falha');
+                    addLog('Resposta do chatbot inválida', 'error');
+                    return false;
+                }
+            } catch (error) {
+                updateStatus('connectionStatus', 'error', '❌ Comunicação: Erro');
+                addLog(`Erro na comunicação: ${error.message}`, 'error');
+                return false;
+            }
+        }
+
+        function addChatMessage(message, sender) {
+            const chatMessages = document.getElementById('chatMessages');
+            const div = document.createElement('div');
+            div.className = `message ${sender}`;
+            
+            if (sender === 'bot') {
+                div.innerHTML = message.replace(/\n/g, '<br>');
+            } else {
+                div.textContent = message;
+            }
+            
+            chatMessages.appendChild(div);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        async function sendTestMessage() {
+            const input = document.getElementById('messageInput');
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            input.value = '';
+            input.disabled = true;
+            
+            addChatMessage(message, 'user');
+            addLog(`Enviando mensagem: "${message}"`, 'info');
+            
+            try {
+                const payload = {
+                    message: message,
+                    user_id: "test_user",
+                    session_id: sessionId || "test_session_" + Date.now()
+                };
+                
+                const response = await fetch('http://localhost:8002/chat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
+                });
+                
+                const data = await response.json();
+                
+                addChatMessage(data.response, 'bot');
+                sessionId = data.session_id;
+                addLog('Resposta recebida com sucesso', 'success');
+                
+            } catch (error) {
+                addChatMessage('Erro: Não foi possível enviar a mensagem.', 'bot');
+                addLog(`Erro ao enviar mensagem: ${error.message}`, 'error');
+            } finally {
+                input.disabled = false;
+                input.focus();
+            }
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendTestMessage();
+            }
+        }
+
+        async function runAllTests() {
+            addLog('🔄 Iniciando bateria completa de testes...', 'info');
+            
+            const frontendOk = await testFrontend();
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            
+            const chatbotOk = await testChatbotService();
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            
+            const communicationOk = await testChatbotMessage();
+            
+            if (frontendOk && chatbotOk && communicationOk) {
+                addLog('🎉 TODOS OS TESTES PASSARAM! Sistema totalmente funcional', 'success');
+                addTestResult('🎉 Sistema 100% Funcional', 'success');
+            } else {
+                addLog('❌ Alguns testes falharam. Verifique os logs acima', 'error');
+                addTestResult('❌ Sistema com problemas', 'error');
+            }
+        }
+
+        async function testDirectChatbot() {
+            addLog('🚀 Executando teste direto do chatbot...', 'info');
+            await testChatbotMessage();
+        }
+
+        function resetTests() {
+            addLog('🔄 Resetando testes...', 'info');
+            
+            updateStatus('frontendStatus', 'info', '🔄 Verificando Frontend...');
+            updateStatus('chatbotStatus', 'info', '🔄 Verificando Chatbot Service...');
+            updateStatus('connectionStatus', 'info', '🔄 Testando Conectividade...');
+            
+            document.getElementById('chatMessages').innerHTML = '';
+            document.getElementById('testResults').innerHTML = '';
+            sessionId = null;
+            
+            addLog('Testes resetados. Pronto para nova execução', 'success');
+        }
+
+        function addTestResult(message, type) {
+            const results = document.getElementById('testResults');
+            const div = document.createElement('div');
+            div.className = `status ${type}`;
+            div.textContent = message;
+            results.appendChild(div);
+        }
+
+        // Auto-executar verificações iniciais
+        setTimeout(() => {
+            addLog('🔄 Executando verificações automáticas iniciais...', 'info');
+            runAllTests();
+        }, 2000);
+    </script>
+</body>
+</html> 

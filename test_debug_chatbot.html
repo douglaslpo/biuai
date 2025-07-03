@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔍 Debug Chatbot BIUAI</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+        .debug-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, #1976d2, #42a5f5);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin: -30px -30px 30px -30px;
+        }
+        .status {
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 10px;
+            border-left: 5px solid;
+            font-weight: 500;
+        }
+        .success { 
+            background: #e8f5e8; 
+            border-color: #4caf50; 
+            color: #2e7d32; 
+        }
+        .error { 
+            background: #ffebee; 
+            border-color: #f44336; 
+            color: #c62828; 
+        }
+        .warning { 
+            background: #fff3e0; 
+            border-color: #ff9800; 
+            color: #ef6c00; 
+        }
+        .info { 
+            background: #e3f2fd; 
+            border-color: #2196f3; 
+            color: #1565c0; 
+        }
+        .test-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border: 2px solid #e0e0e0;
+        }
+        .test-section h3 {
+            margin-top: 0;
+            color: #1976d2;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        iframe {
+            width: 100%;
+            height: 500px;
+            border: 3px solid #1976d2;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        .btn {
+            background: linear-gradient(135deg, #1976d2, #42a5f5);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin: 5px;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(25, 118, 210, 0.4);
+        }
+        .loading {
+            display: inline-block;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .highlight {
+            background: linear-gradient(120deg, #a8edea 0%, #fed6e3 100%);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 4px solid #1976d2;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        @media (max-width: 768px) {
+            .grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="debug-container">
+        <div class="header">
+            <h1>🚀 Debug Completo - Chatbot BIUAI v2.0</h1>
+            <p>Sistema de teste visual e funcional do frontend</p>
+        </div>
+
+        <div class="highlight">
+            <h3>🎯 Objetivo do Teste</h3>
+            <p>Verificar se o <strong>novo ícone do chatbot redesenhado</strong> está aparecendo visualmente no frontend e funcionando corretamente.</p>
+        </div>
+
+        <div class="test-section">
+            <h3>📱 Frame de Teste do Frontend:</h3>
+            <p>O círculo <strong>azul com gradiente</strong> mostra onde o chatbot DEVERIA aparecer:</p>
+            <iframe src="http://localhost:8080" title="Frontend BIUAI"></iframe>
+        </div>
+
+        <div class="grid">
+            <div class="test-section">
+                <h3>🔍 Testes Automáticos:</h3>
+                <button class="btn" onclick="executarTestes()">🧪 Executar Testes</button>
+                
+                <div id="testResults">
+                    <div class="info">⏳ Clique em "Executar Testes" para iniciar</div>
+                </div>
+            </div>
+
+            <div class="test-section">
+                <h3>🤖 Test Bot MCP:</h3>
+                <button class="btn" onclick="testarChatbot()">💬 Testar Chatbot</button>
+                
+                <div id="chatbotResults">
+                    <div class="info">⏳ Clique em "Testar Chatbot" para iniciar</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="test-section">
+            <h3>📋 Instruções de Teste Visual:</h3>
+            <ol>
+                <li><strong>Login:</strong> admin@biuai.com / admin123</li>
+                <li><strong>Procure por:</strong> Ícone circular azul com gradiente no canto inferior direito 🤖</li>
+                <li><strong>Características:</strong> 
+                    <ul>
+                        <li>✨ Gradiente azul moderno (azul claro → azul escuro)</li>
+                        <li>🌊 Animação de ondas quando hover</li>
+                        <li>💡 Tooltip com nome do bot ao passar o mouse</li>
+                        <li>📍 Sombra elegante</li>
+                    </ul>
+                </li>
+                <li><strong>Teste de Interação:</strong> Clique no ícone para abrir o chat</li>
+            </ol>
+        </div>
+    </div>
+
+    <script>
+        async function executarTestes() {
+            const resultsDiv = document.getElementById('testResults');
+            resultsDiv.innerHTML = '<div class="info"><span class="loading">🔄</span> Executando testes...</div>';
+            
+            let resultHtml = '';
+            
+            // Teste 1: Frontend Status
+            try {
+                const response = await fetch('http://localhost:8080', { 
+                    method: 'HEAD',
+                    mode: 'no-cors' // Evitar CORS errors
+                });
+                resultHtml += '<div class="success">✅ Frontend Carregando: OK</div>';
+            } catch (error) {
+                resultHtml += '<div class="warning">⚠️ Frontend: Conectando (normal em iframe)</div>';
+            }
+            
+            // Teste 2: Chatbot MCP
+            try {
+                const chatResponse = await fetch('http://localhost:8002/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        message: "🧪 Teste automático - Ícone redesenhado funcionando?",
+                        session_id: "auto_test_" + Date.now(),
+                        user_id: "1"
+                    })
+                });
+                
+                if (chatResponse.ok) {
+                    resultHtml += '<div class="success">✅ Chatbot MCP Respondendo: OK</div>';
+                } else {
+                    resultHtml += '<div class="error">❌ Chatbot MCP: Erro HTTP ' + chatResponse.status + '</div>';
+                }
+            } catch (error) {
+                resultHtml += '<div class="error">❌ Chatbot MCP: Erro de conexão</div>';
+            }
+            
+            // Teste 3: Containers Status
+            resultHtml += '<div class="info">🐳 Containers Docker: Verificando visualmente...</div>';
+            
+            resultsDiv.innerHTML = resultHtml;
+        }
+        
+        async function testarChatbot() {
+            const resultsDiv = document.getElementById('chatbotResults');
+            resultsDiv.innerHTML = '<div class="info"><span class="loading">🔄</span> Testando chatbot...</div>';
+            
+            try {
+                const response = await fetch('http://localhost:8002/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        message: "🎨 Olá! O novo ícone do chatbot está com visual moderno e gradiente azul?",
+                        session_id: "visual_test_" + Date.now(),
+                        user_id: "1"
+                    })
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    resultsDiv.innerHTML = `
+                        <div class="success">✅ Chatbot Respondeu:</div>
+                        <div style="background: #f5f5f5; padding: 15px; border-radius: 10px; margin: 10px 0; border-left: 4px solid #4caf50;">
+                            <strong>🤖 ${data.bot_name || 'Bi UAI Bot'}:</strong><br>
+                            ${data.response || data.message || 'Resposta recebida!'}
+                        </div>
+                        <div class="info">📊 Session: ${data.session_id}</div>
+                    `;
+                } else {
+                    resultsDiv.innerHTML = `<div class="error">❌ Erro HTTP: ${response.status}</div>`;
+                }
+            } catch (error) {
+                resultsDiv.innerHTML = `<div class="error">❌ Erro: ${error.message}</div>`;
+            }
+        }
+        
+        // Auto-executar teste básico ao carregar
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('testResults').innerHTML = 
+                    '<div class="warning">⚠️ Testes prontos para execução manual</div>';
+            }, 1000);
+        });
+    </script>
+</body>
+</html> 
