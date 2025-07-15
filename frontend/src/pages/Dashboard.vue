@@ -1,640 +1,452 @@
 <template>
   <div class="biuai-dashboard">
-    <!-- Header da página com botões mais visíveis -->
-    <div class="dashboard-header mb-6">
-      <div class="header-content">
+    <!-- Header simplificado -->
+    <v-app-bar 
+      color="transparent" 
+      elevation="0" 
+      height="80"
+      class="dashboard-header"
+    >
+      <v-container class="d-flex align-center justify-space-between">
         <div class="header-info">
-          <h1 class="dashboard-title">
-            💼 Dashboard Financeiro
+          <h1 class="text-h4 font-weight-bold text-primary">
+            Dashboard BIUAI
           </h1>
-          <p class="dashboard-subtitle">
-            Bem-vindo de volta, {{ authStore.user?.full_name || 'Usuário' }}! 
-            <v-chip color="success" size="small" variant="elevated" class="ml-2">
-              <v-icon start icon="mdi-check-circle" size="small" />
-              Sistema Online
-            </v-chip>
+          <p class="text-subtitle-1 text-medium-emphasis mb-0">
+            Bem-vindo, {{ authStore.user?.nome || 'Usuário' }}
           </p>
         </div>
         
-        <div class="header-actions">
+        <div class="header-actions d-flex align-center ga-3">
+          <v-btn
+            icon="mdi-refresh"
+            variant="text"
+            @click="refreshAllData"
+            :loading="loading"
+            size="large"
+          />
           <v-btn
             color="primary"
-            size="large"
-            variant="elevated"
             prepend-icon="mdi-plus"
             @click="showNewLancamento = true"
-            class="new-lancamento-btn"
+            variant="elevated"
           >
-            <span class="font-weight-bold">Novo Lançamento</span>
-          </v-btn>
-          
-          <v-btn
-            color="secondary"
-            size="large"
-            variant="outlined"
-            :loading="loading"
-            @click="refreshData"
-            class="refresh-btn"
-          >
-            <v-icon>mdi-refresh</v-icon>
-          </v-btn>
-          
-          <v-btn
-            color="info"
-            size="large"
-            variant="tonal"
-            prepend-icon="mdi-cloud-download"
-            :loading="importing"
-            @click="importSiogData"
-            class="import-btn"
-          >
-            <span class="font-weight-medium">Importar SIOG</span>
+            Novo Lançamento
           </v-btn>
         </div>
-      </div>
-    </div>
+      </v-container>
+    </v-app-bar>
 
-    <!-- Cards de métricas principais com melhor contraste -->
-    <v-row class="metrics-row mb-6">
-      <v-col cols="12" md="4">
-        <v-card
-          class="metric-card metric-card--success"
-          elevation="8"
-          hover
-        >
-          <v-card-text class="pa-6">
-            <div class="d-flex align-center justify-space-between">
-              <div class="metric-content">
-                <div class="metric-icon-wrapper mb-3">
-                  <v-icon icon="mdi-trending-up" size="32" class="metric-icon" />
-                </div>
-                <div class="metric-label">💰 Receitas</div>
-                <div class="metric-value">
-                  {{ formatCurrency(summary.total_receitas) }}
-                </div>
-                <div class="metric-subtitle">
-                  {{ summary.total_receitas_count || 0 }} lançamentos • {{ summary.periodo_dias }} dias
-                </div>
-              </div>
-              <div class="metric-visual">
-                <v-progress-circular
-                  :model-value="75"
-                  size="60"
-                  width="6"
-                  color="white"
-                  class="metric-progress"
-                />
-              </div>
-            </div>
-          </v-card-text>
-        </v-card>
-      </v-col>
+    <!-- Cards de Métricas -->
+    <v-container class="py-6">
+      <MetricsGrid 
+        :summary="summary"
+        :loading="loading"
+        :trend-data="trendData"
+        @action="handleMetricAction"
+        class="mb-8"
+      />
 
-      <v-col cols="12" md="4">
-        <v-card
-          class="metric-card metric-card--error"
-          elevation="8"
-          hover
-        >
-          <v-card-text class="pa-6">
-            <div class="d-flex align-center justify-space-between">
-              <div class="metric-content">
-                <div class="metric-icon-wrapper mb-3">
-                  <v-icon icon="mdi-trending-down" size="32" class="metric-icon" />
-                </div>
-                <div class="metric-label">💸 Despesas</div>
-                <div class="metric-value">
-                  {{ formatCurrency(Math.abs(summary.total_despesas)) }}
-                </div>
-                <div class="metric-subtitle">
-                  {{ summary.total_despesas_count || 0 }} lançamentos • {{ summary.periodo_dias }} dias
-                </div>
-              </div>
-              <div class="metric-visual">
-                <v-progress-circular
-                  :model-value="85"
-                  size="60"
-                  width="6"
-                  color="white"
-                  class="metric-progress"
-                />
-              </div>
-            </div>
-          </v-card-text>
-        </v-card>
-      </v-col>
+      <!-- Insights e Alertas Modernos -->
+      <v-row v-if="insights.length > 0 || alerts.length > 0" class="mb-6">
+        <!-- Insights Inteligentes -->
+        <v-col cols="12" md="6" v-if="insights.length > 0">
+          <IntelligentInsights
+            :insights="insights"
+            :loading="loadingInsights"
+            @refresh="refreshAllData"
+            @add-transaction="showNewLancamento = true"
+          />
+        </v-col>
 
-      <v-col cols="12" md="4">
-        <v-card
-          :class="`metric-card ${summary.saldo >= 0 ? 'metric-card--info' : 'metric-card--warning'}`"
-          elevation="8"
-          hover
-        >
-          <v-card-text class="pa-6">
-            <div class="d-flex align-center justify-space-between">
-              <div class="metric-content">
-                <div class="metric-icon-wrapper mb-3">
-                  <v-icon 
-                    :icon="summary.saldo >= 0 ? 'mdi-account-balance' : 'mdi-alert'" 
-                    size="32" 
-                    class="metric-icon" 
-                  />
-                </div>
-                <div class="metric-label">⚖️ Saldo</div>
-                <div class="metric-value">
-                  {{ formatCurrency(summary.saldo) }}
-                </div>
-                <div class="metric-subtitle">
-                  {{ summary.total_lancamentos }} lançamentos • {{ summary.saldo >= 0 ? 'Positivo' : 'Atenção' }}
-                </div>
-              </div>
-              <div class="metric-visual">
-                <v-progress-circular
-                  :model-value="summary.saldo >= 0 ? 65 : 35"
-                  size="60"
-                  width="6"
-                  color="white"
-                  class="metric-progress"
-                />
-              </div>
-            </div>
-          </v-card-text>
-        </v-card>
-      </v-col>
-    </v-row>
-
-    <!-- Insights com IA -->
-    <div v-if="aiInsights.length > 0" class="mb-6">
-      <v-card elevation="4" class="insights-card">
-        <v-card-title class="pa-6 pb-4">
-          <v-icon icon="mdi-brain" color="primary" class="mr-3" />
-          <span class="text-h5 font-weight-bold">🤖 Insights Financeiros com IA</span>
-          <v-spacer />
-          <v-chip color="primary" variant="tonal" size="small">
-            Análises automáticas
-          </v-chip>
-        </v-card-title>
-        <v-card-text class="pa-6 pt-0">
-          <div class="d-flex flex-wrap ga-3">
-            <v-chip
-              v-for="insight in aiInsights"
-              :key="insight.id"
-              :color="getInsightColor(insight.type)"
-              :prepend-icon="insight.icon"
-              variant="elevated"
-              size="large"
-              clickable
-              @click="showInsightDetails(insight)"
-              class="insight-chip"
-            >
-              {{ insight.title }}
-            </v-chip>
-          </div>
-        </v-card-text>
-      </v-card>
-    </div>
-
-    <!-- Gráficos e Analytics com melhor layout -->
-    <v-row class="charts-row mb-6">
-      <!-- Gráfico de evolução -->
-      <v-col cols="12" lg="8">
-        <v-card elevation="4" class="chart-card">
-          <v-card-title class="pa-6 pb-4">
-            <v-icon icon="mdi-chart-line" color="primary" class="mr-3" />
-            <span class="text-h5 font-weight-bold">📈 Evolução Financeira</span>
-            <v-spacer />
-            <v-chip color="success" variant="tonal" size="small">
-              Últimos meses
-            </v-chip>
-          </v-card-title>
-          <v-card-text class="pa-6 pt-0">
-            <div class="chart-container">
-              <canvas ref="evolutionChart"></canvas>
-            </div>
-          </v-card-text>
-        </v-card>
-      </v-col>
-
-      <!-- Distribuição por categoria -->
-      <v-col cols="12" lg="4">
-        <v-card elevation="4" class="chart-card">
-          <v-card-title class="pa-6 pb-4">
-            <v-icon icon="mdi-chart-donut" color="primary" class="mr-3" />
-            <span class="text-h6 font-weight-bold">🏷️ Distribuição</span>
-          </v-card-title>
-          <v-card-text class="pa-6 pt-0">
-            <div class="chart-container chart-container--donut">
-              <canvas ref="categoryChart"></canvas>
-            </div>
-          </v-card-text>
-        </v-card>
-      </v-col>
-    </v-row>
-
-    <!-- Lançamentos recentes e MCP Widget -->
-    <v-row>
-      <!-- Lançamentos recentes -->
-      <v-col cols="12" lg="8">
-        <BaseCard
-          title="🕒 Lançamentos Recentes"
-          subtitle="Últimas movimentações financeiras"
-          icon="mdi-clock-outline"
-          hover
-        >
-          <template #actions>
-            <BaseButton
-              variant="text"
-              size="small"
-              @click="$router.push('/lancamentos')"
-            >
-              Ver todos
-            </BaseButton>
-          </template>
-
-          <v-list v-if="recentLancamentos.length > 0" class="pa-0">
-            <v-list-item
-              v-for="lancamento in recentLancamentos"
-              :key="lancamento.id"
-              @click="editLancamento(lancamento)"
-              class="rounded-lg mb-2"
-              color="primary"
-            >
-              <template #prepend>
-                <v-avatar 
-                  :color="lancamento.tipo === 'RECEITA' ? 'success' : 'error'"
-                  size="40"
+        <!-- Alertas -->
+        <v-col cols="12" md="6" v-if="alerts.length > 0">
+          <v-card class="alert-card" elevation="4">
+            <v-card-title class="d-flex align-center">
+              <v-icon icon="mdi-alert" color="warning" class="me-2" />
+              Alertas Importantes
+            </v-card-title>
+            <v-card-text>
+              <v-list density="compact">
+                <v-list-item
+                  v-for="alert in alerts.slice(0, 3)"
+                  :key="alert.id"
+                  class="alert-item"
                 >
-                  <v-icon 
-                    :icon="lancamento.tipo === 'RECEITA' ? 'mdi-plus' : 'mdi-minus'"
-                    color="white"
-                  />
-                </v-avatar>
-              </template>
+                  <template #prepend>
+                    <v-icon :icon="alert.icon" :color="alert.severity" size="small" />
+                  </template>
+                  <v-list-item-title class="text-body-2">
+                    {{ alert.title }}
+                  </v-list-item-title>
+                  <v-list-item-subtitle class="text-caption">
+                    {{ alert.message }}
+                  </v-list-item-subtitle>
+                  <template #append>
+                    <v-btn
+                      icon="mdi-close"
+                      size="x-small"
+                      variant="text"
+                      @click="dismissAlert(alert.id)"
+                    />
+                  </template>
+                </v-list-item>
+              </v-list>
+            </v-card-text>
+          </v-card>
+        </v-col>
+      </v-row>
 
-              <v-list-item-title class="font-weight-medium">
-                {{ lancamento.descricao }}
-              </v-list-item-title>
-              <v-list-item-subtitle>
-                {{ formatDate(lancamento.data_lancamento) }} • 
-                {{ lancamento.categoria || 'Sem categoria' }}
-              </v-list-item-subtitle>
+      <!-- Gráficos Simplificados -->
+      <v-row class="charts-section mb-6">
+        <!-- Gráfico de Evolução Temporal -->
+        <v-col cols="12" lg="8">
+          <v-card class="chart-card" elevation="4" height="400">
+            <v-card-title class="d-flex justify-space-between align-center">
+              <span>Evolução Financeira</span>
+              <v-btn-toggle
+                v-model="chartPeriod"
+                variant="outlined"
+                size="small"
+                mandatory
+              >
+                <v-btn value="7d" size="small">7d</v-btn>
+                <v-btn value="30d" size="small">30d</v-btn>
+                <v-btn value="90d" size="small">90d</v-btn>
+              </v-btn-toggle>
+            </v-card-title>
+            <v-card-text>
+              <div v-if="loadingCharts" class="d-flex justify-center align-center" style="height: 300px;">
+                <v-progress-circular indeterminate color="primary" />
+              </div>
+              <canvas v-else ref="evolutionChart" style="max-height: 300px;"></canvas>
+            </v-card-text>
+          </v-card>
+        </v-col>
 
-              <template #append>
-                <div class="text-end">
-                  <div 
-                    class="font-weight-bold"
-                    :class="lancamento.tipo === 'RECEITA' ? 'text-success' : 'text-error'"
-                  >
-                    {{ formatCurrency(lancamento.valor) }}
-                  </div>
-                  <div class="text-caption text-medium-emphasis">
-                    {{ lancamento.orgao_nome }}
-                  </div>
-                </div>
-              </template>
-            </v-list-item>
-          </v-list>
+        <!-- Gráfico de Distribuição por Categoria -->
+        <v-col cols="12" lg="4">
+          <v-card class="chart-card" elevation="4" height="400">
+            <v-card-title>Distribuição por Categoria</v-card-title>
+            <v-card-text>
+              <div v-if="loadingCharts" class="d-flex justify-center align-center" style="height: 300px;">
+                <v-progress-circular indeterminate color="primary" />
+              </div>
+              <canvas v-else ref="categoryChart" style="max-height: 300px;"></canvas>
+            </v-card-text>
+          </v-card>
+        </v-col>
+      </v-row>
 
-          <div v-else class="text-center py-8">
-            <v-icon icon="mdi-information-outline" size="64" color="grey" class="mb-4" />
-            <p class="text-body-1 text-medium-emphasis">
-              Nenhum lançamento encontrado
-            </p>
-            <BaseButton
-              type="primary"
-              prepend-icon="mdi-plus"
-              @click="showNewLancamento = true"
-            >
-              Criar Primeiro Lançamento
-            </BaseButton>
-          </div>
-        </BaseCard>
-      </v-col>
-
-      <!-- MCP Widget para monitoramento -->
-      <v-col cols="12" lg="4">
-        <MCPWidget
-          title="Status do Sistema"
-          type="status"
-          :status="systemStatus"
-          :metrics="systemMetrics"
-          :items="systemItems"
-          :refreshable="true"
-          :auto-refresh="30"
-          @refresh="refreshSystemData"
-          class="mb-4"
-        />
-
-        <!-- KPIs adicionais -->
-        <BaseCard
-          title="📊 KPIs do Mês"
-          subtitle="Indicadores principais"
-          icon="mdi-speedometer"
-          type="info"
-          hover
-        >
-          <v-list density="compact" class="pa-0">
-            <v-list-item>
-              <template #prepend>
-                <v-icon icon="mdi-target" color="primary" />
-              </template>
-              <v-list-item-title>Meta de Economia</v-list-item-title>
-              <template #append>
-                <v-chip 
-                  :color="monthlyGoal.achieved ? 'success' : 'warning'" 
-                  size="small"
-                  variant="flat"
+      <!-- Transações Recentes -->
+      <v-row class="activity-section">
+        <v-col cols="12" lg="8">
+          <v-card class="transactions-card" elevation="4">
+            <v-card-title class="d-flex justify-space-between align-center">
+              <span>Lançamentos Recentes</span>
+              <v-btn
+                variant="text"
+                size="small"
+                @click="$router.push('/lancamentos')"
+              >
+                Ver Todos
+              </v-btn>
+            </v-card-title>
+            <v-card-text>
+              <div v-if="loadingTransactions" class="text-center py-4">
+                <v-progress-circular indeterminate color="primary" />
+              </div>
+              <v-list v-else-if="recentTransactions.length > 0" density="compact">
+                <v-list-item
+                  v-for="transaction in recentTransactions.slice(0, 5)"
+                  :key="transaction.id"
+                  class="transaction-item"
                 >
-                  {{ monthlyGoal.percentage }}%
-                </v-chip>
-              </template>
-            </v-list-item>
+                  <template #prepend>
+                    <v-avatar :color="transaction.tipo === 'receita' ? 'success' : 'error'" size="32">
+                      <v-icon 
+                        :icon="transaction.tipo === 'receita' ? 'mdi-trending-up' : 'mdi-trending-down'" 
+                        size="16"
+                      />
+                    </v-avatar>
+                  </template>
+                  <v-list-item-title>{{ transaction.descricao }}</v-list-item-title>
+                  <v-list-item-subtitle>
+                    {{ formatDate(transaction.data) }} • {{ transaction.categoria }}
+                  </v-list-item-subtitle>
+                  <template #append>
+                    <span 
+                      :class="[
+                        'font-weight-bold',
+                        transaction.tipo === 'receita' ? 'text-success' : 'text-error'
+                      ]"
+                    >
+                      {{ transaction.tipo === 'receita' ? '+' : '-' }}{{ formatCurrency(transaction.valor) }}
+                    </span>
+                  </template>
+                </v-list-item>
+              </v-list>
+              <div v-else class="text-center py-4 text-medium-emphasis">
+                <v-icon icon="mdi-file-document-outline" size="48" class="mb-2" />
+                <p>Nenhum lançamento encontrado</p>
+                <v-btn
+                  color="primary"
+                  variant="outlined"
+                  @click="showNewLancamento = true"
+                >
+                  Criar Primeiro Lançamento
+                </v-btn>
+              </div>
+            </v-card-text>
+          </v-card>
+        </v-col>
 
-            <v-list-item>
-              <template #prepend>
-                <v-icon icon="mdi-chart-timeline-variant" color="success" />
-              </template>
-              <v-list-item-title>Crescimento</v-list-item-title>
-              <template #append>
-                <span class="font-weight-bold text-success">
-                  +{{ growth.percentage }}%
-                </span>
-              </template>
-            </v-list-item>
+        <!-- Status do Sistema -->
+        <v-col cols="12" lg="4">
+          <v-card class="system-card" elevation="4">
+            <v-card-title class="d-flex align-center">
+              <v-icon icon="mdi-monitor-dashboard" class="me-2" />
+              Status do Sistema
+            </v-card-title>
+            <v-card-text>
+              <v-list density="compact">
+                <v-list-item>
+                  <template #prepend>
+                    <v-icon 
+                      :icon="systemHealth >= 90 ? 'mdi-check-circle' : 'mdi-alert-circle'" 
+                      :color="systemHealth >= 90 ? 'success' : 'warning'"
+                    />
+                  </template>
+                  <v-list-item-title>Saúde do Sistema</v-list-item-title>
+                  <v-list-item-subtitle>{{ systemHealth }}% - {{ getHealthStatus(systemHealth) }}</v-list-item-subtitle>
+                </v-list-item>
 
-            <v-list-item>
-              <template #prepend>
-                <v-icon icon="mdi-calendar-month" color="info" />
-              </template>
-              <v-list-item-title>Dias restantes</v-list-item-title>
-              <template #append>
-                <span class="font-weight-bold">
-                  {{ daysRemainingInMonth }}
-                </span>
-              </template>
-            </v-list-item>
-          </v-list>
-        </BaseCard>
-      </v-col>
-    </v-row>
+                <v-list-item>
+                  <template #prepend>
+                    <v-icon icon="mdi-database" color="info" />
+                  </template>
+                  <v-list-item-title>Banco de Dados</v-list-item-title>
+                  <v-list-item-subtitle>{{ systemStatus.database || 'Conectado' }}</v-list-item-subtitle>
+                </v-list-item>
 
-    <!-- Dialogs -->
+                <v-list-item>
+                  <template #prepend>
+                    <v-icon icon="mdi-robot" color="primary" />
+                  </template>
+                  <v-list-item-title>IA Assistant</v-list-item-title>
+                  <v-list-item-subtitle>{{ systemStatus.ai || 'Online' }}</v-list-item-subtitle>
+                </v-list-item>
+              </v-list>
+
+              <v-btn
+                block
+                color="primary"
+                variant="outlined"
+                class="mt-4"
+                @click="showChatbot = true"
+              >
+                <v-icon icon="mdi-chat" class="me-2" />
+                Abrir Chat IA
+              </v-btn>
+            </v-card-text>
+          </v-card>
+        </v-col>
+      </v-row>
+    </v-container>
+
+    <!-- Modais -->
     <LancamentoForm
       v-model="showNewLancamento"
-      @saved="handleLancamentoSaved"
+      @saved="handleTransactionSaved"
     />
 
-    <!-- Floating Action Button -->
+    <ChatbotModal
+      v-model="showChatbot"
+    />
+
+    <!-- FAB melhorado -->
     <v-fab
       icon="mdi-plus"
       location="bottom end"
       size="large"
       color="primary"
       @click="showNewLancamento = true"
-      class="biuai-fab"
+      app
     />
   </div>
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted, nextTick } from 'vue'
-import { useRouter } from 'vue-router'
-import { useAuthStore } from '@/stores/auth'
-import { useLancamentosStore } from '@/stores/lancamentos'
-import BaseCard from '@/components/base/BaseCard.vue'
-import BaseButton from '@/components/base/BaseButton.vue'
-import MCPWidget from '@/components/MCPWidget.vue'
-import LancamentoForm from '@/components/LancamentoForm.vue'
 import { format } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
-import Chart from 'chart.js/auto'
+import { nextTick, onMounted, ref, watch } from 'vue'
+import { useRouter } from 'vue-router'
+
+// Stores
+import { useAuthStore } from '@/stores/auth'
+import { useDashboardStore } from '@/stores/dashboard'
+import { useNotificationStore } from '@/stores/notifications'
+
+// Composables
+import { useChartData } from '@/composables/useChartData'
+import { useDashboardData } from '@/composables/useDashboardData'
+import { useRealTimeUpdates } from '@/composables/useRealTimeUpdates'
+
+// Componentes
+import ChatbotModal from '@/components/ChatbotModal.vue'
+import IntelligentInsights from '@/components/dashboard/IntelligentInsights.vue'
+import MetricsGrid from '@/components/dashboard/MetricsGrid.vue'
+import LancamentoForm from '@/components/LancamentoForm.vue'
+
+// Chart.js imports
+import {
+    ArcElement,
+    CategoryScale,
+    Chart as ChartJS,
+    Filler,
+    Legend,
+    LinearScale,
+    LineElement,
+    PointElement,
+    Title,
+    Tooltip
+} from 'chart.js'
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  ArcElement,
+  Title,
+  Tooltip,
+  Legend,
+  Filler
+)
 
 // Stores
 const authStore = useAuthStore()
-const lancamentosStore = useLancamentosStore()
+const dashboardStore = useDashboardStore()
+const notificationStore = useNotificationStore()
 const router = useRouter()
 
-// Estados reativos
-const loading = ref(false)
-const importing = ref(false)
+// Composables
+const {
+  summary,
+  insights,
+  alerts,
+  trendData,
+  loading,
+  refreshAllData,
+  dismissAlert
+} = useDashboardData()
+
+const {
+  evolutionData,
+  categoryData,
+  chartPeriod,
+  loadingCharts,
+  refreshChartData
+} = useChartData()
+
+const {
+  recentTransactions,
+  systemStatus,
+  systemHealth,
+  loadingTransactions
+} = useRealTimeUpdates()
+
+// Estados locais
 const showNewLancamento = ref(false)
+const showChatbot = ref(false)
+
+// Chart refs
 const evolutionChart = ref(null)
 const categoryChart = ref(null)
-const refreshInterval = ref(null)
-
-// Dados do dashboard
-const summary = ref({
-  total_receitas: 0,
-  total_despesas: 0,
-  saldo: 0,
-  total_lancamentos: 0,
-  periodo_dias: 30,
-  total_receitas_count: 0,
-  total_despesas_count: 0
-})
-
-const recentLancamentos = ref([])
-const aiInsights = ref([
-  {
-    id: 1,
-    title: 'Gastos elevados esta semana',
-    type: 'warning',
-    icon: 'mdi-alert-circle',
-    description: 'Seus gastos aumentaram 15% comparado à semana passada'
-  },
-  {
-    id: 2,
-    title: 'Meta de economia atingida',
-    type: 'positive',
-    icon: 'mdi-target',
-    description: 'Parabéns! Você atingiu sua meta de economia do mês'
-  },
-  {
-    id: 3,
-    title: 'Nova categoria detectada',
-    type: 'info',
-    icon: 'mdi-tag',
-    description: 'Detectamos gastos em uma nova categoria: Educação'
-  }
-])
-
-// Sistema de monitoramento
-const systemStatus = ref('success')
-const systemMetrics = computed(() => [
-  {
-    name: 'performance',
-    label: 'Performance API',
-    value: 95,
-    format: 'percentage',
-    color: 'success'
-  },
-  {
-    name: 'uptime',
-    label: 'Tempo Online',
-    value: 99.9,
-    format: 'percentage',
-    color: 'success'
-  }
-])
-
-const systemItems = computed(() => [
-  {
-    title: 'Backend API',
-    subtitle: 'Funcionando normalmente',
-    icon: 'mdi-server',
-    color: 'success',
-    value: 'Online'
-  },
-  {
-    title: 'Base de Dados',
-    subtitle: 'PostgreSQL conectado',
-    icon: 'mdi-database',
-    color: 'success',
-    value: 'OK'
-  },
-  {
-    title: 'Cache Redis',
-    subtitle: 'Cache ativo',
-    icon: 'mdi-memory',
-    color: 'success',
-    value: 'Ativo'
-  },
-  {
-    title: 'Monitoramento',
-    subtitle: 'SigNoz coletando dados',
-    icon: 'mdi-monitor-eye',
-    color: 'info',
-    value: 'Ativo'
-  }
-])
-
-// KPIs
-const monthlyGoal = ref({
-  target: 5000,
-  current: 3750,
-  achieved: false,
-  percentage: 75
-})
-
-const growth = ref({
-  percentage: 12.5,
-  trend: 'up'
-})
-
-const daysRemainingInMonth = computed(() => {
-  const now = new Date()
-  const lastDay = new Date(now.getFullYear(), now.getMonth() + 1, 0)
-  return lastDay.getDate() - now.getDate()
-})
-
-// Refs dos gráficos
 let evolutionChartInstance = null
 let categoryChartInstance = null
 
-// Métodos de formatação
+// Métodos
+const handleTransactionSaved = () => {
+  showNewLancamento.value = false
+  refreshAllData()
+  try {
+  notificationStore.showSuccess('Lançamento salvo com sucesso!')
+  } catch (error) {
+    console.log('Lançamento salvo com sucesso!')
+  }
+}
+
+const handleInsightClick = (insight) => {
+  if (notificationStore) {
+  notificationStore.showInfo(insight.description)
+  }
+}
+
+const handleMetricAction = (action) => {
+  switch (action.key) {
+    case 'new-receita':
+      showNewLancamento.value = true
+      break
+    case 'view-categories':
+      router.push('/categorias')
+      break
+    case 'view-goals':
+      router.push('/metas')
+      break
+    case 'analytics':
+      // Implementar analytics específicos
+      break
+  }
+}
+
+const formatDate = (date) => {
+  return format(new Date(date), 'dd/MM/yyyy', { locale: ptBR })
+}
+
 const formatCurrency = (value) => {
   return new Intl.NumberFormat('pt-BR', {
     style: 'currency',
     currency: 'BRL'
-  }).format(value || 0)
+  }).format(value)
 }
 
-const formatDate = (date) => {
-  if (!date) return ''
-  return format(new Date(date), 'dd/MM/yyyy', { locale: ptBR })
+const getHealthStatus = (health) => {
+  if (health >= 90) return 'Excelente'
+  if (health >= 70) return 'Bom'
+  if (health >= 50) return 'Regular'
+  return 'Crítico'
 }
 
-const getInsightColor = (type) => {
-  const colors = {
-    positive: 'success',
-    warning: 'warning',
-    info: 'info'
-  }
-  return colors[type] || 'grey'
-}
+// Chart creation functions
+const createEvolutionChart = () => {
+  if (!evolutionChart.value || !evolutionData.value) return
 
-// Métodos de ação
-const refreshData = async () => {
-  loading.value = true
   try {
-    await Promise.all([
-      loadSummary(),
-      loadRecentLancamentos(),
-      loadChartData()
-    ])
-  } finally {
-    loading.value = false
-  }
-}
-
-const loadSummary = async () => {
-  try {
-    const data = await lancamentosStore.getSummary()
-    summary.value = { ...summary.value, ...data }
-  } catch (error) {
-    console.error('Erro ao carregar resumo:', error)
-  }
-}
-
-const loadRecentLancamentos = async () => {
-  try {
-    const data = await lancamentosStore.getRecent(5)
-    recentLancamentos.value = data
-  } catch (error) {
-    console.error('Erro ao carregar lançamentos recentes:', error)
-  }
-}
-
-const loadChartData = async () => {
-  try {
-    // Carrega dados para os gráficos
-    const evolutionData = await lancamentosStore.getEvolutionData()
-    const categoryData = await lancamentosStore.getCategoryData()
-    
-    // Aguarda o próximo tick para garantir que os elementos canvas estejam montados
-    await nextTick()
-    
-    // Inicializa gráfico de evolução
-    if (evolutionChart.value && evolutionData) {
-      initEvolutionChart(evolutionData)
-    }
-    
-    // Inicializa gráfico de categorias
-    if (categoryChart.value && categoryData) {
-      initCategoryChart(categoryData)
-    }
-  } catch (error) {
-    console.error('Erro ao carregar dados dos gráficos:', error)
-  }
-}
-
-const initEvolutionChart = (data) => {
+  const ctx = evolutionChart.value.getContext('2d')
+  
   if (evolutionChartInstance) {
     evolutionChartInstance.destroy()
   }
-  
-  const ctx = evolutionChart.value.getContext('2d')
-  
-  evolutionChartInstance = new Chart(ctx, {
+
+  evolutionChartInstance = new ChartJS(ctx, {
     type: 'line',
     data: {
-      labels: data.labels || [],
+      labels: evolutionData.value.labels || [],
       datasets: [
         {
           label: 'Receitas',
-          data: data.receitas || [],
-          borderColor: '#4CAF50',
+          data: evolutionData.value.receitas || [],
+          borderColor: 'rgb(76, 175, 80)',
           backgroundColor: 'rgba(76, 175, 80, 0.1)',
-          borderWidth: 3,
           fill: true,
           tension: 0.4
         },
         {
           label: 'Despesas',
-          data: data.despesas || [],
-          borderColor: '#F44336',
+          data: evolutionData.value.despesas || [],
+          borderColor: 'rgb(244, 67, 54)',
           backgroundColor: 'rgba(244, 67, 54, 0.1)',
-          borderWidth: 3,
           fill: true,
           tension: 0.4
         }
@@ -646,86 +458,58 @@ const initEvolutionChart = (data) => {
       plugins: {
         legend: {
           position: 'top',
-          labels: {
-            usePointStyle: true,
-            padding: 20,
-            font: {
-              size: 12,
-              weight: '500'
-            }
-          }
         },
-        tooltip: {
-          mode: 'index',
-          intersect: false,
-          backgroundColor: 'rgba(0, 0, 0, 0.8)',
-          titleColor: '#fff',
-          bodyColor: '#fff',
-          borderColor: '#fff',
-          borderWidth: 1,
-          callbacks: {
-            label: function(context) {
-              return context.dataset.label + ': ' + formatCurrency(context.parsed.y)
-            }
-          }
+        title: {
+          display: false
         }
       },
       scales: {
-        x: {
-          display: true,
-          title: {
-            display: true,
-            text: 'Período'
-          },
-          grid: {
-            display: false
-          }
-        },
         y: {
-          display: true,
-          title: {
-            display: true,
-            text: 'Valor (R$)'
-          },
-          grid: {
-            color: 'rgba(0, 0, 0, 0.1)'
-          },
+          beginAtZero: true,
           ticks: {
             callback: function(value) {
-              return formatCurrency(value)
+              return new Intl.NumberFormat('pt-BR', {
+                style: 'currency',
+                currency: 'BRL',
+                minimumFractionDigits: 0
+              }).format(value)
             }
           }
         }
-      },
-      interaction: {
-        mode: 'nearest',
-        axis: 'x',
-        intersect: false
       }
     }
   })
+  } catch (error) {
+    console.error('Error creating evolution chart:', error)
+  }
 }
 
-const initCategoryChart = (data) => {
+const createCategoryChart = () => {
+  if (!categoryChart.value || !categoryData.value) return
+
+  try {
+  const ctx = categoryChart.value.getContext('2d')
+  
   if (categoryChartInstance) {
     categoryChartInstance.destroy()
   }
-  
-  const ctx = categoryChart.value.getContext('2d')
-  
-  categoryChartInstance = new Chart(ctx, {
+
+  categoryChartInstance = new ChartJS(ctx, {
     type: 'doughnut',
     data: {
-      labels: data.labels || ['Receitas', 'Despesas'],
+      labels: categoryData.value.labels || [],
       datasets: [{
-        data: data.values || [0, 0],
+        data: categoryData.value.values || [],
         backgroundColor: [
-          '#4CAF50',
-          '#F44336'
+          'rgba(76, 175, 80, 0.8)',
+          'rgba(33, 150, 243, 0.8)',
+          'rgba(255, 152, 0, 0.8)',
+          'rgba(156, 39, 176, 0.8)',
+          'rgba(244, 67, 54, 0.8)',
+          'rgba(96, 125, 139, 0.8)'
         ],
-        borderWidth: 0,
-        hoverBorderWidth: 2,
-        hoverBorderColor: '#fff'
+        borderWidth: 2,
+        borderColor: '#fff'
       }]
     },
     options: {
@@ -734,350 +518,138 @@ const initCategoryChart = (data) => {
       plugins: {
         legend: {
           position: 'bottom',
-          labels: {
-            usePointStyle: true,
-            padding: 20,
-            font: {
-              size: 12,
-              weight: '500'
-            }
-          }
-        },
-        tooltip: {
-          backgroundColor: 'rgba(0, 0, 0, 0.8)',
-          titleColor: '#fff',
-          bodyColor: '#fff',
-          borderColor: '#fff',
-          borderWidth: 1,
-          callbacks: {
-            label: function(context) {
-              const total = context.dataset.data.reduce((a, b) => Math.abs(a) + Math.abs(b), 0)
-              const percentage = total > 0 ? ((Math.abs(context.parsed) / total) * 100).toFixed(1) : 0
-              return context.label + ': ' + formatCurrency(context.parsed) + ' (' + percentage + '%)'
-            }
-          }
         }
-      },
-      cutout: '60%'
+      }
     }
   })
-}
-
-const importSiogData = async () => {
-  importing.value = true
-  try {
-    // Implementar importação SIOG
-    await new Promise(resolve => setTimeout(resolve, 3000))
-    await refreshData()
-  } finally {
-    importing.value = false
+  } catch (error) {
+    console.error('Error creating category chart:', error)
   }
 }
 
-const editLancamento = (lancamento) => {
-  router.push(`/lancamentos/${lancamento.id}/edit`)
-}
+// Watchers
+watch(() => evolutionData.value, () => {
+  nextTick(() => createEvolutionChart())
+}, { deep: true })
 
-const handleLancamentoSaved = () => {
-  showNewLancamento.value = false
-  refreshData()
-}
+watch(() => categoryData.value, () => {
+  nextTick(() => createCategoryChart())
+}, { deep: true })
 
-const showInsightDetails = (insight) => {
-  // Implementar modal de detalhes do insight
-  console.log('Insight selecionado:', insight)
-}
-
-const refreshSystemData = () => {
-  // Atualizar dados do sistema
-  console.log('Atualizando dados do sistema...')
-}
+watch(chartPeriod, () => {
+  refreshChartData()
+})
 
 // Lifecycle
 onMounted(async () => {
-  await refreshData()
-  
-  // Auto-refresh a cada 5 minutos
-  refreshInterval.value = setInterval(refreshData, 5 * 60 * 1000)
-})
-
-onUnmounted(() => {
-  if (refreshInterval.value) {
-    clearInterval(refreshInterval.value)
-  }
-  
-  // Limpa instâncias dos gráficos
-  if (evolutionChartInstance) {
-    evolutionChartInstance.destroy()
-  }
-  if (categoryChartInstance) {
-    categoryChartInstance.destroy()
+  try {
+  if (authStore.isAuthenticated) {
+    await refreshAllData()
+    await refreshChartData()
+    
+    nextTick(() => {
+      createEvolutionChart()
+      createCategoryChart()
+    })
+    } else {
+      console.warn('User not authenticated, redirecting to login')
+      router.push('/auth/login')
+    }
+  } catch (error) {
+    console.error('Error loading dashboard:', error)
+    if (notificationStore) {
+      notificationStore.showError('Erro ao carregar dashboard')
+    }
   }
 })
 </script>
 
 <style lang="scss" scoped>
 .biuai-dashboard {
-  padding: 1.5rem;
-  max-width: 1600px;
-  margin: 0 auto;
-  background: linear-gradient(135deg, #f8f9ff 0%, #e8f0ff 100%);
   min-height: 100vh;
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
 }
 
-// Header melhorado
 .dashboard-header {
-  .header-content {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 1.5rem;
-    
-    .header-info {
-      .dashboard-title {
-        font-size: 2.5rem;
-        font-weight: 800;
-        color: rgb(var(--v-theme-primary));
-        margin-bottom: 0.5rem;
-        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      }
-      
-      .dashboard-subtitle {
-        font-size: 1.1rem;
-        color: rgba(var(--v-theme-on-surface), 0.7);
-        font-weight: 500;
-      }
-    }
-    
-    .header-actions {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-      
-      .new-lancamento-btn {
-        background: linear-gradient(135deg, rgb(var(--v-theme-primary)) 0%, #1976D2 100%);
-        box-shadow: 0 4px 16px rgba(var(--v-theme-primary), 0.4);
-        transform: translateY(0);
-        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-        
-        &:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 8px 24px rgba(var(--v-theme-primary), 0.6);
-        }
-      }
-      
-      .refresh-btn, .import-btn {
-        border-width: 2px;
-        font-weight: 600;
-        transition: all 0.3s ease;
-        
-        &:hover {
-          transform: translateY(-1px);
-        }
-      }
-    }
-  }
+  background: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
-// Cards de métricas redesenhados
-.metrics-row {
-  .metric-card {
-    border-radius: 16px;
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    
-    &:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.15);
-    }
-    
-    .metric-content {
-      .metric-icon-wrapper {
-        .metric-icon {
-          color: white;
-          opacity: 0.9;
-        }
-      }
-      
-      .metric-label {
-        font-size: 0.9rem;
-        font-weight: 600;
-        color: rgba(255, 255, 255, 0.9);
-        margin-bottom: 0.5rem;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-      }
-      
-      .metric-value {
-        font-size: 2.2rem;
-        font-weight: 800;
-        color: white;
-        margin-bottom: 0.5rem;
-        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-      }
-      
-      .metric-subtitle {
-        font-size: 0.85rem;
-        color: rgba(255, 255, 255, 0.8);
-        font-weight: 500;
-      }
-    }
-    
-    .metric-visual {
-      .metric-progress {
-        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
-      }
-    }
-    
-    &.metric-card--success {
-      background: linear-gradient(135deg, #4CAF50 0%, #388E3C 100%);
-    }
-    
-    &.metric-card--error {
-      background: linear-gradient(135deg, #F44336 0%, #C62828 100%);
-    }
-    
-    &.metric-card--info {
-      background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
-    }
-    
-    &.metric-card--warning {
-      background: linear-gradient(135deg, #FF9800 0%, #F57C00 100%);
-    }
-  }
-}
-
-// Insights card
-.insights-card {
+// Cards com glassmorphism
+.insight-card,
+.alert-card,
+.chart-card,
+.transactions-card,
+.system-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 16px;
-  background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%);
-  border: 1px solid rgba(var(--v-theme-primary), 0.1);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   
-  .insight-chip {
-    transition: all 0.3s ease;
-    
-    &:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-    }
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
   }
 }
 
-// Charts
-.charts-row {
-  .chart-card {
-    border-radius: 16px;
-    background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%);
-    border: 1px solid rgba(var(--v-theme-primary), 0.1);
-    transition: all 0.3s ease;
-    
-    &:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
-    }
-    
-    .chart-container {
-      position: relative;
-      width: 100%;
-      height: 400px;
-      
-      &.chart-container--donut {
-        height: 300px;
-      }
-      
-      canvas {
-        width: 100% !important;
-        height: 100% !important;
-        border-radius: 8px;
-      }
-    }
-  }
-}
-
-// Floating Action Button
-.biuai-fab {
-  :deep(.v-fab) {
-    background: linear-gradient(135deg, rgb(var(--v-theme-primary)) 0%, #1976D2 100%);
-    box-shadow: 0 8px 24px rgba(var(--v-theme-primary), 0.4);
-    
-    &:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 32px rgba(var(--v-theme-primary), 0.6);
-    }
-  }
-}
-
-// Animações
-.metric-card {
-  animation: slideInUp 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+// Items com hover
+.insight-item,
+.alert-item,
+.transaction-item {
+  border-radius: 8px;
+  transition: background-color 0.2s ease;
   
-  &:nth-child(2) {
-    animation-delay: 0.1s;
-  }
-  
-  &:nth-child(3) {
-    animation-delay: 0.2s;
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.04);
   }
 }
 
-@keyframes slideInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-// Responsividade
+// Responsive
 @media (max-width: 960px) {
-  .biuai-dashboard {
-    padding: 1rem;
-  }
-  
-  .dashboard-header .header-content {
-    flex-direction: column;
-    align-items: flex-start;
-    
-    .header-actions {
-      width: 100%;
-      justify-content: flex-start;
+  .header-actions {
+    .v-btn:not(.v-btn--icon) {
+      .v-btn__content {
+        display: none;
+      }
     }
-  }
-  
-  .metrics-row .metric-card .metric-content .metric-value {
-    font-size: 1.8rem;
   }
 }
 
 @media (max-width: 600px) {
-  .header-actions {
-    flex-direction: column;
-    width: 100%;
+  .dashboard-header {
+    height: 64px !important;
     
-    .v-btn {
-      width: 100%;
-      justify-content: center;
+    .header-info h1 {
+      font-size: 1.5rem !important;
     }
   }
   
-  .dashboard-header .header-info .dashboard-title {
-    font-size: 2rem;
+  .charts-section .v-col,
+  .activity-section .v-col {
+    margin-bottom: 1rem;
+  }
+}
+
+// Dark theme
+.v-theme--dark {
+  .biuai-dashboard {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
   }
   
-  .metrics-row .metric-card .metric-content .metric-value {
-    font-size: 1.6rem;
+  .dashboard-header {
+    background: rgba(30, 30, 46, 0.95) !important;
+    border-bottom-color: rgba(255, 255, 255, 0.1);
   }
   
-  .charts-row .chart-card .chart-container {
-    height: 300px;
-    
-    &.chart-container--donut {
-      height: 250px;
-    }
+  .insight-card,
+  .alert-card,
+  .chart-card,
+  .transactions-card,
+  .system-card {
+    background: rgba(30, 30, 46, 0.95);
+    border-color: rgba(255, 255, 255, 0.1);
   }
 }
 </style> 

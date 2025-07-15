@@ -1,5 +1,4 @@
 from jose import jwt
-import bcrypt
 import secrets
 from datetime import datetime, timedelta, timezone
 from typing import Any, Union, Optional, Dict, List
@@ -313,13 +312,21 @@ class SecurityAudit:
 
 # Password utilities
 def verify_password(plain_password: str, hashed_password: str) -> bool:
-    """Verify password against hash"""
-    return pwd_context.verify(plain_password, hashed_password)
+    """Verify a password against a hash."""
+    try:
+        return pwd_context.verify(plain_password, hashed_password)
+    except Exception as e:
+        print(f"Error verifying password: {e}")
+        return False
 
 
 def get_password_hash(password: str) -> str:
-    """Generate password hash"""
-    return pwd_context.hash(password)
+    """Generate password hash."""
+    try:
+        return pwd_context.hash(password)
+    except Exception as e:
+        print(f"Error hashing password: {e}")
+        raise ValueError("Could not hash password")
 
 
 def generate_csrf_token() -> str:

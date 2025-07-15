@@ -4,114 +4,80 @@ services:
   # Frontend - Vue.js/Quasar
   frontend:
     build:
-      context: ./frontend
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: frontend/Dockerfile
+    container_name: biuai-frontend
     ports:
       - "8080:80"
-    volumes:
-      - ./frontend:/app
-      - /app/node_modules
     environment:
-      - NODE_ENV=development
-      - VITE_API_URL=http://localhost:3000
-    depends_on:
-      backend:
-        condition: service_healthy
-    networks:
-      - app-network
-
-  # Backend - FastAPI
-  backend:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile
-    ports:
-      - "3000:3000"
-    volumes:
-      - ./backend:/app
-    environment:
-      - POSTGRES_HOST=db
-      - POSTGRES_PORT=5432
-      - POSTGRES_DB=biuai
-      - POSTGRES_USER=biuai
-      - POSTGRES_PASSWORD=biuai123
-      - JWT_SECRET=biuai-super-secret-key-2024
-      - ACCESS_TOKEN_EXPIRE_MINUTES=60
-      - MODEL_SERVER=http://model-server:8000
-      - REDIS_HOST=redis
-      - REDIS_PORT=6379
-      - MCP_MEMORY_SERVICE_URL=http://mcp-memory-server:8001
-      - MCP_CHATBOT_SERVICE_URL=http://mcp-chatbot-service:8002
-      - OLLAMA_BASE_URL=http://ollama:11434
-    depends_on:
-      db:
-        condition: service_healthy
-      redis:
-        condition: service_healthy
-      model-server:
-        condition: service_healthy
+      NODE_ENV: production
+      VITE_API_URL: http://localhost:8000/api/v1
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      test: ["CMD-SHELL", "curl -f http://localhost/ || exit 1"]
       interval: 10s
       timeout: 5s
       retries: 5
-    networks:
-      - app-network
+
+  # Backend - FastAPI
+  backend:
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    environment:
+      ENVIRONMENT: development
+      DEBUG: "true"
+      POSTGRES_SERVER: db
+      POSTGRES_USER: biuai
+      POSTGRES_PASSWORD: biuai123
+      POSTGRES_DB: biuai
+      REDIS_URL: redis://redis:6379/0
+      SECRET_KEY: ${SECRET_KEY:-mysecretkey}
+      FIRST_SUPERUSER: admin@biuai.com
+      FIRST_SUPERUSER_PASSWORD: admin123
+      BACKEND_CORS_ORIGINS: '["http://localhost:8080", "http://127.0.0.1:8080"]'
+      SMTP_TLS: "true"
+      SMTP_PORT: 587
+      SMTP_HOST: ${SMTP_HOST:-""}
+      SMTP_USER: ${SMTP_USER:-""}
+      SMTP_PASSWORD: ${SMTP_PASSWORD:-""}
+      EMAILS_FROM_EMAIL: ${EMAILS_FROM_EMAIL:-""}
+      SENTRY_DSN: ${SENTRY_DSN:-""}
+      MCP_MEMORY_SERVICE_URL: ${MCP_MEMORY_SERVICE_URL:-""}
+      MCP_CHATBOT_SERVICE_URL: ${MCP_CHATBOT_SERVICE_URL:-""}
+      OLLAMA_BASE_URL: http://ollama:11434
+      PYTHONPATH: /app
+    volumes:
+      - ./data:/app/data
+      - ./modules:/app/modules
+      - backend_logs:/app/logs
+      - ./scripts:/app/scripts
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+      - redis
 
   # PostgreSQL
   db:
     image: postgres:15-alpine
-    ports:
-      - "5432:5432"
+    environment:
+      POSTGRES_USER: biuai
+      POSTGRES_PASSWORD: biuai123
+      POSTGRES_DB: biuai
     volumes:
       - postgres_data:/var/lib/postgresql/data
-      - ./data/init.sql:/docker-entrypoint-initdb.d/init.sql
-    environment:
-      - POSTGRES_DB=biuai
-      - POSTGRES_USER=biuai
-      - POSTGRES_PASSWORD=biuai123
+    ports:
+      - "5432:5432"
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U biuai -d biuai"]
+      test: ["CMD-SHELL", "pg_isready -U biuai"]
       interval: 10s
       timeout: 5s
       retries: 5
-    networks:
-      - app-network
-
-  # Model Server
-  model-server:
-    build:
-      context: ./model-server
-      dockerfile: Dockerfile
-    ports:
-      - "8000:8000"
-    volumes:
-      - ./model-server:/app
-      - model_artifacts:/app/models
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-    networks:
-      - app-network
-
-  # PostgreSQL Admin
-  pgadmin:
-    image: dpage/pgadmin4
-    ports:
-      - "5050:80"
-    environment:
-      - PGADMIN_DEFAULT_EMAIL=admin@biuai.com
-      - PGADMIN_DEFAULT_PASSWORD=biuai123
-    depends_on:
-      - db
-    networks:
-      - app-network
 
   # Redis
   redis:
-    image: redis:alpine
+    image: redis:7-alpine
     ports:
       - "6379:6379"
     volumes:
@@ -121,112 +87,139 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-    networks:
-      - app-network
 
   # Jupyter Notebook
   jupyter:
-    build:
-      context: ./jupyter
-      dockerfile: Dockerfile
+    build: ./jupyter
+    volumes:
+      - ./jupyter/notebooks:/notebooks
+      - ./data:/data
     ports:
       - "8888:8888"
-    volumes:
-      - ./jupyter:/home/jovyan/work
-      - ./data:/home/jovyan/data
     environment:
-      - POSTGRES_HOST=db
-      - POSTGRES_PORT=5432
-      - POSTGRES_DB=biuai
-      - POSTGRES_USER=biuai
-      - POSTGRES_PASSWORD=biuai123
-    depends_on:
-      - db
-    networks:
-      - app-network
+      JUPYTER_ENABLE_LAB: "yes"
+    command: jupyter lab --ip=0.0.0.0 --port=8888 --no-browser --allow-root --NotebookApp.token=''
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8888"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
 
-  # MCP Memory Server - Mem0 AI
-  mcp-memory-server:
-    build:
-      context: ./mcp-memory-service
-      dockerfile: Dockerfile
-    ports:
-      - "8001:8001"
+  # MCP Memory Service
+  mcp-memory-service:
+    build: ./mcp-memory-service
+    container_name: biuai-memory-service
     volumes:
       - ./mcp-memory-service:/app
-      - mcp_memory_data:/app/data
+      - ./data:/app/data
+    ports:
+      - "8001:8001"
     environment:
-      - MCP_SERVER_HOST=0.0.0.0
-      - MCP_SERVER_PORT=8001
-      - MEM0_API_KEY=a4ed31ec-0cee-4385-b796-4dd33ef1ffb9
-      - MEM0_PROFILE=resident-coral-8A1GGg
-      - MEM0_SERVER_URL=https://server.smithery.ai/@mem0ai/mem0-memory-mcp/mcp
+      DEBUG: "true"
+      DATA_DIR: /app/data
+      MCP_SERVER_HOST: "0.0.0.0"
+      MCP_SERVER_PORT: "8001"
+      MEM0_API_KEY: "${MEM0_API_KEY:-default_key_for_development}"
+      MEM0_PROFILE: "${MEM0_PROFILE:-biuai_development}"
+      MEM0_SERVER_URL: "${MEM0_SERVER_URL:-http://localhost:8001}"
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8001/health"]
-      interval: 15s
-      timeout: 10s
+      test: ["CMD-SHELL", "curl -f http://localhost:8001/health || exit 1"]
+      interval: 10s
+      timeout: 5s
       retries: 5
-    networks:
-      - app-network
 
-  # Ollama - IA Local Gratuita
+  # MCP Chatbot Service
+  mcp-chatbot-service:
+    build: ./mcp-chatbot-service
+    container_name: biuai-chatbot
+    volumes:
+      - ./mcp-chatbot-service:/app
+      - ./data:/app/data
+    ports:
+      - "8002:8002"
+    environment:
+      DEBUG: "true"
+      OLLAMA_BASE_URL: http://ollama:11434
+      BOT_NAME: "Bi UAI Bot Administrador"
+      DATA_DIR: /app/data
+    depends_on:
+      - ollama
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8002/health || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Ollama - IA Local Simplificada
   ollama:
     image: ollama/ollama:latest
+    container_name: biuai-ollama
     ports:
       - "11434:11434"
     volumes:
       - ollama_data:/root/.ollama
+    restart: unless-stopped
     environment:
-      - OLLAMA_MODELS=/root/.ollama/models
+      - OLLAMA_ORIGINS=*
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:11434/api/tags"]
-      interval: 30s
-      timeout: 10s
+      test: ["CMD-SHELL", "curl -f http://localhost:11434/api/health || exit 1"]
+      interval: 10s
+      timeout: 5s
       retries: 5
-    networks:
-      - app-network
+      start_period: 30s
     deploy:
       resources:
+        limits:
+          memory: 4G
         reservations:
-          memory: 2G
+          memory: 1G
 
-  # MCP Chatbot Service - Bi UAI Bot
-  mcp-chatbot-service:
-    build:
-      context: ./mcp-chatbot-service
-      dockerfile: Dockerfile
-    ports:
-      - "8002:8002"
+  # ML Service
+  ml-service:
+    build: ./ml_service
+    container_name: biuai-ml-service
     volumes:
-      - ./mcp-chatbot-service:/app
-      - chatbot_data:/app/data
+      - ./ml_service:/app
+      - ./data:/app/data
+    ports:
+      - "8003:8003"
     environment:
-      - MCP_SERVER_HOST=0.0.0.0
-      - MCP_SERVER_PORT=8002
-      - OLLAMA_BASE_URL=http://ollama:11434
-      - BACKEND_API_URL=http://backend:3000
-      - REDIS_URL=redis://redis:6379/1
-      - BOT_NAME=Bi UAI Bot Administrador
-    depends_on:
-      - ollama
-      - backend
-      - redis
+      DEBUG: "true"
+      MODEL_PATH: /app/models
+      DATA_DIR: /app/data
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8002/health"]
-      interval: 15s
-      timeout: 10s
+      test: ["CMD-SHELL", "curl -f http://localhost:8003/health || exit 1"]
+      interval: 10s
+      timeout: 5s
       retries: 5
-    networks:
-      - app-network
+
+  # ETL Service
+  etl-service:
+    build: ./etl_service
+    container_name: biuai-etl-service
+    volumes:
+      - ./etl_service:/app
+      - ./data:/app/data
+    environment:
+      DEBUG: "true"
+      DATA_DIR: /app/data
+    depends_on:
+      - db
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8004/health || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
 networks:
-  app-network:
+  default:
+    name: biuai-network
     driver: bridge
 
 volumes:
   postgres_data:
   redis_data:
-  model_artifacts:
-  mcp_memory_data:
   ollama_data:
-  chatbot_data: 
+  mcp_memory_data:
+  chatbot_data:
+  backend_logs: 

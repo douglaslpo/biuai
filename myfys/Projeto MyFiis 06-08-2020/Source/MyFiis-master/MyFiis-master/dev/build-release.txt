@@ -1,0 +1,14 @@
+#Android
+./gradlew bundleRelease  #Google's preferred format for uploading to the Play Store.
+
+./gradlew assembleRelease    #Release apk of your app
+
+
+#Ios
+- exec
+react-native bundle --entry-file index.js --platform ios --dev false --bundle-output ios/main.jsbundle --assets-dest ios
+
+- open Xcode
+xed ./ios
+
+- Edit the scheme from Xcode, Run -> Release.

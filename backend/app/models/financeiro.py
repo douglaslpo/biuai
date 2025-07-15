@@ -23,6 +23,8 @@ class Categoria(Base):
     descricao = Column(String, nullable=True)
     user_id = Column(Integer, ForeignKey("users.id"))
     
+    # Relacionamentos
+    user = relationship("User", back_populates="categorias")
     lancamentos = relationship("Lancamento", back_populates="categoria")
     
     created_at = Column(DateTime(timezone=True), server_default=func.now())
@@ -42,6 +44,8 @@ class Conta(Base):
     ativa = Column(String, default="true")  # Para desativar contas sem deletar
     user_id = Column(Integer, ForeignKey("users.id"))
     
+    # Relacionamentos
+    user = relationship("User", back_populates="contas")
     lancamentos = relationship("Lancamento", back_populates="conta")
     
     created_at = Column(DateTime(timezone=True), server_default=func.now())
@@ -63,6 +67,9 @@ class Lancamento(Base):
     conta_id = Column(Integer, ForeignKey("contas.id"), nullable=True)
     conta = relationship("Conta", back_populates="lancamentos")
     
+    # Relacionamentos
+    user = relationship("User", back_populates="lancamentos")
+    
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), onupdate=func.now())
 
@@ -80,7 +87,8 @@ class MetaFinanceira(Base):
     user_id = Column(Integer, ForeignKey("users.id"))
     categoria_id = Column(Integer, ForeignKey("categorias.id"), nullable=True)
     
-    # Relacionamento opcional com categoria
+    # Relacionamentos
+    user = relationship("User", back_populates="metas")
     categoria = relationship("Categoria")
     
     created_at = Column(DateTime(timezone=True), server_default=func.now())

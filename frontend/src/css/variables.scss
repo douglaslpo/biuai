@@ -1,9 +1,4 @@
-// Variáveis Vuetify personalizadas para BIUAI
-@use 'vuetify/settings' with (
-  $color-pack: false
-);
-
-// Cores do tema BIUAI
+// Variáveis do Design System BIUAI
 $primary: #1976D2;
 $primary-lighten-1: #42A5F5;
 $primary-lighten-2: #64B5F6;
@@ -13,14 +8,14 @@ $primary-darken-2: #0D47A1;
 $secondary: #43A047;
 $secondary-lighten-1: #66BB6A;
 $secondary-lighten-2: #81C784;
-$secondary-darken-1: #388E3C;
-$secondary-darken-2: #2E7D32;
+$secondary-darken-1: #2E7D32;
+$secondary-darken-2: #1B5E20;
 
-$accent: #FF6F00;
-$error: #E53935;
-$warning: #FB8C00;
-$info: #1E88E5;
-$success: #43A047;
+$accent: #FF5722;
+$error: #FF5252;
+$info: #2196F3;
+$success: #4CAF50;
+$warning: #FFC107;
 
 // Tons de cinza
 $grey-lighten-5: #FAFAFA;
@@ -75,31 +70,19 @@ $elevation-umbra: (
   24: rgba(0, 0, 0, 0.24)
 );
 
-// Espaçamento (grid de 8px)
-$spacer: 8px;
-$spacers: (
-  0: 0,
-  1: $spacer * 0.5,    // 4px
-  2: $spacer * 1,      // 8px
-  3: $spacer * 1.5,    // 12px
-  4: $spacer * 2,      // 16px
-  5: $spacer * 2.5,    // 20px
-  6: $spacer * 3,      // 24px
-  8: $spacer * 4,      // 32px
-  10: $spacer * 5,     // 40px
-  12: $spacer * 6,     // 48px
-  16: $spacer * 8      // 64px
-);
+// Espaçamento
+$spacing-unit: 4px;
+$spacing-xs: $spacing-unit;
+$spacing-sm: $spacing-unit * 2;
+$spacing-md: $spacing-unit * 4;
+$spacing-lg: $spacing-unit * 6;
+$spacing-xl: $spacing-unit * 8;
 
 // Breakpoints
-$breakpoints: (
-  'xs': 0,
-  'sm': 600px,
-  'md': 960px,
-  'lg': 1280px,
-  'xl': 1920px,
-  'xxl': 2560px
-);
+$breakpoint-xs: 600px;
+$breakpoint-sm: 960px;
+$breakpoint-md: 1264px;
+$breakpoint-lg: 1904px;
 
 // Componentes específicos
 $btn-border-radius: $border-radius-root;
@@ -121,4 +104,4 @@ $density: (
   'default': 0,
   'comfortable': -1,
   'compact': -2
-); 
+);

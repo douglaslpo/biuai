@@ -27,8 +27,12 @@ except ImportError:
 async def create_admin_user():
     """Criar usuário admin na tabela users (atual)"""
     
-    # Conectar ao banco (usando localhost para execução local)
-    database_url = "postgresql+asyncpg://biuai:biuai123@localhost:5432/biuai"
+    # Conectar ao banco (usando variáveis de ambiente ou padrão Docker Compose)
+    POSTGRES_SERVER = os.environ.get("POSTGRES_SERVER", "db")
+    POSTGRES_USER = os.environ.get("POSTGRES_USER", "biuai")
+    POSTGRES_PASSWORD = os.environ.get("POSTGRES_PASSWORD", "biuai123")
+    POSTGRES_DB = os.environ.get("POSTGRES_DB", "biuai")
+    database_url = f"postgresql+asyncpg://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_SERVER}:5432/{POSTGRES_DB}"
     engine = create_async_engine(database_url, echo=False)  # Reduzir verbosidade
     
     async_session = sessionmaker(
@@ -103,7 +107,11 @@ async def create_admin_user():
 
 async def verify_tables():
     """Verificar quais tabelas de usuários existem"""
-    database_url = "postgresql+asyncpg://biuai:biuai123@localhost:5432/biuai"
+    POSTGRES_SERVER = os.environ.get("POSTGRES_SERVER", "db")
+    POSTGRES_USER = os.environ.get("POSTGRES_USER", "biuai")
+    POSTGRES_PASSWORD = os.environ.get("POSTGRES_PASSWORD", "biuai123")
+    POSTGRES_DB = os.environ.get("POSTGRES_DB", "biuai")
+    database_url = f"postgresql+asyncpg://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_SERVER}:5432/{POSTGRES_DB}"
     engine = create_async_engine(database_url, echo=False)
     
     async_session = sessionmaker(

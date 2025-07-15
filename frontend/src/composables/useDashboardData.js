@@ -1,7 +1,5 @@
-import { ref, reactive, computed, onMounted, onUnmounted } from 'vue'
-import { storeToRefs } from 'pinia'
-import { useLancamentosStore } from '@/stores/lancamentos'
 import { api } from '@/boot/axios'
+import { onMounted, onUnmounted, ref } from 'vue'
 
 export function useDashboardData() {
   // States
@@ -120,6 +118,7 @@ export function useDashboardData() {
       await Promise.all([
         loadSummaryData(),
         loadInsightsData(),
+        loadAlertsData(),
         loadKPIsData(),
         loadTrendsData(),
         loadGoalsData()
@@ -163,49 +162,63 @@ export function useDashboardData() {
   const loadInsightsData = async () => {
     loadingInsights.value = true
     try {
-      // Simular carregamento de insights baseados em dados reais
-      await new Promise(resolve => setTimeout(resolve, 800))
+      // Buscar insights reais da API
+      const response = await api.get('/api/v1/analytics/insights')
       
-      // Insights baseados nos dados do summary
-      const dynamicInsights = []
-      
-      if (summary.value.saldo > 0) {
-        dynamicInsights.push({
-          id: Date.now() + 1,
-          title: 'Saldo Positivo Mantido',
-          type: 'success',
-          icon: 'mdi-check-circle',
-          description: `Seu saldo está positivo em ${formatCurrency(summary.value.saldo)}`,
-          priority: 'medium',
-          actionable: false
-        })
-      }
+      if (response.data && response.data.insights) {
+        insights.value = response.data.insights.map(insight => ({
+          id: insight.id,
+          title: insight.title,
+          type: insight.type || 'info',
+          icon: insight.icon || 'mdi-lightbulb',
+          description: insight.description,
+          priority: insight.priority || 'medium',
+          actionable: insight.actionable || false,
+          color: insight.color || 'primary',
+          data: insight.data || {}
+        }))
+      } else {
+        // Fallback para insights baseados nos dados do summary
+        const dynamicInsights = []
+        
+        if (summary.value.saldo > 0) {
+          dynamicInsights.push({
+            id: Date.now() + 1,
+            title: 'Saldo Positivo Mantido',
+            type: 'success',
+            icon: 'mdi-check-circle',
+            description: `Seu saldo está positivo em ${formatCurrency(summary.value.saldo)}`,
+            priority: 'medium',
+            actionable: false
+          })
+        }
 
-      if (summary.value.crescimento_receitas > 10) {
-        dynamicInsights.push({
-          id: Date.now() + 2,
-          title: 'Receitas em Crescimento',
-          type: 'success',
-          icon: 'mdi-trending-up',
-          description: `Suas receitas cresceram ${summary.value.crescimento_receitas}% no período`,
-          priority: 'high',
-          actionable: false
-        })
-      }
+        if (summary.value.crescimento_receitas > 10) {
+          dynamicInsights.push({
+            id: Date.now() + 2,
+            title: 'Receitas em Crescimento',
+            type: 'success',
+            icon: 'mdi-trending-up',
+            description: `Suas receitas cresceram ${summary.value.crescimento_receitas}% no período`,
+            priority: 'high',
+            actionable: false
+          })
+        }
 
-      if (summary.value.total_lancamentos < 10) {
-        dynamicInsights.push({
-          id: Date.now() + 3,
-          title: 'Poucos Lançamentos',
-          type: 'info',
-          icon: 'mdi-information',
-          description: 'Registre mais transações para análises precisas',
-          priority: 'medium',
-          actionable: true
-        })
-      }
+        if (summary.value.total_lancamentos < 10) {
+          dynamicInsights.push({
+            id: Date.now() + 3,
+            title: 'Poucos Lançamentos',
+            type: 'info',
+            icon: 'mdi-information',
+            description: 'Registre mais transações para análises precisas',
+            priority: 'medium',
+            actionable: true
+          })
+        }
 
-      insights.value = [...insights.value, ...dynamicInsights].slice(0, 5)
+        insights.value = dynamicInsights.slice(0, 5)
+      }
     } catch (error) {
       console.error('Erro ao carregar insights:', error)
     } finally {
@@ -307,6 +320,42 @@ export function useDashboardData() {
       }
     } finally {
       loadingGoals.value = false
+    }
+  }
+
+  const loadAlertsData = async () => {
+    try {
+      // Buscar alertas reais da API
+      const response = await api.get('/api/v1/analytics/alerts')
+      
+      if (response.data && response.data.alerts) {
+        alerts.value = response.data.alerts.map(alert => ({
+          id: alert.id,
+          type: alert.type || 'info',
+          title: alert.title,
+          message: alert.message,
+          severity: alert.severity || 'medium',
+          icon: alert.icon || 'mdi-alert',
+          dismissible: alert.dismissible !== false,
+          action: alert.action || '',
+          data: alert.data || {}
+        }))
+      } else {
+        // Fallback para alertas estáticos
+        alerts.value = [
+          {
+            id: 1,
+            type: 'warning',
+            title: 'Limite de Gastos',
+            message: 'Você está próximo do limite mensal de gastos',
+            dismissible: true,
+            action: 'Ver Detalhes'
+          }
+        ]
+      }
+    } catch (error) {
+      console.error('Erro ao carregar alertas:', error)
+      // Manter alertas existentes em caso de erro
     }
   }
 

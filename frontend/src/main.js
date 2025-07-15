@@ -1,17 +1,22 @@
-import { createApp } from 'vue'
 import { createPinia } from 'pinia'
+import { createApp } from 'vue'
+import App from './App.vue'
+import { loadFonts } from './plugins/webfontloader'
 import router from './router'
 
+// Importar módulo MyFIIs
+import MyFIIs from '@/modules/myfiis'
+
 // Vuetify
-import 'vuetify/styles'
-import './css/variables.scss'
-import './css/app.scss'
+import '@mdi/font/css/materialdesignicons.css'
 import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
-import '@mdi/font/css/materialdesignicons.css'
+import 'vuetify/styles'
 
-import App from './App.vue'
+// Custom styles
+import '@/css/app.scss'
+import '@/css/variables.scss'
 
 // Tema personalizado BIUAI completo
 const biuaiTheme = {
@@ -25,27 +30,17 @@ const biuaiTheme = {
     secondary: '#43A047',
     'secondary-lighten-1': '#66BB6A',
     'secondary-lighten-2': '#81C784',
-    'secondary-darken-1': '#388E3C',
-    'secondary-darken-2': '#2E7D32',
-    accent: '#FF6F00',
-    error: '#E53935',
-    info: '#1E88E5',
-    success: '#43A047',
-    warning: '#FB8C00',
-    background: '#FAFAFA',
-    surface: '#FFFFFF',
-    'surface-variant': '#F8F9FA',
-    'on-surface': '#212121',
-    'on-primary': '#FFFFFF',
-    'on-secondary': '#FFFFFF',
-    'on-background': '#212121',
-    'on-error': '#FFFFFF',
-    'on-info': '#FFFFFF',
-    'on-success': '#FFFFFF',
-    'on-warning': '#000000'
+    'secondary-darken-1': '#2E7D32',
+    'secondary-darken-2': '#1B5E20',
+    accent: '#FF5722',
+    error: '#FF5252',
+    info: '#2196F3',
+    success: '#4CAF50',
+    warning: '#FFC107'
   }
 }
 
+// Configuração do Vuetify
 const vuetify = createVuetify({
   components,
   directives,
@@ -54,36 +49,20 @@ const vuetify = createVuetify({
     themes: {
       biuaiTheme
     }
-  },
-  defaults: {
-    VBtn: {
-      style: 'text-transform: none; font-weight: 600;',
-      rounded: 'lg'
-    },
-    VCard: {
-      elevation: 2,
-      rounded: 'lg'
-    },
-    VTextField: {
-      variant: 'outlined',
-      density: 'comfortable'
-    },
-    VSelect: {
-      variant: 'outlined',
-      density: 'comfortable'
-    },
-    VTextarea: {
-      variant: 'outlined',
-      density: 'comfortable'
-    }
   }
 })
 
+// Criar e configurar app
 const app = createApp(App)
-const pinia = createPinia()
 
-app.use(pinia)
+// Plugins e configurações
+app.use(createPinia())
 app.use(router)
 app.use(vuetify)
+app.use(MyFIIs)
 
+// Carregar fontes
+loadFonts()
+
+// Montar app
 app.mount('#app') 

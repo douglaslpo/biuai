@@ -1,3 +1,7 @@
+@forward 'vuetify/settings' with ($color-pack: false);
+@use 'vuetify/styles';
+@use './variables' as *;
+
 // Variáveis do Design System BIUAI
 :root {
   // Cores principais
@@ -29,18 +33,18 @@
   --biuai-surface: #FFFFFF;
   --biuai-surface-variant: #F8F9FA;
   --biuai-background: #FAFAFA;
-  
+
   // Sombras
-  --biuai-shadow-light: 0 2px 4px rgba(0,0,0,0.08);
-  --biuai-shadow-medium: 0 4px 12px rgba(0,0,0,0.12);
-  --biuai-shadow-strong: 0 8px 24px rgba(0,0,0,0.16);
-  
+  --biuai-shadow-light: 0 2px 4px rgba(0, 0, 0, 0.08);
+  --biuai-shadow-medium: 0 4px 12px rgba(0, 0, 0, 0.12);
+  --biuai-shadow-strong: 0 8px 24px rgba(0, 0, 0, 0.16);
+
   // Border radius
   --biuai-radius-sm: 4px;
   --biuai-radius-md: 8px;
   --biuai-radius-lg: 12px;
   --biuai-radius-xl: 16px;
-  
+
   // Espaçamento (grid 8px)
   --biuai-space-xs: 4px;
   --biuai-space-sm: 8px;
@@ -51,15 +55,59 @@
 }
 
 // Tipografia
-.biuai-text-h1 { font-size: 2.5rem; font-weight: 600; line-height: 1.2; }
-.biuai-text-h2 { font-size: 2rem; font-weight: 600; line-height: 1.25; }
-.biuai-text-h3 { font-size: 1.75rem; font-weight: 600; line-height: 1.3; }
-.biuai-text-h4 { font-size: 1.5rem; font-weight: 600; line-height: 1.35; }
-.biuai-text-h5 { font-size: 1.25rem; font-weight: 600; line-height: 1.4; }
-.biuai-text-h6 { font-size: 1.125rem; font-weight: 600; line-height: 1.45; }
-.biuai-text-body1 { font-size: 1rem; font-weight: 400; line-height: 1.5; }
-.biuai-text-body2 { font-size: 0.875rem; font-weight: 400; line-height: 1.55; }
-.biuai-text-caption { font-size: 0.75rem; font-weight: 400; line-height: 1.6; }
+.biuai-text-h1 {
+  font-size: 2.5rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.biuai-text-h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.biuai-text-h3 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.biuai-text-h4 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.biuai-text-h5 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.biuai-text-h6 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+.biuai-text-body1 {
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.biuai-text-body2 {
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.55;
+}
+
+.biuai-text-caption {
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 1.6;
+}
 
 // Componentes customizados
 .biuai-card {
@@ -67,15 +115,15 @@
   border-radius: var(--biuai-radius-lg);
   box-shadow: var(--biuai-shadow-light);
   transition: all 0.3s ease;
-  
+
   &:hover {
     box-shadow: var(--biuai-shadow-medium);
     transform: translateY(-2px);
   }
-  
+
   &.biuai-card-elevated {
     box-shadow: var(--biuai-shadow-medium);
-    
+
     &:hover {
       box-shadow: var(--biuai-shadow-strong);
       transform: translateY(-4px);
@@ -89,22 +137,22 @@
   text-transform: none;
   letter-spacing: 0.02em;
   transition: all 0.2s ease;
-  
+
   &.biuai-btn-primary {
     background: var(--biuai-primary);
     color: white;
-    
+
     &:hover {
       background: var(--biuai-primary-dark);
       transform: translateY(-1px);
       box-shadow: var(--biuai-shadow-medium);
     }
   }
-  
+
   &.biuai-btn-secondary {
     background: var(--biuai-secondary);
     color: white;
-    
+
     &:hover {
       background: var(--biuai-secondary-dark);
       transform: translateY(-1px);
@@ -128,17 +176,17 @@
   border-radius: var(--biuai-radius-lg);
   box-shadow: var(--biuai-shadow-light);
   padding: var(--biuai-space-lg);
-  
+
   &.positive {
     background: linear-gradient(135deg, var(--biuai-success) 0%, #388E3C 100%);
     color: white;
   }
-  
+
   &.negative {
     background: linear-gradient(135deg, var(--biuai-error) 0%, #C62828 100%);
     color: white;
   }
-  
+
   &.warning {
     background: linear-gradient(135deg, var(--biuai-warning) 0%, #E65100 100%);
     color: white;
@@ -159,7 +207,7 @@
 .biuai-loading {
   position: relative;
   overflow: hidden;
-  
+
   &::after {
     content: '';
     position: absolute;
@@ -167,14 +215,19 @@
     left: -100%;
     height: 100%;
     width: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
     animation: biuai-shimmer 1.5s infinite;
   }
 }
 
 @keyframes biuai-shimmer {
-  0% { left: -100%; }
-  100% { left: 100%; }
+  0% {
+    left: -100%;
+  }
+
+  100% {
+    left: 100%;
+  }
 }
 
 .biuai-fade-enter-active,
@@ -193,7 +246,7 @@
     padding: var(--biuai-space-lg);
     margin: var(--biuai-space-md);
   }
-  
+
   .biuai-dashboard-card {
     padding: var(--biuai-space-md);
   }
@@ -218,13 +271,114 @@
 }
 
 // Utilitários
-.biuai-text-primary { color: var(--biuai-primary) !important; }
-.biuai-text-secondary { color: var(--biuai-secondary) !important; }
-.biuai-text-success { color: var(--biuai-success) !important; }
-.biuai-text-error { color: var(--biuai-error) !important; }
-.biuai-text-warning { color: var(--biuai-warning) !important; }
+.biuai-text-primary {
+  color: var(--biuai-primary) !important;
+}
 
-.biuai-bg-primary { background-color: var(--biuai-primary) !important; }
-.biuai-bg-secondary { background-color: var(--biuai-secondary) !important; }
-.biuai-bg-surface { background-color: var(--biuai-surface) !important; }
-.biuai-bg-background { background-color: var(--biuai-background) !important; } 
+.biuai-text-secondary {
+  color: var(--biuai-secondary) !important;
+}
+
+.biuai-text-success {
+  color: var(--biuai-success) !important;
+}
+
+.biuai-text-error {
+  color: var(--biuai-error) !important;
+}
+
+.biuai-text-warning {
+  color: var(--biuai-warning) !important;
+}
+
+.biuai-bg-primary {
+  background-color: var(--biuai-primary) !important;
+}
+
+.biuai-bg-secondary {
+  background-color: var(--biuai-secondary) !important;
+}
+
+.biuai-bg-surface {
+  background-color: var(--biuai-surface) !important;
+}
+
+.biuai-bg-background {
+  background-color: var(--biuai-background) !important;
+}
+
+// Estilos globais
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// Layout
+.page-container {
+  padding: $spacing-md;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+// Cards
+.card {
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background: white;
+  padding: $spacing-md;
+  margin-bottom: $spacing-md;
+}
+
+// Botões
+.btn {
+  text-transform: none !important;
+  letter-spacing: normal !important;
+  font-weight: 500;
+
+  &--primary {
+    background-color: $primary !important;
+    color: white;
+  }
+
+  &--secondary {
+    background-color: $secondary !important;
+    color: white;
+  }
+}
+
+// Formulários
+.form-field {
+  margin-bottom: $spacing-md;
+}
+
+// Tabelas
+.v-data-table {
+  border-radius: 8px;
+  overflow: hidden;
+
+  .v-data-table__wrapper {
+    border-radius: 8px;
+  }
+
+  th {
+    font-weight: 500 !important;
+    text-transform: none !important;
+    white-space: nowrap;
+  }
+}
+
+// Responsividade
+@media (max-width: $breakpoint-sm) {
+  .page-container {
+    padding: $spacing-sm;
+  }
+
+  .card {
+    padding: $spacing-sm;
+    margin-bottom: $spacing-sm;
+  }
+}

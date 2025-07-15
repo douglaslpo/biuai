@@ -1,0 +1,144 @@
+{
+    "module": {
+        "name": "myfiis",
+        "title": "MyFIIs - Gestão de Fundos Imobiliários",
+        "description": "Módulo para análise e gestão de Fundos de Investimento Imobiliário (FIIs)",
+        "version": "1.0.0",
+        "enabled": true,
+        "requires_auth": true
+    },
+    "roles": {
+        "admin": {
+            "description": "Administrador do módulo",
+            "permissions": [
+                "myfiis:admin",
+                "myfiis:read",
+                "myfiis:write",
+                "myfiis:delete",
+                "myfiis:manage_users"
+            ]
+        },
+        "manager": {
+            "description": "Gestor de carteira",
+            "permissions": [
+                "myfiis:read",
+                "myfiis:write",
+                "myfiis:analyze"
+            ]
+        },
+        "user": {
+            "description": "Usuário padrão",
+            "permissions": [
+                "myfiis:read",
+                "myfiis:portfolio_write"
+            ]
+        },
+        "viewer": {
+            "description": "Visualizador",
+            "permissions": [
+                "myfiis:read"
+            ]
+        }
+    },
+    "permissions": {
+        "myfiis:admin": {
+            "description": "Acesso total ao módulo",
+            "endpoints": [
+                "*"
+            ]
+        },
+        "myfiis:read": {
+            "description": "Visualizar FIIs e análises",
+            "endpoints": [
+                "GET /api/v1/myfiis",
+                "GET /api/v1/myfiis/search",
+                "GET /api/v1/myfiis/{fii_id}",
+                "GET /api/v1/myfiis/{fii_id}/analysis",
+                "GET /api/v1/myfiis/{fii_id}/similar",
+                "GET /api/v1/myfiis/{fii_id}/historical"
+            ]
+        },
+        "myfiis:write": {
+            "description": "Criar e atualizar FIIs",
+            "endpoints": [
+                "POST /api/v1/myfiis",
+                "PUT /api/v1/myfiis/{fii_id}"
+            ]
+        },
+        "myfiis:delete": {
+            "description": "Remover FIIs",
+            "endpoints": [
+                "DELETE /api/v1/myfiis/{fii_id}"
+            ]
+        },
+        "myfiis:portfolio_write": {
+            "description": "Gerenciar carteira pessoal",
+            "endpoints": [
+                "GET /api/v1/myfiis/portfolio",
+                "POST /api/v1/myfiis/portfolio",
+                "PUT /api/v1/myfiis/portfolio/{fii_id}",
+                "DELETE /api/v1/myfiis/portfolio/{fii_id}",
+                "POST /api/v1/myfiis/{fii_id}/favorite",
+                "POST /api/v1/myfiis/{fii_id}/alert"
+            ]
+        },
+        "myfiis:analyze": {
+            "description": "Executar análises avançadas",
+            "endpoints": [
+                "POST /api/v1/myfiis/{fii_id}/analysis",
+                "POST /api/v1/myfiis/batch-analysis"
+            ]
+        },
+        "myfiis:manage_users": {
+            "description": "Gerenciar acesso de usuários",
+            "endpoints": [
+                "GET /api/v1/myfiis/users",
+                "POST /api/v1/myfiis/users",
+                "PUT /api/v1/myfiis/users/{user_id}",
+                "DELETE /api/v1/myfiis/users/{user_id}"
+            ]
+        }
+    },
+    "feature_flags": {
+        "ai_analysis": {
+            "enabled": true,
+            "description": "Análise de FIIs com IA",
+            "requires_permission": "myfiis:analyze"
+        },
+        "real_time_data": {
+            "enabled": true,
+            "description": "Dados em tempo real",
+            "requires_permission": "myfiis:read"
+        },
+        "portfolio_alerts": {
+            "enabled": true,
+            "description": "Alertas de preço",
+            "requires_permission": "myfiis:portfolio_write"
+        },
+        "advanced_analytics": {
+            "enabled": true,
+            "description": "Análises avançadas",
+            "requires_permission": "myfiis:analyze"
+        }
+    },
+    "rate_limits": {
+        "default": {
+            "requests_per_minute": 60,
+            "burst": 10
+        },
+        "ai_analysis": {
+            "requests_per_minute": 10,
+            "burst": 3
+        },
+        "portfolio_operations": {
+            "requests_per_minute": 30,
+            "burst": 5
+        }
+    },
+    "security": {
+        "require_2fa": false,
+        "session_timeout": 3600,
+        "max_failed_attempts": 5,
+        "lockout_duration": 300
+    }
+}

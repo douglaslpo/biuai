@@ -11,38 +11,39 @@ import asyncio
 from app.core.config import settings
 from app.models.base import Base
 
-# Global engine instance
-engine: AsyncEngine = None
-async_session_factory: sessionmaker = None
+# Inicialização global do engine e session factory
+engine: AsyncEngine = create_async_engine(
+    settings.DATABASE_URL,
+    echo=settings.DEBUG,
+    future=True,
+    pool_size=10,
+    max_overflow=20,
+    pool_pre_ping=True,
+    pool_recycle=300,
+    connect_args={
+        "server_settings": {
+            "application_name": "biuai_backend",
+        }
+    }
+)
+print(f"[DEBUG][database.py] engine criado: {engine}")
+async_session_factory: sessionmaker = sessionmaker(
+    engine, 
+    class_=AsyncSession, 
+    expire_on_commit=False,
+    autoflush=True,
+    autocommit=False
+)
 
 
 def create_engine() -> AsyncEngine:
     """Create database engine with optimized settings"""
-    return create_async_engine(
-        settings.DATABASE_URL,
-        echo=settings.DEBUG,
-        future=True,
-        pool_size=10,
-        max_overflow=20,
-        pool_pre_ping=True,
-        pool_recycle=300,
-        connect_args={
-            "server_settings": {
-                "application_name": "biuai_backend",
-            }
-        }
-    )
+    return engine
 
 
 def create_session_factory(engine: AsyncEngine) -> sessionmaker:
     """Create session factory"""
-    return sessionmaker(
-        engine, 
-        class_=AsyncSession, 
-        expire_on_commit=False,
-        autoflush=True,
-        autocommit=False
-    )
+    return async_session_factory
 
 
 async def get_session() -> AsyncGenerator[AsyncSession, None]:
@@ -70,16 +71,16 @@ async def init_db():
     
     try:
         # Create engine
-        engine = create_engine()
+        # engine = create_engine() # This line is removed as per the edit hint
         
         # Create session factory
-        async_session_factory = create_session_factory(engine)
+        # async_session_factory = create_session_factory(engine) # This line is removed as per the edit hint
         
         # Test connection
         async with engine.begin() as conn:
             # Import all models to ensure they are registered
             try:
-                from app.models import user, financeiro, usuario
+                from app.models import tenant, user, financeiro, usuario
                 print("✅ Models imported successfully")
             except ImportError as e:
                 print(f"⚠️ Warning importing models: {e}")

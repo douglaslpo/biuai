@@ -26,12 +26,16 @@ from fastapi.openapi.docs import (
     get_swagger_ui_oauth2_redirect_html,
 )
 from fastapi.openapi.utils import get_openapi
+from fastapi.middleware.cors import CORSMiddleware
+from starlette.middleware.sessions import SessionMiddleware
 
 from app.core.config import settings
-from app.database import init_db, close_db
-from app.middleware import setup_middleware, setup_exception_handlers
+from app.database import init_db, close_db, engine, Base, get_db
+from app.core_middleware import setup_middleware, setup_exception_handlers
+from app.middleware.tenant import TenantMiddleware
 from app.api.v1.api import api_router
 from app.core.security import SecurityAudit
+from app.core.init_data import init_data
 
 
 @asynccontextmanager
@@ -40,34 +44,52 @@ async def lifespan(app: FastAPI):
     # Startup
     print("🚀 Iniciando BIUAI API...")
     
-    # Initialize database
-    await init_db()
-    print("✅ Banco de dados inicializado")
-    
-    # Log startup
-    SecurityAudit.log_security_event(
-        "application_startup",
-        details={
-            "environment": settings.ENVIRONMENT,
-            "version": settings.PROJECT_VERSION,
-            "debug": settings.DEBUG
-        }
-    )
-    
-    yield
-    
-    # Shutdown
-    print("🛑 Finalizando BIUAI API...")
-    
-    # Close database connections
-    await close_db()
-    print("✅ Conexões de banco fechadas")
-    
-    # Log shutdown
-    SecurityAudit.log_security_event(
-        "application_shutdown",
-        details={"environment": settings.ENVIRONMENT}
-    )
+    try:
+        # Initialize database
+        await init_db()
+        print(f"[DEBUG] engine após init_db: {engine}")
+        if engine is None:
+            raise RuntimeError("[ERRO CRÍTICO] engine não foi inicializado após init_db(). Verifique a inicialização do banco de dados.")
+        print("✅ Banco de dados inicializado")
+        
+        # Log startup
+        SecurityAudit.log_security_event(
+            "application_startup",
+            details={
+                "environment": settings.ENVIRONMENT,
+                "version": settings.PROJECT_VERSION,
+                "debug": settings.DEBUG
+            }
+        )
+        
+        # Criar tabelas
+        async with engine.begin() as conn:
+            await conn.run_sync(Base.metadata.create_all)
+        
+        # Inicializar dados usando o async generator corretamente
+        async for db in get_db():
+            await init_data(db)
+            break
+        print("✅ Dados iniciais carregados")
+        
+        yield
+        
+    except Exception as e:
+        print(f"❌ Erro durante inicialização: {str(e)}")
+        raise
+    finally:
+        # Shutdown
+        print("🛑 Finalizando BIUAI API...")
+        
+        # Close database connections
+        await close_db()
+        print("✅ Conexões de banco fechadas")
+        
+        # Log shutdown
+        SecurityAudit.log_security_event(
+            "application_shutdown",
+            details={"environment": settings.ENVIRONMENT}
+        )
 
 
 # Create FastAPI application
@@ -135,11 +157,42 @@ setup_middleware(app)
 # Setup exception handlers
 setup_exception_handlers(app)
 
+# Configurar CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=settings.BACKEND_CORS_ORIGINS,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# Configurar sessão
+app.add_middleware(
+    SessionMiddleware,
+    secret_key=settings.SECRET_KEY
+)
+
+# Configurar tenant
+app.add_middleware(TenantMiddleware)
+
 # Include API routes
 app.include_router(api_router, prefix=settings.API_V1_STR)
 
 
 # Health Check Endpoint
+@app.get("/api/v1/health", response_model=Dict[str, Any], tags=["System"])
+async def health_check() -> Dict[str, Any]:
+    """
+    Health check endpoint
+    """
+    return {
+        "status": "healthy",
+        "version": settings.PROJECT_VERSION,
+        "environment": settings.ENVIRONMENT
+    }
+
+
+# Root Endpoint
 @app.get("/", response_model=Dict[str, Any], tags=["System"])
 async def root() -> Dict[str, Any]:
     """
@@ -164,7 +217,7 @@ async def root() -> Dict[str, Any]:
             "docs": "/docs",
             "redoc": "/redoc", 
             "openapi": f"{settings.API_V1_STR}/openapi.json",
-            "health": "/health",
+            "health": "/api/v1/health",
             "metrics": "/metrics"
         }
     }
@@ -258,7 +311,7 @@ def custom_openapi():
     # Add servers information
     openapi_schema["servers"] = [
         {
-            "url": f"http://localhost:3000",
+            "url": f"http://localhost:8000",
             "description": "Servidor de Desenvolvimento"
         },
         {
@@ -326,11 +379,11 @@ async def startup_message():
     print(f"📊 Versão: {settings.PROJECT_VERSION}")
     print(f"🌍 Ambiente: {settings.ENVIRONMENT}")
     print(f"🔧 Debug: {settings.DEBUG}")
-    print(f"🚀 Servidor: http://localhost:3000")
-    print(f"📚 Documentação: http://localhost:3000/docs")
-    print(f"⚡ API: http://localhost:3000{settings.API_V1_STR}")
-    print(f"🔍 Métricas: http://localhost:3000/metrics")
-    print(f"💓 Health: http://localhost:3000/health")
+    print(f"🚀 Servidor: http://localhost:8000")
+    print(f"📚 Documentação: http://localhost:8000/docs")
+    print(f"⚡ API: http://localhost:8000{settings.API_V1_STR}")
+    print(f"🔍 Métricas: http://localhost:8000/metrics")
+    print(f"💓 Health: http://localhost:8000/api/v1/health")
     print("="*60)
     
     if settings.ENVIRONMENT == "development":
@@ -353,7 +406,7 @@ async def custom_404_handler(request: Request, exc):
             "suggestion": "Verifique a documentação em /docs",
             "available_endpoints": [
                 "/docs - Documentação",
-                "/health - Status do sistema", 
+                "/api/v1/health - Status do sistema", 
                 "/metrics - Métricas de performance",
                 f"{settings.API_V1_STR}/auth/login - Login",
                 f"{settings.API_V1_STR}/auth/register - Registro"
@@ -394,7 +447,7 @@ if __name__ == "__main__":
     uvicorn.run(
         "main:app",
         host="0.0.0.0",
-        port=3000,
+        port=8000,
         reload=settings.DEBUG,
         log_level="info" if settings.DEBUG else "warning",
         access_log=settings.DEBUG,

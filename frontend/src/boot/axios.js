@@ -8,14 +8,13 @@ const api = axios.create({
   baseURL: API_URL,
   withCredentials: true,
   timeout: 10000,
-  headers: {
-    'Content-Type': 'application/json'
-  }
+  headers: {}
 })
 
 // Interceptor para adicionar token nas requisições
 api.interceptors.request.use(
   (config) => {
+    // Sempre pegar o token atualizado do localStorage
     const token = localStorage.getItem('token')
     if (token) {
       config.headers.Authorization = `Bearer ${token}`
@@ -43,4 +42,4 @@ api.interceptors.response.use(
   }
 )
 
-export { api } 
+export { api }

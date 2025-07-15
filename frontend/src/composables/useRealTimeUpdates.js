@@ -1,5 +1,5 @@
-import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { api } from '@/boot/axios'
+import { computed, onMounted, onUnmounted, ref } from 'vue'
 
 export function useRealTimeUpdates() {
   // States
@@ -10,7 +10,7 @@ export function useRealTimeUpdates() {
 
   // Data
   const recentTransactions = ref([])
-  const systemStatus = ref('healthy')
+  const systemStatus = ref({})
   
   const systemMetrics = ref({
     api_response_time: 85,
@@ -23,14 +23,7 @@ export function useRealTimeUpdates() {
     uptime_percentage: 99.9
   })
 
-  const systemHealth = ref({
-    overall: 'good',
-    database: 'healthy',
-    cache: 'healthy',
-    api: 'healthy',
-    storage: 'healthy',
-    monitoring: 'active'
-  })
+  const systemHealth = ref(90)
 
   // Computed
   const transactionsSummary = computed(() => {
@@ -48,19 +41,6 @@ export function useRealTimeUpdates() {
       despesas,
       today: todayTransactions
     }
-  })
-
-  const systemHealthScore = computed(() => {
-    const metrics = systemMetrics.value
-    const scores = [
-      100 - metrics.api_response_time, // Menor tempo = melhor
-      (100 - metrics.memory_usage), // Menor uso = melhor
-      (100 - metrics.cpu_usage), // Menor uso = melhor
-      Math.min(100, metrics.uptime_percentage), // Max 100%
-      Math.max(0, 100 - metrics.error_rate * 10) // Menor erro = melhor
-    ]
-    
-    return Math.round(scores.reduce((a, b) => a + b, 0) / scores.length)
   })
 
   // Methods
@@ -97,90 +77,49 @@ export function useRealTimeUpdates() {
   const refreshSystemData = async () => {
     loadingSystem.value = true
     try {
-      // Simular coleta de métricas do sistema
-      await Promise.all([
-        updateSystemMetrics(),
-        updateSystemHealth(),
-        checkSystemStatus()
-      ])
+      // Buscar status real do sistema
+      const response = await api.get('/api/v1/analytics/system-status')
+      
+      if (response.data) {
+        systemStatus.value = {
+          database: response.data.database?.status || 'Conectado',
+          cache: response.data.cache?.status || 'Ativo',
+          ai: response.data.ai?.status || 'Online'
+        }
+        
+        systemHealth.value = response.data.overall?.health || 90
+        
+        // Atualizar métricas se disponíveis
+        if (response.data.metrics) {
+          systemMetrics.value = {
+            ...systemMetrics.value,
+            total_lancamentos: response.data.metrics.total_lancamentos || 0,
+            total_categorias: response.data.metrics.total_categorias || 0,
+            total_metas: response.data.metrics.total_metas || 0,
+            data_completeness: response.data.metrics.data_completeness || 0
+          }
+        }
+      } else {
+        // Fallback para dados padrão
+        systemStatus.value = {
+          database: 'Conectado',
+          cache: 'Ativo', 
+          ai: 'Online'
+        }
+        systemHealth.value = 90
+      }
       
       lastSystemUpdate.value = new Date()
     } catch (error) {
       console.error('Erro ao atualizar dados do sistema:', error)
-      systemStatus.value = 'warning'
+      systemStatus.value = {
+        database: 'Erro de Conexão',
+        cache: 'Desconhecido',
+        ai: 'Offline'
+      }
+      systemHealth.value = 50
     } finally {
       loadingSystem.value = false
-    }
-  }
-
-  const updateSystemMetrics = async () => {
-    try {
-      // Simular métricas do sistema com variações realistas
-      const currentMetrics = systemMetrics.value
-      
-      systemMetrics.value = {
-        api_response_time: Math.max(50, Math.min(200, 
-          currentMetrics.api_response_time + (Math.random() - 0.5) * 20
-        )),
-        database_connections: Math.max(5, Math.min(50,
-          currentMetrics.database_connections + Math.floor((Math.random() - 0.5) * 6)
-        )),
-        memory_usage: Math.max(30, Math.min(95,
-          currentMetrics.memory_usage + (Math.random() - 0.5) * 10
-        )),
-        cpu_usage: Math.max(10, Math.min(90,
-          currentMetrics.cpu_usage + (Math.random() - 0.5) * 15
-        )),
-        active_users: Math.max(1, Math.min(100,
-          currentMetrics.active_users + Math.floor((Math.random() - 0.5) * 3)
-        )),
-        requests_per_minute: Math.max(20, Math.min(200,
-          currentMetrics.requests_per_minute + Math.floor((Math.random() - 0.5) * 20)
-        )),
-        error_rate: Math.max(0, Math.min(5,
-          currentMetrics.error_rate + (Math.random() - 0.5) * 0.5
-        )),
-        uptime_percentage: Math.max(95, Math.min(100,
-          currentMetrics.uptime_percentage + (Math.random() - 0.5) * 0.1
-        ))
-      }
-    } catch (error) {
-      console.error('Erro ao atualizar métricas:', error)
-    }
-  }
-
-  const updateSystemHealth = async () => {
-    try {
-      const metrics = systemMetrics.value
-      
-      // Determinar saúde dos componentes baseado nas métricas
-      systemHealth.value = {
-        overall: determineOverallHealth(),
-        database: metrics.database_connections > 30 ? 'warning' : 'healthy',
-        cache: metrics.memory_usage > 80 ? 'warning' : 'healthy',
-        api: metrics.api_response_time > 150 ? 'warning' : 'healthy',
-        storage: Math.random() > 0.95 ? 'warning' : 'healthy', // Raramente com problema
-        monitoring: 'active'
-      }
-    } catch (error) {
-      console.error('Erro ao atualizar saúde do sistema:', error)
-    }
-  }
-
-  const checkSystemStatus = async () => {
-    try {
-      const healthScore = systemHealthScore.value
-      
-      if (healthScore >= 80) {
-        systemStatus.value = 'healthy'
-      } else if (healthScore >= 60) {
-        systemStatus.value = 'warning'
-      } else {
-        systemStatus.value = 'critical'
-      }
-    } catch (error) {
-      console.error('Erro ao verificar status do sistema:', error)
-      systemStatus.value = 'unknown'
     }
   }
 
@@ -198,8 +137,8 @@ export function useRealTimeUpdates() {
       },
       {
         id: 2,
-        descricao: 'Supermercado - Compras da semana',
-        valor: -320.50,
+        descricao: 'Supermercado - Compras do Mês',
+        valor: -450.80,
         tipo: 'DESPESA',
         data_lancamento: new Date(2025, 0, 24),
         categoria: 'Alimentação',
@@ -207,48 +146,30 @@ export function useRealTimeUpdates() {
       },
       {
         id: 3,
-        descricao: 'Freelance - Projeto de Design',
-        valor: 1200.00,
+        descricao: 'Freelance - Projeto Web',
+        valor: 2500.00,
         tipo: 'RECEITA',
         data_lancamento: new Date(2025, 0, 23),
         categoria: 'Freelance',
-        orgao_nome: 'Cliente DEF'
+        orgao_nome: 'Cliente XYZ'
       },
       {
         id: 4,
-        descricao: 'Conta de Energia Elétrica',
-        valor: -185.90,
+        descricao: 'Combustível',
+        valor: -120.00,
         tipo: 'DESPESA',
         data_lancamento: new Date(2025, 0, 22),
-        categoria: 'Utilities',
-        orgao_nome: 'CEMIG'
+        categoria: 'Transporte',
+        orgao_nome: 'Posto ABC'
       },
       {
         id: 5,
-        descricao: 'Venda de Produto Online',
-        valor: 450.00,
-        tipo: 'RECEITA',
-        data_lancamento: new Date(2025, 0, 21),
-        categoria: 'Vendas',
-        orgao_nome: 'Marketplace'
-      },
-      {
-        id: 6,
-        descricao: 'Gasolina',
-        valor: -120.00,
-        tipo: 'DESPESA',
-        data_lancamento: new Date(2025, 0, 20),
-        categoria: 'Transporte',
-        orgao_nome: 'Posto Shell'
-      },
-      {
-        id: 7,
         descricao: 'Aluguel - Janeiro',
-        valor: -1500.00,
+        valor: -1200.00,
         tipo: 'DESPESA',
-        data_lancamento: new Date(2025, 0, 5),
+        data_lancamento: new Date(2025, 0, 1),
         categoria: 'Moradia',
-        orgao_nome: 'Imobiliária GHI'
+        orgao_nome: 'Imobiliária XYZ'
       }
     ]
 
@@ -262,28 +183,21 @@ export function useRealTimeUpdates() {
     }))
   }
 
-  const determineOverallHealth = () => {
-    const score = systemHealthScore.value
-    if (score >= 85) return 'excellent'
-    if (score >= 70) return 'good'
-    if (score >= 50) return 'fair'
-    return 'poor'
-  }
-
   const getTransactionIcon = (transaction) => {
     if (transaction.tipo === 'RECEITA') {
       return 'mdi-trending-up'
     }
     
-    // Ícones baseados na categoria
+    // Ícones específicos por categoria
     const categoryIcons = {
       'Alimentação': 'mdi-food',
       'Transporte': 'mdi-car',
       'Moradia': 'mdi-home',
-      'Utilities': 'mdi-lightning-bolt',
       'Saúde': 'mdi-medical-bag',
+      'Educação': 'mdi-school',
       'Lazer': 'mdi-gamepad-variant',
-      'Educação': 'mdi-school'
+      'Salário': 'mdi-cash',
+      'Freelance': 'mdi-laptop'
     }
     
     return categoryIcons[transaction.categoria] || 'mdi-trending-down'
@@ -294,68 +208,78 @@ export function useRealTimeUpdates() {
   }
 
   const formatDate = (date) => {
-    if (!date) return ''
-    const d = new Date(date)
-    return d.toLocaleDateString('pt-BR', {
-      day: '2-digit',
-      month: 'short',
-      year: 'numeric'
-    })
+    try {
+      const dateObj = typeof date === 'string' ? new Date(date) : date
+      return dateObj.toLocaleDateString('pt-BR', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric'
+      })
+    } catch (error) {
+      return 'Data inválida'
+    }
   }
 
   const formatCurrency = (value) => {
     return new Intl.NumberFormat('pt-BR', {
       style: 'currency',
       currency: 'BRL'
-    }).format(value || 0)
+    }).format(Math.abs(value) || 0)
   }
 
   const getRelativeTime = (date) => {
-    const now = new Date()
-    const diffInMs = now - new Date(date)
-    const diffInMinutes = Math.floor(diffInMs / (1000 * 60))
-    const diffInHours = Math.floor(diffInMinutes / 60)
-    const diffInDays = Math.floor(diffInHours / 24)
+    try {
+      const now = new Date()
+      const dateObj = typeof date === 'string' ? new Date(date) : date
+      const diffInMs = now - dateObj
+      const diffInHours = diffInMs / (1000 * 60 * 60)
+      const diffInDays = diffInHours / 24
 
-    if (diffInMinutes < 60) {
-      return `${diffInMinutes} min atrás`
-    } else if (diffInHours < 24) {
-      return `${diffInHours}h atrás`
-    } else if (diffInDays < 7) {
-      return `${diffInDays} dias atrás`
-    } else {
-      return formatDate(date)
+      if (diffInHours < 1) {
+        return 'Há poucos minutos'
+      } else if (diffInHours < 24) {
+        const hours = Math.floor(diffInHours)
+        return `Há ${hours} hora${hours > 1 ? 's' : ''}`
+      } else if (diffInDays < 7) {
+        const days = Math.floor(diffInDays)
+        return `Há ${days} dia${days > 1 ? 's' : ''}`
+      } else {
+        return formatDate(dateObj)
+      }
+    } catch (error) {
+      return 'Data inválida'
     }
   }
 
-  // Real-time updates
-  const updateInterval = ref(null)
-  const metricsInterval = ref(null)
+  const getHealthStatus = (health) => {
+    if (health >= 90) return 'Excelente'
+    if (health >= 70) return 'Bom'
+    if (health >= 50) return 'Regular'
+    return 'Crítico'
+  }
+
+  // Auto-refresh setup
+  const refreshInterval = ref(null)
 
   const startRealTimeUpdates = () => {
-    // Atualizar transações a cada 2 minutos
-    updateInterval.value = setInterval(refreshTransactions, 2 * 60 * 1000)
-    
-    // Atualizar métricas do sistema a cada 30 segundos
-    metricsInterval.value = setInterval(refreshSystemData, 30 * 1000)
+    refreshTransactions()
+    refreshSystemData()
+    // Atualizar a cada 30 segundos
+    refreshInterval.value = setInterval(() => {
+      refreshTransactions()
+      refreshSystemData()
+    }, 30000)
   }
 
   const stopRealTimeUpdates = () => {
-    if (updateInterval.value) {
-      clearInterval(updateInterval.value)
-      updateInterval.value = null
-    }
-    
-    if (metricsInterval.value) {
-      clearInterval(metricsInterval.value)
-      metricsInterval.value = null
+    if (refreshInterval.value) {
+      clearInterval(refreshInterval.value)
+      refreshInterval.value = null
     }
   }
 
   // Lifecycle
   onMounted(() => {
-    refreshTransactions()
-    refreshSystemData()
     startRealTimeUpdates()
   })
 
@@ -373,24 +297,20 @@ export function useRealTimeUpdates() {
     // Data
     recentTransactions,
     systemStatus,
-    systemMetrics,
     systemHealth,
+    systemMetrics,
 
     // Computed
     transactionsSummary,
-    systemHealthScore,
 
     // Methods
     refreshTransactions,
     refreshSystemData,
     startRealTimeUpdates,
     stopRealTimeUpdates,
-
-    // Utils
+    getHealthStatus,
     formatDate,
     formatCurrency,
-    getRelativeTime,
-    getTransactionIcon,
-    getTransactionColor
+    getRelativeTime
   }
 } 

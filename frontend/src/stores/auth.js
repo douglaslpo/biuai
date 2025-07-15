@@ -1,6 +1,6 @@
-import { defineStore } from 'pinia'
-import { ref, computed } from 'vue'
 import { api } from '@/boot/axios'
+import { defineStore } from 'pinia'
+import { computed, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
 export const useAuthStore = defineStore('auth', () => {
@@ -25,13 +25,17 @@ export const useAuthStore = defineStore('auth', () => {
       formData.append('username', email)
       formData.append('password', password)
 
-      const response = await api.post('/api/v1/auth/login', formData, {
+      const response = await api.post('/api/v1/auth/login', formData.toString(), {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded'
         }
       })
       
       const { access_token, user: userData } = response.data
+      
+      if (!access_token) {
+        throw new Error('Token não recebido do servidor')
+      }
       
       token.value = access_token
       user.value = userData
@@ -43,6 +47,7 @@ export const useAuthStore = defineStore('auth', () => {
       return { success: true }
     } catch (error) {
       loading.value = false
+      console.error('Erro no login:', error)
       error.value = error.response?.data?.detail || 'Erro no login'
       return { success: false, error: error.value }
     }

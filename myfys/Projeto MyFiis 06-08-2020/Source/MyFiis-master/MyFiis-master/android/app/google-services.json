@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "678786450236",
+    "firebase_url": "https://myfiis-53761.firebaseio.com",
+    "project_id": "myfiis-53761",
+    "storage_bucket": "myfiis-53761.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:678786450236:android:57f4bb3a2affbad6d79439",
+        "android_client_info": {
+          "package_name": "com.myfiis"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "678786450236-0lmrgqg4b5t0hpk8hd488q6h5dit0a78.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCVOstHpjVAwAaYL7sFqLBD3JXYI9t4jm8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "678786450236-0lmrgqg4b5t0hpk8hd488q6h5dit0a78.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

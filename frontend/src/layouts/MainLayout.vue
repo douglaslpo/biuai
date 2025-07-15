@@ -250,8 +250,15 @@ const menuItems = ref([
     route: 'lancamentos'
   },
   {
+    title: 'FIIs',
+    subtitle: 'Fundos Imobiliários',
+    icon: 'mdi-office-building',
+    to: '/fiis',
+    route: 'fiis'
+  },
+  {
     title: 'Categorias',
-    subtitle: 'Organizar gastos',
+    subtitle: 'Gerenciar categorias',
     icon: 'mdi-tag-multiple',
     to: '/categorias',
     route: 'categorias'
@@ -259,16 +266,22 @@ const menuItems = ref([
   {
     title: 'Metas',
     subtitle: 'Objetivos financeiros',
-    icon: 'mdi-target',
+    icon: 'mdi-flag',
     to: '/metas',
     route: 'metas'
   },
   {
     title: 'Contas',
-    subtitle: 'Contas bancárias',
+    subtitle: 'Gerenciar contas',
     icon: 'mdi-bank',
     to: '/contas',
     route: 'contas'
+  },
+  {
+    title: 'MyFIIs',
+    icon: 'mdi-chart-box',
+    to: '/myfiis',
+    route: 'myfiis'
   },
   {
     title: 'Importar Dados',
@@ -321,6 +334,12 @@ const toolItems = computed(() => {
         icon: 'mdi-math-log',
         to: '/admin/logs',
         route: 'logs-sistema'
+      },
+      {
+        title: 'Gestor de Acessos',
+        icon: 'mdi-account-key',
+        to: '/admin/gestor-acessos',
+        route: 'gestor-acessos'
       }
     )
   }

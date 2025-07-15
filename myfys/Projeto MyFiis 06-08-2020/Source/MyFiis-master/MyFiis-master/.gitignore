@@ -1,0 +1,26 @@
+node_modules
+node_modules/**/*
+.expo/*
+npm-debug.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.orig.*
+web-build/
+web-report/
+metro-cache
+
+android/build/
+android/app/build/
+android/.gradle
+android/.gradle/*
+
+ios/Pods
+ios/Pods/*
+ios/myfiis.xcworkspace/xcuserdata
+ios/myfiis.xcodeproj/xcuserdata
+
+# macOS
+.DS_Store

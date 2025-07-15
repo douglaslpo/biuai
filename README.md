@@ -1,268 +1,235 @@
-# 🏦 BIUAI - Business Intelligence Unity with AI
+# BIUAI - Sistema Financeiro Inteligente
 
-Sistema completo de gestão financeira pessoal e empresarial com inteligência artificial integrada.
+Sistema financeiro completo com BI, Machine Learning e Inteligência Artificial.
 
-![BIUAI Logo](public/images/biuai-logo.svg)
+## Arquitetura
 
-## 🌟 Características Principais
+O BIUAI é um sistema SaaS (Software as a Service) modular com suporte a multi-tenancy.
 
-### 💰 Gestão Financeira Completa
-- **Dashboard Interativo**: Métricas em tempo real com gráficos modernos
-- **Lançamentos**: Controle total de receitas e despesas
-- **Categorização Inteligente**: IA para classificação automática
-- **Relatórios Avançados**: Analytics e insights financeiros
-- **Metas e Objetivos**: Acompanhamento de metas financeiras
+### Multi-tenancy
 
-### 🤖 Inteligência Artificial
-- **Chatbot MCP**: Assistente especializado "Bi UAI Bot Administrador"
-- **Base de Conhecimento**: Especializada no sistema BIUAI
-- **Suporte 24/7**: Ajuda contextual e inteligente
-- **Análise Preditiva**: Insights baseados em machine learning
+O sistema suporta múltiplos tenants (empresas/organizações) com:
 
-### 🏗️ Arquitetura Moderna
-- **Microserviços**: Arquitetura escalável e modular
-- **Containerização**: Docker Compose para deploy simplificado
-- **APIs RESTful**: FastAPI com documentação automática
-- **Frontend Reativo**: Vue.js 3 + Vuetify 3
-- **Cache Inteligente**: Redis para performance otimizada
+- Isolamento completo de dados
+- Configurações personalizadas
+- Domínios customizados
+- Features por tenant
+- Limites e quotas
 
-## 🚀 Tecnologias
+### Sistema de Módulos
+
+Módulos disponíveis:
+
+- **CORE** (Gratuito)
+  - Autenticação
+  - Dashboard básico
+  - Gestão de usuários
+  
+- **FINANCIAL** (Gratuito)
+  - Gestão financeira
+  - Categorias
+  - Relatórios básicos
+  
+- **INVESTMENTS** (Pago)
+  - Análise de investimentos
+  - Carteira de FIIs
+  - Simulações
+  
+- **AI_INSIGHTS** (Pago)
+  - Análises com IA
+  - Detecção de padrões
+  - Previsões
+  
+- **CHATBOT** (Pago)
+  - Assistente virtual
+  - Consultas em linguagem natural
+  - Suporte 24/7
+  
+- **ANALYTICS** (Pago)
+  - Relatórios avançados
+  - BI customizado
+  - Exportação de dados
+
+### Hierarquia de Usuários
+
+- **SUPER_ADMIN**: Administrador master do sistema
+- **TENANT_ADMIN**: Administrador do tenant
+- **SUB_ADMIN**: Administrador delegado
+- **USER**: Usuário final
+
+## Características Principais
+
+- **Multi-tenancy**: Isolamento completo de dados por empresa
+- **Modular**: Módulos independentes e plugáveis
+- **Inteligente**: IA e ML integrados em todo sistema
+- **Seguro**: RBAC granular e auditoria completa
+- **Escalável**: Arquitetura distribuída e containerizada
+- **Customizável**: Configurações por tenant e módulo
+
+## Tecnologias
 
 ### Backend
-- **Python 3.11+** - Linguagem principal
-- **FastAPI** - Framework web moderno e performático
-- **PostgreSQL** - Banco de dados robusto
-- **Redis** - Cache e sessões
-- **SQLAlchemy** - ORM avançado com async/await
-- **Pydantic** - Validação de dados
+- FastAPI (API REST)
+- PostgreSQL (Banco de dados)
+- Redis (Cache)
+- Celery (Tarefas assíncronas)
+- Alembic (Migrações)
 
 ### Frontend
-- **Vue.js 3** - Framework JavaScript reativo
-- **Vuetify 3** - Material Design para Vue
-- **Vite** - Build tool moderno
-- **Chart.js** - Gráficos interativos
-- **Axios** - Cliente HTTP
+- Vue.js 3 (Framework)
+- Quasar (UI Framework)
+- Pinia (Gerenciamento de estado)
+- Chart.js (Gráficos)
+- TailwindCSS (Estilização)
 
-### Inteligência Artificial
-- **Ollama** - Modelos de IA locais gratuitos
-- **MCP (Model Context Protocol)** - Comunicação com IA
-- **llama3.2:3b** - Modelo de linguagem principal
-- **Scikit-learn** - Machine Learning
-- **NLTK** - Processamento de linguagem natural
+### Machine Learning
+- TensorFlow
+- scikit-learn
+- pandas
+- numpy
+- Jupyter
 
-### DevOps & Infraestrutura
-- **Docker & Docker Compose** - Containerização
-- **Nginx** - Proxy reverso e servir arquivos estáticos
-- **Jupyter Lab** - Análise de dados
-- **PgAdmin** - Administração do banco
+### DevOps
+- Docker
+- Docker Compose
+- GitHub Actions
+- Prometheus
+- Grafana
 
-## 📦 Instalação Rápida
+## Instalação
 
 ### Pré-requisitos
-- Docker & Docker Compose
-- 4GB+ RAM (recomendado 8GB)
-- 10GB+ espaço livre em disco
 
-### 1. Clone o Repositório
+- Docker e Docker Compose
+- Python 3.10+
+- Node.js 18+
+- PostgreSQL 15+
+
+### Configuração
+
+1. Clone o repositório:
 ```bash
-git clone https://github.com/douglaslpo/biuai.git
+git clone https://github.com/seu-usuario/biuai.git
 cd biuai
 ```
 
-### 2. Inicie o Sistema
+2. Configure as variáveis de ambiente:
 ```bash
-# Dar permissão aos scripts
-chmod +x scripts/*.sh
-
-# Iniciar todos os serviços
-./scripts/start.sh
+cp .env.example .env
+# Edite .env com suas configurações
 ```
 
-### 3. Acesse a Interface
-- **Frontend**: http://localhost:8080
-- **API Docs**: http://localhost:3000/docs
-- **PgAdmin**: http://localhost:5050
-
-## 🔧 Configuração
-
-### Credenciais Padrão
-
-**Aplicação:**
-- Admin: `admin@biuai.com` / `admin123`
-- Demo: `demo@biuai.com` / `demo123`
-
-**PgAdmin:**
-- Email: `admin@biuai.com`
-- Senha: `biuai123`
-
-**Banco de Dados:**
-- Host: `localhost:5432`
-- Database: `biuai`
-- User: `biuai`
-- Password: `biuai123`
-
-## 📊 Serviços e Portas
-
-| Serviço | Porta | Descrição |
-|---------|-------|-----------|
-| Frontend | 8080 | Interface principal |
-| Backend API | 3000 | API REST |
-| PostgreSQL | 5432 | Banco de dados |
-| Redis | 6379 | Cache e sessões |
-| Ollama | 11434 | IA Local |
-| MCP Chatbot | 8002 | Serviço do chatbot |
-| MCP Memory | 8001 | Serviço de memória |
-| Model Server | 8000 | Servidor ML |
-| Jupyter Lab | 8888 | Análise de dados |
-| PgAdmin | 5050 | Admin do banco |
-
-## 🤖 Chatbot "Bi UAI Bot Administrador"
-
-### Funcionalidades
-- **Chat em Tempo Real**: WebSocket para comunicação instantânea
-- **Base de Conhecimento**: Especializada em funcionalidades BIUAI
-- **Sugestões Inteligentes**: Recomendações contextuais
-- **Sistema de Feedback**: Avaliação e melhoria contínua
-- **Interface Moderna**: Modal flutuante responsivo
-
-### Como Usar
-1. Acesse o dashboard principal
-2. Clique no ícone do robô (canto inferior direito)
-3. Digite suas dúvidas em português natural
-4. Use as sugestões rápidas para ações comuns
-
-## 📈 Analytics e Monitoramento
-
-### Dashboard Administrativo
-- Acesse: `/admin/chatbot`
-- Métricas de uso em tempo real
-- Configuração de personalidade
-- Gerenciamento da base de conhecimento
-
-### Logs e Debug
+3. Inicie os containers:
 ```bash
-# Ver logs de um serviço
-docker-compose logs backend
-
-# Ver todos os logs
-docker-compose logs
-
-# Logs em tempo real
-docker-compose logs -f backend
+docker-compose up -d
 ```
 
-## 🔧 Comandos Úteis
-
-### Gerenciamento do Sistema
+4. Execute as migrações:
 ```bash
-# Iniciar sistema
-./scripts/start.sh
-
-# Parar sistema
-./scripts/stop.sh
-
-# Reiniciar
-./scripts/stop.sh && ./scripts/start.sh
-
-# Ver status
-docker-compose ps
+docker-compose exec backend alembic upgrade head
 ```
 
-### Desenvolvimento
+5. Crie o primeiro tenant:
 ```bash
-# Rebuild de um serviço
-docker-compose up --build backend
-
-# Executar no modo dev
-docker-compose -f docker-compose.dev.yml up
-
-# Acessar container
-docker-compose exec backend bash
+curl -X POST http://localhost:8000/api/v1/tenants/register \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Minha Empresa",
+    "slug": "minhaempresa",
+    "admin_email": "admin@minhaempresa.com",
+    "admin_password": "senha123"
+  }'
 ```
 
-### Banco de Dados
-```bash
-# Importar dados SIOG
-python scripts/import_siog_data.py
+## Desenvolvimento
 
-# Criar usuário admin
-python scripts/create_admin_user.py
-
-# Backup do banco
-docker-compose exec db pg_dump -U biuai biuai > backup.sql
-```
-
-## 🏗️ Arquitetura do Sistema
+### Estrutura de Diretórios
 
 ```
-┌─────────────────┐    ┌─────────────────┐
-│   Frontend      │    │   Backend API   │
-│   Vue.js 3      │◄──►│   FastAPI       │
-│   Vuetify 3     │    │   Python 3.11   │
-│   Port: 8080    │    │   Port: 3000    │
-└─────────────────┘    └─────────────────┘
-         │                       │
-         ▼                       ▼
-┌─────────────────┐    ┌─────────────────┐
-│   PostgreSQL    │    │   Redis Cache   │
-│   Port: 5432    │    │   Port: 6379    │
-└─────────────────┘    └─────────────────┘
-         │                       │
-         ▼                       ▼
-┌─────────────────┐    ┌─────────────────┐
-│   MCP Services  │    │   ML Services   │
-│   Chatbot: 8002 │    │   Model: 8000   │
-│   Memory: 8001  │    │   Jupyter: 8888 │
-└─────────────────┘    └─────────────────┘
+biuai/
+├── backend/           # API FastAPI
+│   ├── app/
+│   │   ├── api/      # Endpoints
+│   │   │   ├── core/     # Configurações
+│   │   │   ├── models/   # Modelos SQLAlchemy
+│   │   │   ├── schemas/  # Schemas Pydantic
+│   │   │   └── services/ # Regras de negócio
+│   │   └── tests/        # Testes
+│   └── frontend/         # Frontend Vue.js
+│       ├── src/
+│       │   ├── components/
+│       │   ├── composables/
+│       │   ├── pages/
+│       │   └── stores/
+│       └── tests/
+├── ml_service/       # Serviço de ML
+├── etl_service/      # Serviço de ETL
+├── jupyter/          # Notebooks
+└── modules/         # Módulos
+    ├── financial/
+    ├── investments/
+    ├── ai_insights/
+    └── analytics/
 ```
 
-## 📚 Documentação
-
-- **API**: `/docs` - Documentação interativa da API
-- **Swagger**: `/redoc` - Documentação alternativa
-- **Arquitetura**: `/docs/architecture` - Diagramas e fluxos
-- **Deploy**: `/docs/deploy` - Guias de instalação
-
-## 🧪 Testes
+### Comandos Úteis
 
 ```bash
+# Criar novo módulo
+python scripts/create_module.py nome_modulo
+
+# Gerar migrations
+docker-compose exec backend alembic revision --autogenerate -m "descricao"
+
 # Executar testes
 docker-compose exec backend pytest
+docker-compose exec frontend npm run test
 
-# Testes com coverage
-docker-compose exec backend pytest --cov=app
+# Lint e formatação
+docker-compose exec backend black .
+docker-compose exec frontend npm run lint
 
-# Testes específicos
-docker-compose exec backend pytest tests/test_api.py
+# Build para produção
+docker-compose -f docker-compose.prod.yml build
 ```
 
-## 🤝 Contribuição
+## APIs
+
+### Tenant Management
+
+- `POST /api/v1/tenants/register` - Registra novo tenant
+- `GET /api/v1/tenants/me` - Obtém tenant atual
+- `PUT /api/v1/tenants/me` - Atualiza tenant atual
+- `POST /api/v1/tenants/me/modules/{module}` - Ativa/desativa módulo
+
+### Módulos
+
+- `GET /api/v1/modules` - Lista módulos disponíveis
+- `GET /api/v1/modules/{module}` - Detalhes do módulo
+- `POST /api/v1/modules/{module}/trial` - Inicia trial
+
+### Usuários
+
+- `POST /api/v1/auth/login` - Login
+- `POST /api/v1/auth/refresh` - Refresh token
+- `GET /api/v1/users/me` - Usuário atual
+- `PUT /api/v1/users/me` - Atualiza usuário
+
+## Documentação
+
+- [Documentação Completa](https://docs.biuai.com)
+- [API Reference](https://api.biuai.com/docs)
+- [Guia de Desenvolvimento](docs/DEVELOPMENT.md)
+- [Changelog](CHANGELOG.md)
+
+## Contribuição
 
 1. Fork o projeto
-2. Crie uma branch: `git checkout -b feature/nova-funcionalidade`
-3. Commit: `git commit -m 'Adiciona nova funcionalidade'`
-4. Push: `git push origin feature/nova-funcionalidade`
-5. Abra um Pull Request
+2. Crie uma branch para sua feature (`git checkout -b feature/nome`)
+3. Commit suas mudanças (`git commit -am 'Adiciona feature'`)
+4. Push para a branch (`git push origin feature/nome`)
+5. Crie um Pull Request
 
-## 📄 Licença
+## Licença
 
-Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
-
-## 📞 Suporte
-
-- **GitHub Issues**: Para bugs e melhorias
-- **Discussions**: Para perguntas e ideias
-- **Wiki**: Documentação adicional
-- **Chatbot**: Suporte integrado no sistema
-
----
-
-<div align="center">
-
-**BIUAI** - Transformando a gestão financeira com inteligência artificial
-
-[![GitHub stars](https://img.shields.io/github/stars/douglaslpo/biuai.svg)](https://github.com/douglaslpo/biuai/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/douglaslpo/biuai.svg)](https://github.com/douglaslpo/biuai/network)
-[![GitHub issues](https://img.shields.io/github/issues/douglaslpo/biuai.svg)](https://github.com/douglaslpo/biuai/issues)
-
-</div>
+Este projeto está licenciado sob a licença MIT - veja o arquivo [LICENSE](LICENSE) para detalhes.

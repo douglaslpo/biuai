@@ -12,12 +12,12 @@
         "frontend/dist",
         "frontend/build"
     ],
-    "pythonVersion": "3.9",
+    "pythonVersion": "3.11",
     "pythonPlatform": "Linux",
     "executionEnvironments": [
         {
             "root": "backend",
-            "pythonVersion": "3.9",
+            "pythonVersion": "3.11",
             "pythonPlatform": "Linux",
             "extraPaths": [
                 "backend",
@@ -26,7 +26,7 @@
         },
         {
             "root": "scripts",
-            "pythonVersion": "3.9",
+            "pythonVersion": "3.11",
             "pythonPlatform": "Linux",
             "extraPaths": [
                 "backend",

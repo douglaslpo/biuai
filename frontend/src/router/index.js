@@ -53,6 +53,12 @@ const routes = [
         component: () => import('@/pages/Contas.vue')
       },
       {
+        path: '/fiis',
+        name: 'fiis',
+        component: () => import('@/pages/FIIs.vue'),
+        meta: { requiresAuth: true }
+      },
+      {
         path: '/profile',
         name: 'profile',
         component: () => import('@/pages/Profile.vue')
@@ -92,6 +98,12 @@ const routes = [
         path: '/admin/logs',
         name: 'logs-sistema',
         component: () => import('@/pages/admin/LogsSistema.vue'),
+        meta: { requiresAuth: true, requiresAdmin: true }
+      },
+      {
+        path: '/admin/gestor-acessos',
+        name: 'gestor-acessos',
+        component: () => import('@/pages/admin/GestorAcessos.vue'),
         meta: { requiresAuth: true, requiresAdmin: true }
       }
     ]

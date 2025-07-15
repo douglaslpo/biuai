@@ -167,6 +167,10 @@ class Settings(BaseSettings):
     BACKUP_RETENTION_DAYS: int = 30
     BACKUP_SCHEDULE: str = "0 2 * * *"  # Daily at 2 AM
 
+    # Market Data API
+    MARKET_DATA_API_URL: str = os.getenv("MARKET_DATA_API_URL", "https://api.marketdata.com.br/v1")
+    MARKET_DATA_API_KEY: str = os.getenv("MARKET_DATA_API_KEY", "")
+
 
 @lru_cache()
 def get_settings() -> Settings:

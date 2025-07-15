@@ -1,975 +1,405 @@
 <template>
-  <div class="biuai-contas">
-    <!-- Header da página -->
-    <div class="contas-header mb-6">
-      <div class="header-content">
-        <div class="header-info">
-          <h1 class="page-title">
-            🏦 Contas Bancárias
-          </h1>
-          <p class="page-subtitle">
-            Gerencie suas contas e acompanhe saldos em tempo real
-          </p>
-        </div>
+  <div class="contas-page">
+    <!-- Page Header -->
+    <PageHeader
+      title="Contas Bancárias"
+      subtitle="Gerencie suas contas e acompanhe saldos em tempo real"
+      icon="mdi-bank"
+    >
+      <template #actions>
+        <v-btn
+          color="primary"
+          size="large"
+          variant="elevated"
+          prepend-icon="mdi-plus"
+          @click="showCreateDialog = true"
+          class="mr-2"
+        >
+          Nova Conta
+        </v-btn>
         
-        <div class="header-actions">
-          <v-btn
-            color="primary"
-            size="large"
-            variant="elevated"
-            prepend-icon="mdi-plus"
-            @click="showNewConta = true"
-            class="new-conta-btn"
-          >
-            <span class="font-weight-bold">Nova Conta</span>
-          </v-btn>
-          
-          <v-btn
-            color="secondary"
-            size="large"
-            variant="outlined"
-            :loading="loading"
-            @click="carregarDados"
-            class="refresh-btn"
-          >
-            <v-icon>mdi-refresh</v-icon>
-          </v-btn>
-        </div>
-      </div>
-    </div>
+        <v-btn
+          color="secondary"
+          size="large"
+          variant="outlined"
+          icon="mdi-refresh"
+          :loading="loading"
+          @click="refresh"
+        />
+      </template>
 
-    <!-- Cards de resumo -->
-    <v-row class="metrics-row mb-6">
-      <v-col cols="12" md="3">
-        <v-card class="metric-card metric-card--primary" elevation="8" hover>
-          <v-card-text class="pa-6">
-            <div class="d-flex align-center justify-space-between">
-              <div class="metric-content">
-                <div class="metric-icon-wrapper mb-3">
-                  <v-icon icon="mdi-bank" size="32" class="metric-icon" />
-                </div>
-                <div class="metric-label">Total de Contas</div>
-                <div class="metric-value">{{ resumo.total_contas || 0 }}</div>
-              </div>
-            </div>
-          </v-card-text>
-        </v-card>
-      </v-col>
-
-      <v-col cols="12" md="3">
-        <v-card class="metric-card metric-card--success" elevation="8" hover>
-          <v-card-text class="pa-6">
-            <div class="d-flex align-center justify-space-between">
-              <div class="metric-content">
-                <div class="metric-icon-wrapper mb-3">
-                  <v-icon icon="mdi-check-circle" size="32" class="metric-icon" />
-                </div>
-                <div class="metric-label">Contas Ativas</div>
-                <div class="metric-value">{{ resumo.contas_ativas || 0 }}</div>
-              </div>
-            </div>
-          </v-card-text>
-        </v-card>
-      </v-col>
-
-      <v-col cols="12" md="3">
-        <v-card class="metric-card metric-card--info" elevation="8" hover>
-          <v-card-text class="pa-6">
-            <div class="d-flex align-center justify-space-between">
-              <div class="metric-content">
-                <div class="metric-icon-wrapper mb-3">
-                  <v-icon icon="mdi-cash" size="32" class="metric-icon" />
-                </div>
-                <div class="metric-label">Saldo Total</div>
-                <div class="metric-value">{{ formatarSaldo(resumo.saldo_total) }}</div>
-              </div>
-            </div>
-          </v-card-text>
-        </v-card>
-      </v-col>
-
-      <v-col cols="12" md="3">
-        <v-card class="metric-card metric-card--warning" elevation="8" hover>
-          <v-card-text class="pa-6">
-            <div class="d-flex align-center justify-space-between">
-              <div class="metric-content">
-                <div class="metric-icon-wrapper mb-3">
-                  <v-icon icon="mdi-office-building" size="32" class="metric-icon" />
-                </div>
-                <div class="metric-label">Banco Principal</div>
-                <div class="metric-value text-caption">{{ resumo.banco_principal || 'N/A' }}</div>
-              </div>
-            </div>
-          </v-card-text>
-        </v-card>
-      </v-col>
-    </v-row>
-
-    <!-- Filtros -->
-    <v-card class="filters-card mb-6" elevation="2">
-      <v-card-text class="pa-4">
-        <v-row align="center">
-          <v-col cols="12" md="3">
-            <v-select
-              v-model="filtros.ativa"
-              :items="statusOptions"
-              label="Status"
-              density="comfortable"
-              variant="outlined"
-              clearable
-              @update:model-value="aplicarFiltros"
-            />
-          </v-col>
-          
-          <v-col cols="12" md="3">
-            <v-select
-              v-model="filtros.tipo_conta"
-              :items="tiposContaOptions"
-              label="Tipo de Conta"
-              density="comfortable"
-              variant="outlined"
-              clearable
-              @update:model-value="aplicarFiltros"
-            />
-          </v-col>
-          
-          <v-col cols="12" md="3">
-            <v-text-field
-              v-model="pesquisaTexto"
-              label="Pesquisar contas..."
-              density="comfortable"
-              variant="outlined"
-              prepend-inner-icon="mdi-magnify"
-              clearable
-              @input="pesquisarContas"
-            />
-          </v-col>
-          
-          <v-col cols="12" md="3" class="d-flex justify-end">
-            <v-btn
+      <template #metrics>
+        <v-row>
+          <v-col cols="12" sm="6" md="3">
+            <MetricCard
+              label="Total de Contas"
+              :value="metrics.totalContas"
+              icon="mdi-bank"
               color="primary"
-              variant="outlined"
-              @click="limparFiltros"
-            >
-              Limpar Filtros
-            </v-btn>
+              :clickable="true"
+              @click="setFilter('ativa', null)"
+            />
+          </v-col>
+          
+          <v-col cols="12" sm="6" md="3">
+            <MetricCard
+              label="Contas Ativas"
+              :value="metrics.contasAtivas"
+              icon="mdi-check-circle"
+              color="success"
+              :clickable="true"
+              @click="setFilter('ativa', true)"
+            />
+          </v-col>
+          
+          <v-col cols="12" sm="6" md="3">
+            <MetricCard
+              label="Saldo Total"
+              :value="metrics.saldoTotal"
+              format="currency"
+              icon="mdi-cash"
+              color="info"
+              :animated="true"
+            />
+          </v-col>
+          
+          <v-col cols="12" sm="6" md="3">
+            <MetricCard
+              label="Banco Principal"
+              :value="metrics.bancoPrincipal"
+              icon="mdi-office-building"
+              color="warning"
+            />
           </v-col>
         </v-row>
-      </v-card-text>
-    </v-card>
+      </template>
+    </PageHeader>
 
-    <!-- Loading -->
+    <!-- Filters Card -->
+    <BaseCard class="mb-6" elevation="2">
+      <template #title>
+        <v-icon icon="mdi-filter" class="mr-2" />
+        Filtros
+      </template>
+      
+      <v-row>
+        <v-col cols="12" md="3">
+          <v-select
+            v-model="filters.ativa"
+            :items="statusOptions"
+            label="Status"
+            density="comfortable"
+            variant="outlined"
+            clearable
+            @update:model-value="applyFilters"
+          />
+        </v-col>
+        
+        <v-col cols="12" md="3">
+          <v-select
+            v-model="filters.tipo_conta"
+            :items="tiposContaOptions"
+            label="Tipo de Conta"
+            density="comfortable"
+            variant="outlined"
+            clearable
+            @update:model-value="applyFilters"
+          />
+        </v-col>
+        
+        <v-col cols="12" md="4">
+          <v-text-field
+            v-model="searchQuery"
+            label="Pesquisar contas..."
+            density="comfortable"
+            variant="outlined"
+            prepend-inner-icon="mdi-magnify"
+            clearable
+            @input="setSearch"
+          />
+        </v-col>
+        
+        <v-col cols="12" md="2">
+          <v-btn
+            color="primary"
+            variant="outlined"
+            block
+            @click="clearFilters"
+          >
+            Limpar Filtros
+          </v-btn>
+        </v-col>
+      </v-row>
+    </BaseCard>
+
+    <!-- Loading State -->
     <div v-if="loading" class="text-center py-8">
       <v-progress-circular size="64" color="primary" indeterminate />
       <p class="mt-4 text-h6">Carregando contas...</p>
     </div>
 
-    <!-- Lista de Contas -->
+    <!-- Empty State -->
+    <BaseCard v-else-if="isEmpty" class="text-center py-12">
+      <v-icon size="64" color="grey-lighten-1" class="mb-4">mdi-bank-off</v-icon>
+      <h3 class="text-h5 mb-2">Nenhuma conta encontrada</h3>
+      <p class="text-body-1 mb-4">Comece criando sua primeira conta bancária</p>
+      <v-btn
+        color="primary"
+        variant="elevated"
+        prepend-icon="mdi-plus"
+        @click="showCreateDialog = true"
+      >
+        Criar Primeira Conta
+      </v-btn>
+    </BaseCard>
+
+    <!-- Contas List -->
     <div v-else>
       <!-- Agrupamento por Banco -->
       <div v-for="(contasBanco, banco) in contasAgrupadasPorBanco" :key="banco" class="mb-6">
-        <v-card class="banco-group-card" elevation="2">
-          <v-card-title class="pa-4 bank-header">
+        <BaseCard elevation="2">
+          <template #title>
             <div class="d-flex align-center justify-space-between w-100">
               <div class="d-flex align-center">
                 <v-icon icon="mdi-office-building" class="mr-3" />
-                <span class="text-h6 font-weight-bold">{{ banco }}</span>
+                <span class="text-h6">{{ banco }}</span>
                 <v-chip class="ml-3" size="small" color="primary" variant="tonal">
                   {{ contasBanco.length }} {{ contasBanco.length === 1 ? 'conta' : 'contas' }}
                 </v-chip>
               </div>
               <div class="text-h6 font-weight-bold">
-                {{ formatarSaldo(calcularSaldoBanco(contasBanco)) }}
+                {{ formatCurrency(calcularSaldoBanco(contasBanco)) }}
               </div>
             </div>
-          </v-card-title>
+          </template>
 
-          <v-card-text class="pa-0">
-            <v-row class="ma-0">
-              <v-col
-                v-for="conta in contasBanco"
-                :key="conta.id"
-                cols="12"
-                md="6"
-                lg="4"
-                class="pa-2"
-              >
-                <v-card 
-                  class="conta-card" 
-                  elevation="4" 
-                  hover 
-                  @click="abrirDetalhesConta(conta)"
-                  :class="{ 'conta-inativa': conta.ativa !== 'true' }"
-                >
-                  <v-card-title class="pa-4 pb-2">
-                    <div class="d-flex align-center justify-space-between w-100">
-                      <div class="d-flex align-center">
-                        <v-icon 
-                          :icon="formatarTipoConta(conta.tipo_conta).icon" 
-                          :color="formatarTipoConta(conta.tipo_conta).color"
-                          class="mr-2"
-                        />
-                        <span class="text-h6 font-weight-bold">{{ conta.nome }}</span>
-                      </div>
-                      <v-chip
-                        :color="formatarStatusConta(conta.ativa).color"
-                        :prepend-icon="formatarStatusConta(conta.ativa).icon"
-                        size="small"
-                        variant="elevated"
-                      >
-                        {{ formatarStatusConta(conta.ativa).label }}
-                      </v-chip>
-                    </div>
-                  </v-card-title>
-
-                  <v-card-text class="pa-4">
-                    <div class="conta-info">
-                      <div class="conta-detalhes mb-3">
-                        <div class="text-body-2 mb-1">
-                          <strong>Tipo:</strong> {{ formatarTipoConta(conta.tipo_conta).label }}
-                        </div>
-                        <div v-if="conta.numero_conta" class="text-body-2 mb-1">
-                          <strong>Conta:</strong> {{ formatarNumeroConta(conta.numero_conta, conta.agencia) }}
-                        </div>
-                      </div>
-
-                      <div class="saldo-info">
-                        <v-card 
-                          class="saldo-card pa-3" 
-                          :color="getCorSaldo(conta.saldo_atual)"
-                          variant="tonal"
-                        >
-                          <div class="text-center">
-                            <div class="text-body-2 mb-1">Saldo Atual</div>
-                            <div class="text-h6 font-weight-bold">
-                              {{ formatarSaldo(conta.saldo_atual) }}
-                            </div>
-                          </div>
-                        </v-card>
-                      </div>
-
-                      <div v-if="conta.total_lancamentos > 0" class="estatisticas-conta mt-3">
-                        <v-row dense>
-                          <v-col cols="4" class="text-center">
-                            <div class="text-caption">Lançamentos</div>
-                            <div class="text-body-2 font-weight-bold">{{ conta.total_lancamentos }}</div>
-                          </v-col>
-                          <v-col cols="4" class="text-center">
-                            <div class="text-caption text-success">Receitas</div>
-                            <div class="text-body-2 font-weight-bold text-success">
-                              {{ formatarSaldo(conta.total_receitas) }}
-                            </div>
-                          </v-col>
-                          <v-col cols="4" class="text-center">
-                            <div class="text-caption text-error">Despesas</div>
-                            <div class="text-body-2 font-weight-bold text-error">
-                              {{ formatarSaldo(conta.total_despesas) }}
-                            </div>
-                          </v-col>
-                        </v-row>
-                      </div>
-                    </div>
-                  </v-card-text>
-
-                  <v-card-actions class="pa-4 pt-0">
-                    <v-btn
-                      color="primary"
-                      variant="text"
-                      size="small"
-                      prepend-icon="mdi-eye"
-                      @click.stop="verLancamentosConta(conta)"
-                    >
-                      Ver Lançamentos
-                    </v-btn>
-                    
-                    <v-spacer />
-                    
-                    <v-menu>
-                      <template v-slot:activator="{ props }">
-                        <v-btn
-                          icon="mdi-dots-vertical"
-                          variant="text"
-                          size="small"
-                          v-bind="props"
-                          @click.stop
-                        />
-                      </template>
-                      
-                      <v-list>
-                        <v-list-item @click="editarConta(conta)">
-                          <v-list-item-title>
-                            <v-icon icon="mdi-pencil" class="mr-2" />
-                            Editar
-                          </v-list-item-title>
-                        </v-list-item>
-                        
-                        <v-list-item @click="alterarStatusConta(conta)">
-                          <v-list-item-title :class="conta.ativa === 'true' ? 'text-warning' : 'text-success'">
-                            <v-icon :icon="conta.ativa === 'true' ? 'mdi-pause' : 'mdi-play'" class="mr-2" />
-                            {{ conta.ativa === 'true' ? 'Desativar' : 'Ativar' }}
-                          </v-list-item-title>
-                        </v-list-item>
-                        
-                        <v-list-item @click="confirmarDelecao(conta)">
-                          <v-list-item-title class="text-error">
-                            <v-icon icon="mdi-delete" class="mr-2" />
-                            Excluir
-                          </v-list-item-title>
-                        </v-list-item>
-                      </v-list>
-                    </v-menu>
-                  </v-card-actions>
-                </v-card>
-              </v-col>
-            </v-row>
-          </v-card-text>
-        </v-card>
-      </div>
-
-      <!-- Estado vazio -->
-      <div v-if="!contasFiltradas.length && !loading" class="text-center py-12">
-        <v-icon icon="mdi-bank" size="96" color="grey" class="mb-4" />
-        <h3 class="text-h5 mb-2">Nenhuma conta encontrada</h3>
-        <p class="text-body-1 mb-4">
-          {{ filtros.ativa || filtros.tipo_conta || pesquisaTexto ? 
-            'Nenhuma conta corresponde aos filtros aplicados.' : 
-            'Comece adicionando sua primeira conta bancária!' }}
-        </p>
-        <v-btn
-          v-if="!filtros.ativa && !filtros.tipo_conta && !pesquisaTexto"
-          color="primary"
-          variant="elevated"
-          prepend-icon="mdi-plus"
-          @click="showNewConta = true"
-        >
-          Adicionar Primeira Conta
-        </v-btn>
+          <v-row class="ma-0">
+            <v-col
+              v-for="conta in contasBanco"
+              :key="conta.id"
+              cols="12"
+              md="6"
+              lg="4"
+              class="pa-2"
+            >
+              <ContaCard
+                :conta="conta"
+                @edit="editConta"
+                @delete="confirmDelete"
+                @view="viewConta"
+              />
+            </v-col>
+          </v-row>
+        </BaseCard>
       </div>
     </div>
 
-    <!-- Dialog Nova/Editar Conta -->
-    <v-dialog v-model="showNewConta" max-width="700" persistent>
-      <v-card>
-        <v-card-title class="text-h5 pa-6">
-          <v-icon icon="mdi-bank" class="mr-3" />
-          {{ contaEditando ? 'Editar Conta' : 'Nova Conta Bancária' }}
-        </v-card-title>
+    <!-- Create/Edit Dialog -->
+    <ContaDialog
+      v-model="showCreateDialog"
+      :conta="editingConta"
+      :loading="dialogLoading"
+      @save="handleSave"
+      @cancel="handleCancel"
+    />
 
-        <v-card-text class="pa-6">
-          <v-form ref="formConta" v-model="formValido">
-            <v-row>
-              <v-col cols="12" md="6">
-                <v-text-field
-                  v-model="formConta.nome"
-                  label="Nome da Conta *"
-                  variant="outlined"
-                  :rules="[v => !!v || 'Nome é obrigatório']"
-                  prepend-inner-icon="mdi-format-title"
-                />
-              </v-col>
-
-              <v-col cols="12" md="6">
-                <v-combobox
-                  v-model="formConta.banco"
-                  :items="bancosComuns"
-                  label="Banco *"
-                  variant="outlined"
-                  :rules="[v => !!v || 'Banco é obrigatório']"
-                  prepend-inner-icon="mdi-office-building"
-                />
-              </v-col>
-
-              <v-col cols="12" md="6">
-                <v-select
-                  v-model="formConta.tipo_conta"
-                  :items="tiposContaOptions.filter(t => t.value)"
-                  label="Tipo de Conta *"
-                  variant="outlined"
-                  :rules="[v => !!v || 'Tipo é obrigatório']"
-                  prepend-inner-icon="mdi-credit-card"
-                />
-              </v-col>
-
-              <v-col cols="12" md="6">
-                <v-text-field
-                  v-model.number="formConta.saldo_inicial"
-                  label="Saldo Inicial *"
-                  variant="outlined"
-                  type="number"
-                  prefix="R$"
-                  step="0.01"
-                  :rules="[v => v !== null && v !== undefined || 'Saldo inicial é obrigatório']"
-                  prepend-inner-icon="mdi-cash"
-                />
-              </v-col>
-
-              <v-col cols="12" md="6">
-                <v-text-field
-                  v-model="formConta.agencia"
-                  label="Agência (opcional)"
-                  variant="outlined"
-                  prepend-inner-icon="mdi-bank-outline"
-                />
-              </v-col>
-
-              <v-col cols="12" md="6">
-                <v-text-field
-                  v-model="formConta.numero_conta"
-                  label="Número da Conta (opcional)"
-                  variant="outlined"
-                  prepend-inner-icon="mdi-credit-card-outline"
-                />
-              </v-col>
-            </v-row>
-          </v-form>
-        </v-card-text>
-
-        <v-card-actions class="pa-6">
-          <v-spacer />
-          <v-btn
-            variant="text"
-            @click="cancelarFormulario"
-          >
-            Cancelar
-          </v-btn>
-          <v-btn
-            color="primary"
-            variant="elevated"
-            :loading="salvando"
-            :disabled="!formValido"
-            @click="salvarConta"
-          >
-            {{ contaEditando ? 'Atualizar' : 'Criar Conta' }}
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
-
-    <!-- Dialog Confirmação de Deleção -->
-    <v-dialog v-model="showDeleteDialog" max-width="400">
-      <v-card>
-        <v-card-title class="text-h6 pa-6">
-          Confirmar Exclusão
-        </v-card-title>
-
-        <v-card-text class="pa-6">
-          Tem certeza que deseja excluir a conta "{{ contaParaDeletar?.nome }}" do {{ contaParaDeletar?.banco }}?
-          Esta ação irá desvincular todos os lançamentos da conta, mas não os excluirá.
-        </v-card-text>
-
-        <v-card-actions class="pa-6">
-          <v-spacer />
-          <v-btn variant="text" @click="showDeleteDialog = false">
-            Cancelar
-          </v-btn>
-          <v-btn
-            color="error"
-            variant="elevated"
-            :loading="deletando"
-            @click="deletarConta"
-          >
-            Excluir
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
-
-    <!-- Dialog Lançamentos da Conta -->
-    <v-dialog v-model="showLancamentosDialog" max-width="900">
-      <v-card>
-        <v-card-title class="text-h6 pa-6">
-          Lançamentos - {{ contaSelecionada?.nome }} ({{ contaSelecionada?.banco }})
-        </v-card-title>
-
-        <v-card-text class="pa-6">
-          <div v-if="loadingLancamentos" class="text-center py-4">
-            <v-progress-circular size="32" color="primary" indeterminate />
-            <p class="mt-2">Carregando lançamentos...</p>
-          </div>
-
-          <div v-else-if="lancamentosConta.length">
-            <v-list>
-              <v-list-item
-                v-for="lancamento in lancamentosConta"
-                :key="lancamento.id"
-                class="mb-2"
-              >
-                <template v-slot:prepend>
-                  <v-icon 
-                    :icon="lancamento.tipo === 'RECEITA' ? 'mdi-trending-up' : 'mdi-trending-down'"
-                    :color="lancamento.tipo === 'RECEITA' ? 'success' : 'error'"
-                  />
-                </template>
-
-                <v-list-item-title>{{ lancamento.descricao }}</v-list-item-title>
-                <v-list-item-subtitle>
-                  {{ new Date(lancamento.data_lancamento).toLocaleDateString('pt-BR') }}
-                </v-list-item-subtitle>
-
-                <template v-slot:append>
-                  <v-chip 
-                    :color="lancamento.tipo === 'RECEITA' ? 'success' : 'error'"
-                    variant="elevated"
-                  >
-                    {{ formatarSaldo(lancamento.valor) }}
-                  </v-chip>
-                </template>
-              </v-list-item>
-            </v-list>
-          </div>
-
-          <div v-else class="text-center py-8">
-            <v-icon icon="mdi-inbox" size="64" color="grey" />
-            <p class="mt-2 text-body-1">Nenhum lançamento encontrado para esta conta</p>
-          </div>
-        </v-card-text>
-
-        <v-card-actions class="pa-6">
-          <v-spacer />
-          <v-btn variant="text" @click="showLancamentosDialog = false">
-            Fechar
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
+    <!-- Delete Confirmation -->
+    <ConfirmDialog
+      v-model="showDeleteDialog"
+      title="Confirmar Exclusão"
+      :message="`Tem certeza que deseja excluir a conta '${deletingConta?.nm_conta}'?`"
+      confirm-text="Excluir"
+      confirm-color="error"
+      @confirm="handleDelete"
+      @cancel="showDeleteDialog = false"
+    />
   </div>
 </template>
 
-<script>
-import { ref, reactive, computed, onMounted } from 'vue'
+<script setup>
+import { ref, computed, onMounted } from 'vue'
+import { usePageData } from '@/composables/usePageData'
+import { useMetrics } from '@/composables/useMetrics'
+import { useNotifications } from '@/composables/useNotifications'
 import { contasService } from '@/services/contas'
 
-export default {
-  name: 'ContasPage',
-  setup() {
+// Components
+import PageHeader from '@/components/base/PageHeader.vue'
+import MetricCard from '@/components/base/MetricCard.vue'
+import BaseCard from '@/components/base/BaseCard.vue'
+import ContaCard from '@/components/forms/ContaCard.vue'
+import ContaDialog from '@/components/modals/ContaDialog.vue'
+import ConfirmDialog from '@/components/modals/ConfirmDialog.vue'
 
-    // Estados reativos
-    const loading = ref(false)
-    const loadingLancamentos = ref(false)
-    const salvando = ref(false)
-    const deletando = ref(false)
-    const showNewConta = ref(false)
-    const showDeleteDialog = ref(false)
-    const showLancamentosDialog = ref(false)
-    const formValido = ref(false)
-    const pesquisaTexto = ref('')
+// Composables
+const {
+  data: contas,
+  filteredData,
+  loading,
+  isEmpty,
+  searchQuery,
+  filters,
+  setFilter,
+  setSearch,
+  clearFilters,
+  refresh,
+  addItem,
+  updateItem,
+  removeItem
+} = usePageData({
+  fetchFn: contasService.list,
+  autoFetch: true
+})
+
+const { formatCurrency } = useMetrics(contas)
+const { showSuccess, showError, showActionSuccess, showActionError } = useNotifications()
+
+// Local state
+const showCreateDialog = ref(false)
+const showDeleteDialog = ref(false)
+const editingConta = ref(null)
+const deletingConta = ref(null)
+const dialogLoading = ref(false)
+
+// Options
+const statusOptions = [
+  { title: 'Ativa', value: true },
+  { title: 'Inativa', value: false }
+]
+
+const tiposContaOptions = [
+  { title: 'Conta Corrente', value: 'corrente' },
+  { title: 'Conta Poupança', value: 'poupanca' },
+  { title: 'Conta Investimento', value: 'investimento' }
+]
+
+// Computed
+const metrics = computed(() => {
+  const total = contas.value.length
+  const ativas = contas.value.filter(c => c.ativa).length
+  const saldoTotal = contas.value.reduce((sum, c) => sum + (Number(c.saldo_atual) || 0), 0)
+  
+  // Banco com mais contas
+  const bancoCount = {}
+  contas.value.forEach(conta => {
+    const banco = conta.banco?.nm_banco || 'Sem banco'
+    bancoCount[banco] = (bancoCount[banco] || 0) + 1
+  })
+  
+  const bancoPrincipal = Object.entries(bancoCount)
+    .sort(([,a], [,b]) => b - a)[0]?.[0] || 'N/A'
+
+  return {
+    totalContas: total,
+    contasAtivas: ativas,
+    saldoTotal,
+    bancoPrincipal
+  }
+})
+
+const contasAgrupadasPorBanco = computed(() => {
+  const grupos = {}
+  
+  filteredData.value.forEach(conta => {
+    const banco = conta.banco?.nm_banco || 'Sem banco definido'
+    if (!grupos[banco]) {
+      grupos[banco] = []
+    }
+    grupos[banco].push(conta)
+  })
+  
+  return grupos
+})
+
+// Methods
+const calcularSaldoBanco = (contas) => {
+  return contas.reduce((sum, conta) => sum + (Number(conta.saldo_atual) || 0), 0)
+}
+
+const applyFilters = () => {
+  // Filters are automatically applied by the composable
+}
+
+const editConta = (conta) => {
+  editingConta.value = { ...conta }
+  showCreateDialog.value = true
+}
+
+const confirmDelete = (conta) => {
+  deletingConta.value = conta
+  showDeleteDialog.value = true
+}
+
+const viewConta = (conta) => {
+  // Implementar visualização detalhada
+  console.log('View conta:', conta)
+}
+
+const handleSave = async (contaData) => {
+  try {
+    dialogLoading.value = true
     
-    const contas = ref([])
-    const resumo = ref({})
-    const contaEditando = ref(null)
-    const contaParaDeletar = ref(null)
-    const contaSelecionada = ref(null)
-    const lancamentosConta = ref([])
-
-    const filtros = reactive({
-      ativa: '',
-      tipo_conta: ''
-    })
-
-    const formConta = reactive({
-      nome: '',
-      banco: '',
-      tipo_conta: 'CORRENTE',
-      numero_conta: '',
-      agencia: '',
-      saldo_inicial: 0
-    })
-
-    // Computed
-    const statusOptions = computed(() => contasService.getStatusOptions())
-    const tiposContaOptions = computed(() => contasService.getTiposContaOptions())
-    const bancosComuns = computed(() => contasService.getBancosComuns())
+    if (editingConta.value?.id) {
+      // Update
+      const updated = await contasService.update(editingConta.value.id, contaData)
+      updateItem(editingConta.value.id, updated)
+      showActionSuccess('update', 'Conta')
+    } else {
+      // Create
+      const created = await contasService.create(contaData)
+      addItem(created)
+      showActionSuccess('create', 'Conta')
+    }
     
-    const contasFiltradas = computed(() => {
-      let resultado = contas.value
-
-      if (filtros.ativa) {
-        resultado = resultado.filter(conta => conta.ativa === filtros.ativa)
-      }
-
-      if (filtros.tipo_conta) {
-        resultado = resultado.filter(conta => conta.tipo_conta === filtros.tipo_conta)
-      }
-
-      if (pesquisaTexto.value) {
-        const termo = pesquisaTexto.value.toLowerCase()
-        resultado = resultado.filter(conta => 
-          conta.nome.toLowerCase().includes(termo) ||
-          conta.banco.toLowerCase().includes(termo) ||
-          (conta.numero_conta && conta.numero_conta.toLowerCase().includes(termo))
-        )
-      }
-
-      return resultado
-    })
-
-    const contasAgrupadasPorBanco = computed(() => {
-      return contasService.agruparPorBanco(contasFiltradas.value)
-    })
-
-    // Métodos
-    const carregarDados = async () => {
-      loading.value = true
-      try {
-        const [contasData, resumoData] = await Promise.all([
-          contasService.listarContas(),
-          contasService.obterResumoEstatisticas()
-        ])
-        
-        contas.value = contasData
-        resumo.value = resumoData
-      } catch (error) {
-        console.error('Erro ao carregar dados:', error)
-        console.error('Erro ao carregar dados das contas')
-      } finally {
-        loading.value = false
-      }
-    }
-
-    const salvarConta = async () => {
-      salvando.value = true
-      try {
-        if (contaEditando.value) {
-          await contasService.atualizarConta(contaEditando.value.id, formConta)
-          console.log('Conta atualizada com sucesso!')
-        } else {
-          await contasService.criarConta(formConta)
-          console.log('Conta criada com sucesso!')
-        }
-        
-        cancelarFormulario()
-        await carregarDados()
-      } catch (error) {
-        console.error('Erro ao salvar conta:', error)
-        console.error('Erro ao salvar conta')
-      } finally {
-        salvando.value = false
-      }
-    }
-
-    const editarConta = (conta) => {
-      contaEditando.value = conta
-      Object.assign(formConta, {
-        nome: conta.nome,
-        banco: conta.banco,
-        tipo_conta: conta.tipo_conta,
-        numero_conta: conta.numero_conta || '',
-        agencia: conta.agencia || '',
-        saldo_inicial: conta.saldo_inicial
-      })
-      showNewConta.value = true
-    }
-
-    const alterarStatusConta = async (conta) => {
-      try {
-        const ativar = conta.ativa !== 'true'
-        await contasService.alterarStatusConta(conta.id, ativar)
-        
-        console.log(`Conta ${ativar ? 'ativada' : 'desativada'} com sucesso!`)
-        
-        await carregarDados()
-      } catch (error) {
-        console.error('Erro ao alterar status da conta:', error)
-        console.error('Erro ao alterar status da conta')
-      }
-    }
-
-    const confirmarDelecao = (conta) => {
-      contaParaDeletar.value = conta
-      showDeleteDialog.value = true
-    }
-
-    const deletarConta = async () => {
-      deletando.value = true
-      try {
-        await contasService.deletarConta(contaParaDeletar.value.id)
-        console.log('Conta excluída com sucesso!')
-        
-        showDeleteDialog.value = false
-        await carregarDados()
-      } catch (error) {
-        console.error('Erro ao deletar conta:', error)
-        console.error('Erro ao excluir conta')
-      } finally {
-        deletando.value = false
-      }
-    }
-
-    const verLancamentosConta = async (conta) => {
-      contaSelecionada.value = conta
-      showLancamentosDialog.value = true
-      loadingLancamentos.value = true
-      
-      try {
-        const response = await contasService.listarLancamentosConta(conta.id, { limit: 50 })
-        lancamentosConta.value = response.lancamentos || []
-      } catch (error) {
-        console.error('Erro ao carregar lançamentos da conta:', error)
-        $q.notify({
-          type: 'negative',
-          message: 'Erro ao carregar lançamentos da conta'
-        })
-        lancamentosConta.value = []
-      } finally {
-        loadingLancamentos.value = false
-      }
-    }
-
-    const cancelarFormulario = () => {
-      showNewConta.value = false
-      contaEditando.value = null
-      Object.assign(formConta, {
-        nome: '',
-        banco: '',
-        tipo_conta: 'CORRENTE',
-        numero_conta: '',
-        agencia: '',
-        saldo_inicial: 0
-      })
-    }
-
-    const aplicarFiltros = () => {
-      // Filtros são aplicados automaticamente via computed
-    }
-
-    const limparFiltros = () => {
-      filtros.ativa = ''
-      filtros.tipo_conta = ''
-      pesquisaTexto.value = ''
-    }
-
-    const pesquisarContas = () => {
-      // Pesquisa é aplicada automaticamente via computed
-    }
-
-    const abrirDetalhesConta = (conta) => {
-      // Implementar modal de detalhes se necessário
-      console.log('Abrir detalhes da conta:', conta)
-    }
-
-    // Utilitários
-    const calcularSaldoBanco = (contasBanco) => {
-      return contasBanco
-        .filter(conta => conta.ativa === 'true')
-        .reduce((total, conta) => total + (conta.saldo_atual || 0), 0)
-    }
-
-    // Formatadores
-    const formatarSaldo = (valor) => contasService.formatarSaldo(valor)
-    const formatarTipoConta = (tipo) => contasService.formatarTipoConta(tipo)
-    const formatarStatusConta = (ativa) => contasService.formatarStatusConta(ativa)
-    const formatarNumeroConta = (numero, agencia) => contasService.formatarNumeroConta(numero, agencia)
-    const getCorSaldo = (saldo) => contasService.getCorSaldo(saldo)
-
-    // Lifecycle
-    onMounted(() => {
-      carregarDados()
-    })
-
-    return {
-      // Estados
-      loading,
-      loadingLancamentos,
-      salvando,
-      deletando,
-      showNewConta,
-      showDeleteDialog,
-      showLancamentosDialog,
-      formValido,
-      pesquisaTexto,
-      contas,
-      resumo,
-      contaEditando,
-      contaParaDeletar,
-      contaSelecionada,
-      lancamentosConta,
-      filtros,
-      formConta,
-      
-      // Computed
-      statusOptions,
-      tiposContaOptions,
-      bancosComuns,
-      contasFiltradas,
-      contasAgrupadasPorBanco,
-      
-      // Métodos
-      carregarDados,
-      salvarConta,
-      editarConta,
-      alterarStatusConta,
-      confirmarDelecao,
-      deletarConta,
-      verLancamentosConta,
-      cancelarFormulario,
-      aplicarFiltros,
-      limparFiltros,
-      pesquisarContas,
-      abrirDetalhesConta,
-      calcularSaldoBanco,
-      formatarSaldo,
-      formatarTipoConta,
-      formatarStatusConta,
-      formatarNumeroConta,
-      getCorSaldo
-    }
+    handleCancel()
+    
+  } catch (error) {
+    showActionError(editingConta.value?.id ? 'update' : 'create', 'conta', error.message)
+  } finally {
+    dialogLoading.value = false
   }
 }
+
+const handleCancel = () => {
+  showCreateDialog.value = false
+  editingConta.value = null
+  dialogLoading.value = false
+}
+
+const handleDelete = async () => {
+  try {
+    await contasService.delete(deletingConta.value.id)
+    removeItem(deletingConta.value.id)
+    showActionSuccess('delete', 'Conta')
+    
+  } catch (error) {
+    showActionError('delete', 'conta', error.message)
+  } finally {
+    showDeleteDialog.value = false
+    deletingConta.value = null
+  }
+}
+
+// Lifecycle
+onMounted(() => {
+  // Additional setup if needed
+})
 </script>
 
 <style scoped>
-.biuai-contas {
-  padding: 24px;
-  min-height: 100vh;
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+.contas-page {
+  padding: 0;
 }
 
-.contas-header {
-  background: white;
-  border-radius: 16px;
-  padding: 32px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-}
-
-.header-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 24px;
-}
-
-.page-title {
-  font-size: 2.5rem;
-  font-weight: bold;
-  color: #1976D2;
-  margin: 0;
-}
-
-.page-subtitle {
-  font-size: 1.1rem;
-  color: #666;
-  margin: 8px 0 0 0;
-}
-
-.header-actions {
-  display: flex;
-  gap: 16px;
-  align-items: center;
-}
-
-.metrics-row .metric-card {
-  border-radius: 16px;
-  background: linear-gradient(135deg, var(--v-theme-primary) 0%, var(--v-theme-primary-darken-1) 100%);
-  color: white;
-  transition: transform 0.3s ease;
-}
-
-.metric-card:hover {
-  transform: translateY(-4px);
-}
-
-.metric-card--primary {
-  background: linear-gradient(135deg, #1976D2 0%, #1565C0 100%);
-}
-
-.metric-card--success {
-  background: linear-gradient(135deg, #43A047 0%, #388E3C 100%);
-}
-
-.metric-card--info {
-  background: linear-gradient(135deg, #00ACC1 0%, #0097A7 100%);
-}
-
-.metric-card--warning {
-  background: linear-gradient(135deg, #FB8C00 0%, #F57C00 100%);
-}
-
-.metric-icon-wrapper {
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 12px;
-  padding: 12px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.metric-label {
-  font-size: 0.9rem;
-  opacity: 0.9;
-  margin-bottom: 8px;
-}
-
-.metric-value {
-  font-size: 2rem;
-  font-weight: bold;
-}
-
-.filters-card {
-  border-radius: 12px;
-}
-
-.banco-group-card {
-  border-radius: 16px;
-  margin-bottom: 24px;
-}
-
-.bank-header {
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-  border-radius: 16px 16px 0 0;
-}
-
-.conta-card {
-  border-radius: 16px;
-  transition: all 0.3s ease;
-  height: 100%;
-  cursor: pointer;
-}
-
-.conta-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
-}
-
-.conta-inativa {
-  opacity: 0.7;
-}
-
-.conta-inativa .conta-card {
-  border: 2px dashed #ccc;
-}
-
-.saldo-card {
-  border-radius: 12px;
-}
-
-.estatisticas-conta {
-  background: #f8f9fa;
-  border-radius: 8px;
-  padding: 8px;
-}
-
-@media (max-width: 960px) {
-  .biuai-contas {
-    padding: 16px;
-  }
-  
-  .contas-header {
-    padding: 24px;
-  }
-  
-  .page-title {
-    font-size: 2rem;
-  }
-  
-  .header-content {
+/* Responsividade aprimorada */
+@media (max-width: 768px) {
+  .contas-page :deep(.header-actions) {
     flex-direction: column;
-    align-items: flex-start;
+    gap: 8px;
   }
   
-  .header-actions {
+  .contas-page :deep(.header-actions .v-btn) {
     width: 100%;
-    justify-content: flex-end;
   }
 }
 </style> 
